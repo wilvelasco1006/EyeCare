@@ -1,0 +1,13 @@
+.Quiz{
+    background-color: aquamarine;
+    width: 50%;
+    height: auto;
+    margin: 50px;
+    position: relative;
+    left: 200px;
+    padding: 50px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
+    
+}
+

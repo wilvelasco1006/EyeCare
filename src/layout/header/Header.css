@@ -1,0 +1,19 @@
+header{
+    background-color: #00586F;
+    padding: 1rem;
+}
+
+nav{
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    gap: 1rem;
+}
+
+.logo{
+    width: 70px;
+    height: auto;
+    position: relative;
+    right: 780px;
+
+}
