@@ -1,6 +1,6 @@
 header{
-    background-color: #00586F;
-    padding: 1rem;
+    background-color: #649fad;
+    padding: 0.5rem;
 }
 
 nav{
@@ -8,12 +8,13 @@ nav{
     justify-content: end;
     align-items: center;
     gap: 1rem;
+    margin-right: 20px;
 }
 
 .logo{
-    width: 70px;
+    width: 90px;
     height: auto;
     position: relative;
-    right: 780px;
+    right: 900px;
 
 }
