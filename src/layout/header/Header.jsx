@@ -6,7 +6,7 @@ const Header = () => {
   return (
     <header>
         <nav className="nav"> 
-          <img src="./public/nobackground.png" alt="eye" className="logo"/>
+          <img src="/nobackground.png" alt="eye" className="logo"/>
             <NavLink to="/" end>
             Inicio
             </NavLink>
