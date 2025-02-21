@@ -16,3 +16,8 @@
     cursor: pointer;
 
 }
+.Home button:hover{
+    background-color: #000000cb;
+    color: #ffffff;
+
+}

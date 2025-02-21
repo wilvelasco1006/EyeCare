@@ -7,6 +7,7 @@ import NotFound from './pages/not-found/NotFound.jsx'
 import AboutUs from "./pages/about-us/AboutUs.jsx"
 import { BrowserRouter, Routes, Route } from 'react-router'
 import Layout from './layout/Layout.jsx'
+import Sign from './pages/sign-in/Sign.jsx'
 
 createRoot(document.getElementById('root')).render(
   <BrowserRouter>
@@ -17,6 +18,7 @@ createRoot(document.getElementById('root')).render(
         <Route path="quiz" element={<Quiz />} />
         <Route path="*" element={<NotFound />}/>
         <Route path="about us" element={<AboutUs />}/>
+        <Route path="sign in" element={<Sign />}/>
       </Routes>
     </Layout>
   </BrowserRouter>
