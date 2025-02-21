@@ -2,3 +2,8 @@ footer{
     background-color: #00586F;
     padding: 1rem;
 }
+.copy{
+    color: #ffffff; 
+    font-size: 0.8rem; 
+    text-align: left;
+}

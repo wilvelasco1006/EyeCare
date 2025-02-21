@@ -4,7 +4,7 @@ import "./Diseases.css";
 const Diseases = () => {
     return (
     <div className="Contenedor-enfermedades">
-      <h1>Lista de enfermedades</h1>
+      <h2>Lista de enfermedades</h2>
       <p className="info-text">informacion sobre diferentes enfermedades oculares</p>
       <ul>
         <li>Catarata</li>
