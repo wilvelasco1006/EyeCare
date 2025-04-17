@@ -1,9 +1,9 @@
 footer{
-    background-color: #00586F;
+    background-color: #73CFBE;
     padding: 1rem;
 }
-.copy{
-    color: #ffffff; 
-    font-size: 0.8rem; 
+#copy{
+    color: black; 
+    font-size: 1rem; 
     text-align: left;
 }

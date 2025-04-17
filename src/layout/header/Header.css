@@ -1,6 +1,7 @@
 header{
-    background-color: #649fad;
+    background-color: #73CFBE;
     padding: 0.5rem;
+    min-height: 60px;
 }
 
 nav{
@@ -9,12 +10,14 @@ nav{
     align-items: center;
     gap: 1rem;
     margin-right: 20px;
+    padding: o.5rem 0;
 }
 
 .logo{
-    width: 90px;
+    width: 200px; /* Ajusta este valor según sea necesario */
     height: auto;
-    position: relative;
-    right: 900px;
-
+    position: absolute;
+    left: 5px; /* Ajusta este valor según sea necesario */
+    transform: translateY(10%);
+    
 }
