@@ -1,9 +1,15 @@
 footer{
-    background-color: #73CFBE;
+
+    background-color: #00596f81;
     padding: 1rem;
+    border: 5px solid transparent;
+    border-radius: 20px;
 }
-#copy{
-    color: black; 
-    font-size: 1rem; 
+
+
+.copy{
+    color: #000000; 
+    font-size: 0.8rem; 
     text-align: left;
+    text-shadow: 0 0 5px #00596f81;
 }

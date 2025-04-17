@@ -1,23 +1,46 @@
-header{
-    background-color: #73CFBE;
+header {
+    background: linear-gradient(to bottom, #61b3e9, #ffffff); /* Ajustado para un gradiente de arriba hacia abajo */
     padding: 0.5rem;
     min-height: 60px;
 }
 
-nav{
+.nav {
     display: flex;
     justify-content: end;
     align-items: center;
     gap: 1rem;
     margin-right: 20px;
-    padding: o.5rem 0;
+    padding: 0.5rem 0; /* Corrige el error tipográfico en "o.5rem" */
 }
 
-.logo{
-    width: 200px; /* Ajusta este valor según sea necesario */
+.logo {
+    width: 100px;
     height: auto;
-    position: absolute;
-    left: 5px; /* Ajusta este valor según sea necesario */
-    transform: translateY(10%);
-    
+    margin-right: auto;
+    filter: drop-shadow(2px 5px 480px #000000);
+}
+
+.nav a {
+    color: #000; /* Color de letra negro */
+    text-decoration: none;
+}
+
+.nav a:hover {
+    color: #36aace; /* Cambia el color de la letra al pasar el mouse por encima */
+}
+
+.sign-in-link {
+    color: #000; /* Color de letra negro */
+    border: 2px solid #b6ecf3;
+    background-color: transparent;
+    padding: 0.5rem 1rem;
+    border-radius: 10px;
+    font-size: 20px;
+    box-sizing: border-box;
+    margin-left: 40px;
+}
+
+.sign-in-link:hover {
+    color: #104858; /* Cambia el color de la letra al pasar el mouse por encima */
+    background-color: #0f545e; /* Cambia el fondo al pasar el mouse por encima */
 }
