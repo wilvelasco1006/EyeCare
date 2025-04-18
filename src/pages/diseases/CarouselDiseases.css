@@ -1,4 +1,4 @@
-.carrusel-contenedor {
+.carousel-container {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -7,7 +7,7 @@
     position: relative;
   }
   
-  .carrusel {
+  .carousel {
     position: relative;
     width: 660px;
     height: 300px;
@@ -17,7 +17,7 @@
     overflow: hidden;
   }
   
-  .tarjeta {
+  .card {
     width: 300px;
     height: 260px;
     border-radius: 20px;
@@ -30,19 +30,19 @@
     transition: all 0.3s ease;
   }
   
-  .tarjeta img {
+  .card img {
     width: 100%;
     height: 150px;
     object-fit: cover;
     border-radius: 12px;
   }
   
-  .tarjeta h3 {
+  .card h3 {
     margin: 10px 0;
     font-size: 16px;
   }
   
-  .ver-mas {
+  .watch-more {
     align-self: normal;
     background: #36aace;
     border: 1px solid #333;
@@ -53,7 +53,7 @@
     text-align: center;
   }
   
-  .flecha {
+  .arrow {
     background: #36aace;
     border: none;
     font-size: 30px;

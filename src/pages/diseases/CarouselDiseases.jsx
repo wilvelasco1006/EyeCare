@@ -1,66 +1,73 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
-import { useNavigate } from "react-router-dom"; // Importa useNavigate
 import "./CarouselDiseases.css";
 
 const diseases = [
   {
-    nombre: "GLAUCOMA",
-    imagen: "/public/Glaucoma.png",
+    name: "GLAUCOMA",
+    image: "/Glaucoma.png", // Ruta relativa desde la carpeta public
   },
   {
-    nombre: "CONJUNTIVITIS",
-    imagen: "/public/Conjuntivitis.jpg",
+    name: "CONJUNTIVITIS",
+    image: "/Conjuntivitis.jpg", // Ruta relativa desde la carpeta public
   },
   {
-    nombre: "DEGENERACIÓN MACULAR",
-    imagen: "/public/Degeneracion.jpg",
+    name: "DEGENERACIÓN MACULAR",
+    image: "/Degeneracion.jpg", // Ruta relativa desde la carpeta public
   },
   {
-    nombre: "CATARATAS",
-    imagen: "/public/Cataratas.jpg",
-    ruta: "/diseases/cataracts", // Ruta para la página de Cataratas
+    name: "CATARATAS",
+    image: "/Cataratas.jpg", // Ruta relativa desde la carpeta public
   },
 ];
 
 const CarouselDiseases = () => {
-  const [indice, setIndice] = useState(1); // comienza en el centro
-  const navigate = useNavigate(); // Hook para navegar entre rutas
-  const mover = (direccion) => {
-    setIndice((prev) => (prev + direccion + diseases.length) % diseases.length);
+  const [index, setIndex] = useState(1); // comienza en el centro
+
+  const move = (direction) => {
+    setIndex((prev) => (prev + direction + diseases.length) % diseases.length);
   };
 
   return (
-    <div className="carrusel-contenedor">
-      <button className="flecha" onClick={() => mover(-1)}>
+    <div className="carousel-container">
+      <button
+        className="arrow"
+        onClick={() => move(-1)}
+        aria-label="Anterior"
+      >
         &lt;
       </button>
-      <div className="carrusel">
+      <div className="carousel">
         {diseases.map((item, i) => {
-          const offset = i - indice;
-          const escala = offset === 0 ? 1.1 : 0.8;
-          const opacidad = offset === 0 ? 1 : 0.5;
+          const offset = i - index;
+          const scale = offset === 0 ? 1.1 : 0.8;
+          const opacity = offset === 0 ? 1 : 0.5;
           return (
             <motion.div
-              className="tarjeta"
+              className="card"
               key={i}
               animate={{
-                scale: escala,
-                opacity: opacidad,
+                scale: scale,
+                opacity: opacity,
                 zIndex: offset === 0 ? 2 : 1,
               }}
               transition={{ type: "spring", stiffness: 200 }}
               style={{ transform: `translateX(${offset * 220}px)` }}
-              onClick={() => navigate(item.ruta)} // Navega a la ruta correspondiente
             >
-              <img src={item.imagen} alt={item.nombre} />
-              <h3>{item.nombre}</h3>
-              <button className="ver-mas">Ver más</button>
+              <img src={item.image} alt={item.name} />
+              <h3>{item.name}</h3>
+              <button className="watch-more" aria-label={`Ver más sobre ${item.name}`}>
+                Ver más
+              </button>
             </motion.div>
           );
         })}
       </div>
-      <button className="flecha" onClick={() => mover(1)}>
+      <button
+        className="arrow"
+        onClick={() => move(1)}
+        aria-label="Siguiente"
+      >
         &gt;
       </button>
     </div>
