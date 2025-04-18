@@ -1,0 +1,65 @@
+.carrusel-contenedor {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(to bottom, #e0eafc, #cfdef3);
+    padding: 40px 0;
+    position: relative;
+  }
+  
+  .carrusel {
+    position: relative;
+    width: 660px;
+    height: 300px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+  }
+  
+  .tarjeta {
+    width: 300px;
+    height: 260px;
+    border-radius: 20px;
+    overflow: hidden;
+    background: rgba(255, 255, 255, 0.9);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+    position: absolute;
+    text-align: center;
+    padding: 10px;
+    transition: all 0.3s ease;
+  }
+  
+  .tarjeta img {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 12px;
+  }
+  
+  .tarjeta h3 {
+    margin: 10px 0;
+    font-size: 16px;
+  }
+  
+  .ver-mas {
+    align-self: normal;
+    background: #36aace;
+    border: 1px solid #333;
+    border-radius: 10px;
+    padding: 5px 10px;
+    margin-top: 5px;
+    cursor: pointer;
+    text-align: center;
+  }
+  
+  .flecha {
+    background: #36aace;
+    border: none;
+    font-size: 30px;
+    padding: 10px;
+    border-radius: 50%;
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    margin: 0 10px;
+  }

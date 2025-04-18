@@ -1,7 +1,7 @@
 import { createRoot } from 'react-dom/client'
 import './index.css'
 import Home from './pages/home/Home.jsx'
-import Diseases from './pages/diseases/Diseases.jsx'
+import Diseases from './pages/diseases/CarouselDiseases.jsx'
 import Quiz from './pages/quiz/Quiz.jsx'
 import NotFound from './pages/not-found/NotFound.jsx'
 import AboutUs from "./pages/about-us/AboutUs.jsx"
