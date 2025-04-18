@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
+import { useNavigate } from "react-router-dom"; // Importa useNavigate
 import "./CarouselDiseases.css";
 
 const diseases = [
@@ -18,12 +19,13 @@ const diseases = [
   {
     nombre: "CATARATAS",
     imagen: "/public/Cataratas.jpg",
+    ruta: "/diseases/cataracts", // Ruta para la página de Cataratas
   },
 ];
 
 const CarouselDiseases = () => {
   const [indice, setIndice] = useState(1); // comienza en el centro
-
+  const navigate = useNavigate(); // Hook para navegar entre rutas
   const mover = (direccion) => {
     setIndice((prev) => (prev + direccion + diseases.length) % diseases.length);
   };
@@ -49,6 +51,7 @@ const CarouselDiseases = () => {
               }}
               transition={{ type: "spring", stiffness: 200 }}
               style={{ transform: `translateX(${offset * 220}px)` }}
+              onClick={() => navigate(item.ruta)} // Navega a la ruta correspondiente
             >
               <img src={item.imagen} alt={item.nombre} />
               <h3>{item.nombre}</h3>

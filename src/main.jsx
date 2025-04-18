@@ -8,17 +8,18 @@ import AboutUs from "./pages/about-us/AboutUs.jsx"
 import { BrowserRouter, Routes, Route } from 'react-router'
 import Layout from './layout/Layout.jsx'
 import Sign from './pages/sign-in/Sign.jsx'
-
-createRoot(document.getElementById('root')).render(
+import Cataracts from './pages/diseases/Cataracts/Cataracts.jsx'
+createRoot(document.getElementById("root")).render(
   <BrowserRouter>
     <Layout>
       <Routes>
         <Route index path="/" element={<Home />} />
-        <Route path="diseases" element={<Diseases />}/>
+        <Route path="diseases" element={<Diseases />} />
+        <Route path="diseases/cataracts" element={<Cataracts />} />
         <Route path="quiz" element={<Quiz />} />
-        <Route path="*" element={<NotFound />}/>
-        <Route path="about us" element={<AboutUs />}/>
-        <Route path="sign in" element={<Sign />}/>
+        <Route path="*" element={<NotFound />} />
+        <Route path="about us" element={<AboutUs />} />
+        <Route path="sign in" element={<Sign />} />
       </Routes>
     </Layout>
   </BrowserRouter>
