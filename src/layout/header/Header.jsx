@@ -9,7 +9,7 @@ const Header = () => {
         <NavLink to="/" end>
           Inicio
         </NavLink>
-        <NavLink to="diseases" end>
+        <NavLink to="diseases/content-diseases" end>
           Enfermedades
         </NavLink>
         <NavLink to="quiz" end>

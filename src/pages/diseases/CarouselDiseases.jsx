@@ -1,28 +1,34 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
+import { useNavigate, Outlet } from "react-router-dom"; // Importa Outlet
 import "./CarouselDiseases.css";
 
 const diseases = [
   {
     name: "GLAUCOMA",
-    image: "/Glaucoma.png", // Ruta relativa desde la carpeta public
+    image: "/Glaucoma.png",
+    ruta: "/diseases/glaucoma", // Ruta correspondiente
   },
   {
     name: "CONJUNTIVITIS",
-    image: "/Conjuntivitis.jpg", // Ruta relativa desde la carpeta public
+    image: "/Conjuntivitis.jpg",
+    ruta: "/diseases/conjunctivitis", // Ruta correspondiente
   },
   {
     name: "DEGENERACIÓN MACULAR",
-    image: "/Degeneracion.jpg", // Ruta relativa desde la carpeta public
+    image: "/Degeneracion.jpg",
+    ruta: "/diseases/macular-degeneration", // Ruta correspondiente
   },
   {
     name: "CATARATAS",
-    image: "/Cataratas.jpg", // Ruta relativa desde la carpeta public
+    image: "/Cataratas.jpg",
+    ruta: "/diseases/cataracts", // Ruta correspondiente
   },
 ];
 
 const CarouselDiseases = () => {
   const [index, setIndex] = useState(1); // comienza en el centro
+  const navigate = useNavigate(); // Inicializa useNavigate
 
   const move = (direction) => {
     setIndex((prev) => (prev + direction + diseases.length) % diseases.length);
@@ -56,7 +62,11 @@ const CarouselDiseases = () => {
             >
               <img src={item.image} alt={item.name} />
               <h3>{item.name}</h3>
-              <button className="watch-more" aria-label={`Ver más sobre ${item.name}`}>
+              <button
+                className="watch-more"
+                aria-label={`Ver más sobre ${item.name}`}
+                onClick={() => navigate(item.ruta)} // Navega a la ruta correspondiente
+              >
                 Ver más
               </button>
             </motion.div>
@@ -70,6 +80,7 @@ const CarouselDiseases = () => {
       >
         &gt;
       </button>
+      <Outlet />
     </div>
   );
 };

@@ -14,8 +14,11 @@ createRoot(document.getElementById("root")).render(
     <Layout>
       <Routes>
         <Route index path="/" element={<Home />} />
-        <Route path="diseases" element={<Diseases />} />
-        <Route path="diseases/cataracts" element={<Cataracts />} />
+        <Route path="diseases">
+          <Route path="content-diseases" element={<Diseases />} />
+          <Route path="cataracts" element={<Cataracts />}/>
+        </Route>
+  
         <Route path="quiz" element={<Quiz />} />
         <Route path="*" element={<NotFound />} />
         <Route path="about us" element={<AboutUs />} />
