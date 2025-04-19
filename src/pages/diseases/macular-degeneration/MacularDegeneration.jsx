@@ -2,8 +2,9 @@ import "./MacularDegeneration.css";
 import { Canvas } from "@react-three/fiber";
 import { MacularModel } from "./models-3d/MacularModel";
 import { OrbitControls } from "@react-three/drei";
-import { Environment } from '@react-three/drei';
+// import { Environment } from '@react-three/drei';
 import Floor from "./models-3d/Floor";
+import Lights from "./lights/Lights";
 
 const MacularDegeneration = () => {
   return (
@@ -22,12 +23,11 @@ const MacularDegeneration = () => {
         </p>
       </div>
       <div className="model-container" style={{ flex: 1, height: '400px' }}>
-        <Canvas camera={{ position: [0, 0, 2], fov: 50 }}>
-          <ambientLight intensity={1} />
-          <directionalLight position={[5, 5, 5]} intensity={4} />
+        <Canvas camera={{ position: [0, 0, 2], fov: 50 }} shadows={true}>
           <OrbitControls autoRotate enableZoom={true} minDistance={1} maxDistance={5}/>
           <MacularModel/>
-
+          <Floor/>
+          <Lights/>
         </Canvas>
       </div>
     </div>

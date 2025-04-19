@@ -7,7 +7,11 @@ export function MacularModel (props) {
   
   return (
     <group {...props} dispose={null}>
-      <mesh castShadow receiveShadow geometry={nodes.MacularDegeneration.geometry} material={materials.MacularMaterial} />
+      <mesh 
+      geometry={nodes.MacularDegeneration.geometry} 
+      material={materials.MacularMaterial} 
+      castShadow
+      />
     </group>
   )
 }
