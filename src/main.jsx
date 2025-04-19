@@ -9,6 +9,7 @@ import { BrowserRouter, Routes, Route } from 'react-router'
 import Layout from './layout/Layout.jsx'
 import Sign from './pages/sign-in/Sign.jsx'
 import Cataracts from './pages/diseases/Cataracts/Cataracts.jsx'
+import MacularDegeneration from './pages/diseases/macular-degeneration/MacularDegeneration.jsx'
 createRoot(document.getElementById("root")).render(
   <BrowserRouter>
     <Layout>
@@ -17,8 +18,8 @@ createRoot(document.getElementById("root")).render(
         <Route path="diseases">
           <Route path="content-diseases" element={<Diseases />} />
           <Route path="cataracts" element={<Cataracts />}/>
+          <Route path="macular-degeneration" element={<MacularDegeneration />} />
         </Route>
-  
         <Route path="quiz" element={<Quiz />} />
         <Route path="*" element={<NotFound />} />
         <Route path="about us" element={<AboutUs />} />
