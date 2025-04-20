@@ -1,7 +1,7 @@
 import { useTexture } from "@react-three/drei";
 import React, { useMemo } from "react"; 
 const Floor = () => {
-    const PATH = useMemo(() => "/textures/floor/light-plank-flooring_", []);
+    const PATH = useMemo(() => "/textures/floor/ligth/light-plank-flooring_", []);
     const floorTexture = useTexture({
         map: PATH + "albedo.png",
         normalMap: PATH + "normal-ogl.png",
