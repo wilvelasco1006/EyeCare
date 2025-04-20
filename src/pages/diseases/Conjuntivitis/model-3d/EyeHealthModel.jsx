@@ -3,7 +3,7 @@ import React, { useRef } from 'react'
 import { useGLTF } from '@react-three/drei'
 
 export function EyeHealthModel(props) {
-  const { nodes, materials } = useGLTF('/models-3d/Conjuntivitis/health-eye.glb')
+  const { nodes, materials } = useGLTF('/models-3d/conjuntivitis/health-eye.glb')
   return (
     <group {...props} dispose={null}>
       <mesh castShadow geometry={nodes.Sclera.geometry} material={materials.Sclera} />
@@ -13,4 +13,4 @@ export function EyeHealthModel(props) {
   )
 }
 
-useGLTF.preload('/models-3d/Conjuntivitis/health-eye.glb')
+useGLTF.preload('/models-3d/conjuntivitis/health-eye.glb')

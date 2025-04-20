@@ -12,7 +12,7 @@ const diseases = [
   },
   {
     name: "CONJUNTIVITIS",
-    image: "/Conjuntivitis.jpg",
+    image: "/images/Conjuntivitis.jpg",
     ruta: "/diseases/conjuntivitis", // Ruta correspondiente
   },
   {

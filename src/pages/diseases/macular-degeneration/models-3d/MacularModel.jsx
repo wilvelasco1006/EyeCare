@@ -2,7 +2,7 @@ import { useGLTF } from '@react-three/drei'
 
 
 export function MacularModel (props) {
-  const { nodes, materials } = useGLTF('/models-3d/MacularDegeneration.glb');
+  const { nodes, materials } = useGLTF('/models-3d/macularDegeneration/MacularDegeneration.glb');
 
   
   return (
@@ -16,4 +16,4 @@ export function MacularModel (props) {
   )
 }
 
-useGLTF.preload('/models-3d/MacularDegeneration.glb');
+useGLTF.preload('/models-3d/macularDegeneration/MacularDegeneration.glb');

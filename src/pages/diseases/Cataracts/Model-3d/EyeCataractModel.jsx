@@ -4,7 +4,7 @@ import { useGLTF, useAnimations } from "@react-three/drei";
 export function EyeCataractModel(props) {
   const group = useRef();
   const { nodes, materials, animations } = useGLTF(
-    "/models-3d/Cataracts/cataract-eye.glb"
+    "/models-3d/cataracts/cataract-eye.glb"
   );
    // Ruta al modelo
   const { actions } = useAnimations(animations, group);
@@ -60,4 +60,4 @@ export function EyeCataractModel(props) {
   );
 }
 
-useGLTF.preload("/models-3d/cataract-eye.glb");
+useGLTF.preload("/models-3d/cataracts/cataract-eye.glb");
