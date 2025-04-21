@@ -44,9 +44,9 @@ const Glaucoma = () => {
                 </div>
             </div>
             <div className="model-container">
-                <Canvas camera={{ position: [0, 0, 0.3], fov: 50 }}>
+                <Canvas shadows camera={{ position: [0, 0, 0.3], fov: 50 }}>
                     <ambientLight intensity={2} />
-                    <directionalLight position={[2, 2, 2]} />
+                    <directionalLight position={[2, 2, 2]} castShadow />
                     <OrbitControls />
                     <EyeGlaucomaModel scale={[10, 10, 10]} position={[0, 0, 0]} />
                     <Floor />

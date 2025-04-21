@@ -7,22 +7,22 @@ import { FaChevronLeft, FaChevronRight, FaEye } from "react-icons/fa"; // Import
 const diseases = [
   {
     name: "GLAUCOMA",
-    image: "/Glaucoma.png",
+    image: "/images/Glaucoma.png",
     ruta: "/diseases/glaucoma", // Ruta correspondiente
   },
   {
     name: "CONJUNTIVITIS",
-    image: "/Conjuntivitis.jpg",
+    image: "/images/Conjuntivitis.jpg",
     ruta: "/diseases/conjuntivitis", // Ruta correspondiente
   },
   {
     name: "DEGENERACIÓN MACULAR",
-    image: "/Degeneracion.jpg",
+    image: "/images/Degeneracion.jpg",
     ruta: "/diseases/macular-degeneration", // Ruta correspondiente
   },
   {
     name: "CATARATAS",
-    image: "/Cataratas.jpg",
+    image: "/images/Cataratas.jpg",
     ruta: "/diseases/cataracts", // Ruta correspondiente
   },
 ];

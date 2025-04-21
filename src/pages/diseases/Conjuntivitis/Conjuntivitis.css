@@ -1,56 +1,190 @@
 .conjuntivitis-container {
-    display: flex; 
-    flex-direction: row; 
-    align-items: center; 
-    justify-content: space-around; 
-    padding: 2rem; /* Añade un poco de espacio alrededor del contenedor */
-    background-color: #f0f8ff; /* Un color de fondo claro como en el prototipo */
-    border-radius: 8px; /* Bordes redondeados para un aspecto suave */
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); /* Una ligera sombra para elevación */
-    margin: 2rem; /* Margen alrededor del contenedor principal */
+  font-family: sans-serif;
+  color: #333;
+  height: 700px; /* Altura fija */
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+  padding: 2rem;
+  background-color: #f0f8ff;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  margin: 2rem;
+  overflow: hidden; /* Evita que el contenedor se agrande */
+}
+
+.Text-container-sectionOne {
+  flex: 1;
+  padding: 1rem;
+  text-align: left;
+  height: 600px; /* Altura fija para el contenedor de texto */
+  position: relative; /* Para posicionar correctamente elementos internos */
+  overflow-y: auto; /* Añade desplazamiento vertical cuando sea necesario */
+}
+
+.conjuntivitis-title {
+  font-size: 3rem;
+  color: #333;
+  margin-bottom: 0.5rem;
+}
+
+.subtitle {
+  font-size: 2rem;
+  color: #555;
+  margin-bottom: 1rem;
+}
+
+.conjuntivitis-description {
+  background-color: #e6f2ff;
+  border-left: 3px solid #0066cc;
+  padding: 12px;
+  margin-bottom: 15px;
+}
+
+/* Palabra "conjuntivitis" resaltada */
+.conjuntivitis-description span {
+  color: #0066cc;
+  font-weight: bold;
+}
+
+/* Estilos para el contenedor de details */
+details {
+  max-height: 400px; /* Altura máxima para el contenido de details */
+  overflow-y: auto; /* Scroll vertical si el contenido es más grande */
+}
+
+/* Mejorar la apariencia del summary */
+.conjuntivitis-summary {
+  cursor: pointer;
+  padding: 10px;
+  background-color: #e6f2ff;
+  border-left: 3px solid #0066cc;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+/* Lista de causas */
+.conjuntivitis-list {
+  list-style-type: none;
+  padding-left: 0;
+  padding: 10px;
+  margin: 0;
+  background-color: #f8fbff;
+}
+
+.conjuntivitis-list li {
+  background-color: #f0f8ff;
+  margin-bottom: 8px;
+  padding: 10px;
+  border-left: 3px solid #3399ff;
+}
+
+.conjuntivitis-list li:nth-child(1) {
+  border-left: 3px solid #0066cc;
+}
+
+.conjuntivitis-list li:nth-child(2) {
+  border-left: 3px solid #3399ff;
+}
+
+.conjuntivitis-list li:nth-child(3) {
+  border-left: 3px solid #66b3ff;
+}
+
+.conjuntivitis-list li:nth-child(4) {
+  border-left: 3px solid #99ccff;
+}
+
+.model-container {
+  flex: 1;
+  padding: 1rem;
+  padding-bottom: 7rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-width: 300px;
+  min-height: 300px;
+  position: relative; /* Para posicionar correctamente el mensaje flotante */
+}
+
+.model-container canvas {
+  max-width: 100%;
+  max-height: 100%;
+  width: 400px;
+  height: 400px;
+  border: 2px solid #87ceeb;
+  border-radius: 8px;
+  box-sizing: border-box;
+}
+
+.box-message {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(255, 255, 255, 0.85);
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  font-size: 1.1rem;
+  padding: 1rem;
+  z-index: 10;
+  text-align: center;
+  pointer-events: none;
+  opacity: 0;
+  transform: scale(0.95);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.box-message.show {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.btn-conjuntivitis {
+  width: 80px;
+  height: 40px;
+  background-color: #52a1c0;
+  border: none;
+  border-radius: 80px;
+  margin: auto;
+  color: white; /* Color de texto para el botón */
+  cursor: pointer; /* Cambia el cursor a una mano al pasar sobre el botón */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.btn-conjuntivitis:hover {
+  background-color: #3b8bbf;
+  box-shadow: 0 0 20px #52a1c0;
+}
+
+.floating-message {
+  position: absolute;
+  top: 6rem;
+  right: 3rem;
+  background-color: rgba(255, 255, 255, 0.9);
+  padding: 1rem 1.5rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+  font-size: 1rem;
+  max-width: 250px;
+  z-index: 10;
+  animation: fadeIn 0.5s ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
   }
-  
-  .Text-container-sectionOne {
-    flex: 1; /* Permite que el contenedor de texto ocupe el espacio disponible */
-    padding: 1rem;
-    text-align: left; /* Alinea el texto a la izquierda */
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
-  
-  .conjuntivitis-title {
-    font-size: 2.5rem; /* Tamaño grande para el título principal */
-    color: #333; /* Color del título */
-    margin-bottom: 0.5rem; /* Espacio debajo del título */
-  }
-  
-  .subtitle {
-    font-size: 1.5rem; /* Tamaño para el subtítulo/pregunta */
-    color: #555; /* Color del subtítulo */
-    margin-bottom: 1rem; /* Espacio debajo del subtítulo */
-  }
-  
-  .conjuntivitis-description {
-    font-size: 1rem; /* Tamaño para la descripción */
-    color: #666; /* Color de la descripción */
-    line-height: 1.6; /* Espacio entre líneas para mejor legibilidad */
-  }
-  
-  .model-container {
-    flex: 1; /* Permite que el contenedor del modelo ocupe el espacio disponible */
-    padding: 1rem;
-    display: flex;
-    justify-content: center; /* Centra el modelo horizontalmente */
-    align-items: center; /* Centra el modelo verticalmente (si es necesario) */
-    min-width: 300px; /* Ancho mínimo para el contenedor del modelo */
-    min-height: 300px; /* Alto mínimo para el contenedor del modelo */
-  }
-  
-  /* Estilos adicionales para el Canvas (opcional, dependiendo de cómo quieras que se vea) */
-  .model-container canvas {
-    max-width: 100%;
-    max-height: 100%;
-    width: 300px; /* o el tamaño que desees por defecto */
-    height: 300px;
-    border: 2px solid #87ceeb;
-    border-radius: 8px;
-    box-sizing: border-box;
-  }
+}

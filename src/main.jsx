@@ -11,6 +11,8 @@ import Diseases from './pages/diseases/CarouselDiseases.jsx'
 import Cataracts from './pages/diseases/Cataracts/Cataracts.jsx'
 import Conjuntivis from './pages/diseases/Conjuntivitis/Conjuntivitis.jsx'
 import Glaucoma from './pages/diseases/Glaucoma/Glaucoma.jsx'
+import MacularDegeneration from './pages/diseases/macular-degeneration/MacularDegeneration.jsx'
+
 createRoot(document.getElementById("root")).render(
   <BrowserRouter>
     <Layout>
@@ -21,6 +23,7 @@ createRoot(document.getElementById("root")).render(
           <Route path="cataracts" element={<Cataracts />}/>
           <Route path="Conjuntivitis" element={<Conjuntivis />}/>
           <Route path="Glaucoma" element={<Glaucoma />} />
+          <Route path="macular-degeneration" element={<MacularDegeneration />} />
         </Route>
         <Route path="quiz" element={<Quiz />} />
         <Route path="*" element={<NotFound />} />

@@ -1,11 +1,10 @@
-
 /* eslint-disable react/no-unknown-property */
 import { useRef, useEffect } from 'react'
 import { useGLTF, useAnimations } from '@react-three/drei'
 
 export function EyeGlaucomaModel(props) {
   const group = useRef()
-  const { nodes, materials, animations } = useGLTF('/models-3d/eyeGlaucomaM.glb')
+  const { nodes, materials, animations } = useGLTF('/models-3d/glaucoma/eyeGlaucomaM.glb')
   const { actions } = useAnimations(animations, group)
 
   useEffect(() => {
@@ -22,8 +21,8 @@ export function EyeGlaucomaModel(props) {
         <group name="controlEye" rotation={[0.01, -0.004, -0.006]}>
           <mesh
             name="eye_low001"
-            castShadow
-            receiveShadow
+            castShadow // El modelo proyectará sombras
+            receiveShadow // El modelo recibirá sombras
             geometry={nodes.eye_low001.geometry}
             material={materials.Eye_material}
           />
@@ -33,4 +32,4 @@ export function EyeGlaucomaModel(props) {
   )
 }
 
-useGLTF.preload('/models-3d/eyeGlaucomaM.glb')
+useGLTF.preload('/models-3d/glaucoma/eyeGlaucomaM.glb')
