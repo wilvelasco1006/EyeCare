@@ -1,0 +1,77 @@
+.glaucoma-container {
+    display: flex; 
+    flex-direction: row; 
+    align-items: center; 
+    justify-content: space-around; 
+    padding: 2rem; /* Añade un poco de espacio alrededor del contenedor */
+    background-color: #f0f8ff; /* Un color de fondo claro como en el prototipo */
+    border-radius: 8px; /* Bordes redondeados para un aspecto suave */
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); /* Una ligera sombra para elevación */
+    margin: 2rem; /* Margen alrededor del contenedor principal */
+  }
+  
+  .Text-container-sectionOne {
+    flex: 1; /* Permite que el contenedor de texto ocupe el espacio disponible */
+    padding: 1rem;
+    text-align: left; /* Alinea el texto a la izquierda */
+  }
+  
+  .glaucoma-title {
+    font-size: 2.5rem; /* Tamaño grande para el título principal */
+    color: #333; /* Color del título */
+    margin-bottom: 0.5rem; /* Espacio debajo del título */
+  }
+  
+  .subtitle {
+    font-size: 1.5rem; /* Tamaño para el subtítulo/pregunta */
+    color: #555; /* Color del subtítulo */
+    margin-bottom: 1rem; /* Espacio debajo del subtítulo */
+  }
+  
+  .glaucoma-description {
+    font-size: 1rem; /* Tamaño para la descripción */
+    color: #666; /* Color de la descripción */
+    line-height: 1.6; /* Espacio entre líneas para mejor legibilidad */
+  }
+  
+  .model-container {
+    flex: 1; /* Permite que el contenedor del modelo ocupe el espacio disponible */
+    padding: 1rem;
+    display: flex;
+    justify-content: center; /* Centra el modelo horizontalmente */
+    align-items: center; /* Centra el modelo verticalmente (si es necesario) */
+    min-width: 300px; /* Ancho mínimo para el contenedor del modelo */
+    min-height: 300px; /* Alto mínimo para el contenedor del modelo */
+  }
+  
+  /* Estilos adicionales para el Canvas (opcional, dependiendo de cómo quieras que se vea) */
+  .model-container canvas {
+    max-width: 100%;
+    max-height: 100%;
+    width: 300px; /* o el tamaño que desees por defecto */
+    height: 300px;
+    border: 2px solid #87ceeb;
+    border-radius: 8px;
+    box-sizing: border-box;
+  }
+
+  .glaucoma-buttons {
+    margin-top: 20px;
+    display: flex;
+    gap: 10px;
+}
+
+.glaucoma-button {
+    background-color: #4da5ff;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background-color 0.3s;
+}
+
+.glaucoma-button:hover {
+    background-color: #357abd;
+}
