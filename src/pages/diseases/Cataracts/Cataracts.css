@@ -89,16 +89,20 @@
   background-color: #ffffff; /* Fondo blanco */
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra suave */
+  position: relative; /* Posiciona el texto dentro del contenedor */
 }
 
 .model-tooltip {
-  margin-top: 1rem;
-  text-align: center;
+  position: absolute;
+  bottom: 10px; /* Ubica el texto en la parte inferior */
+  left: 50%; /* Centra horizontalmente */
+  transform: translateX(-50%); /* Ajusta el centrado */
   background-color: rgba(0, 0, 0, 0.7);
   color: white;
   padding: 0.5rem 1rem;
   border-radius: 8px;
   font-size: 0.9rem;
+  text-align: center;
   animation: fadeIn 1s ease-out forwards;
 }
 

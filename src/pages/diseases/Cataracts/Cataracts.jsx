@@ -142,7 +142,10 @@ const Cataracts = () => {
           <Canvas shadows camera={{ position: [0, 0, 2], fov: 50 }}>
             <ambientLight castShadow intensity={1} />
             <directionalLight castShadow position={[2, 2, 2]} intensity={2} />
-            <OrbitControls minDistance={0.5} maxDistance={1} />
+            <OrbitControls
+              minDistance={0.5}
+              maxDistance={1}
+            />
             <EyeCataractModel scale={10} position={[0, 0, 0]} />
             <Floor />
           </Canvas>
