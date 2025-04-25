@@ -15,10 +15,10 @@ const Header = () => {
         <NavLink to="quiz" end>
           Quiz
         </NavLink>
-        <NavLink to="about us" end>
+        <NavLink to="about-us" end>
           Sobre nosotros
         </NavLink>
-        <NavLink to="sign in" end className="sign-in-link">
+        <NavLink to="sign-in" end className="sign-in-link">
           Sign in
         </NavLink>
       </nav>
