@@ -68,7 +68,6 @@ const Conjuntivitis = () => {
                 <div className="floating-message">
                     {messages[viewIndex]}
                 </div>
-
                 <Canvas camera={{ position: [0.9, 0.3, 2], fov: 70 }} shadows={true}>
                     <ambientLight intensity={0.5} />
                     <directionalLight position={[2, 2, 2]} intensity={3} castShadow={true} shadow-mapSize={[2048, 2048]} />

@@ -118,10 +118,11 @@ details {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding: 5rem 10rem 10rem 10rem;
+  padding: 2rem 10rem 5rem 10rem; /* antes: 5rem arriba y 10rem abajo */
   min-width: 300px;
   min-height: 300px;
   position: relative;
+  top: -60px
 }
 
 
@@ -130,7 +131,7 @@ details {
   max-width: 100%;
   max-height: 100%;
   width: 400px;
-  height: 400px;
+  height: 500px;
   border: 2px solid #87ceeb;
   border-radius: 8px;
   box-sizing: border-box;
@@ -184,8 +185,8 @@ details {
 
 .floating-message {
   position: absolute;
-  top: 6rem;
-  right: 3rem;
+  top: 3rem;
+  right: 2rem;
   background-color: rgba(255, 255, 255, 0.9);
   padding: 1rem 1.5rem;
   border-radius: 12px;
