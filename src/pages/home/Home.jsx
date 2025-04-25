@@ -13,6 +13,11 @@ const Home = () => {
       <p className="info-text">experencia interactiva 3D sobre enfermedades Oculares</p>
       <img src="/images/eye.gif" alt="Animated Eye" className="animated-image" />
       <button className="boton-welcome" onClick={handleClick}>Iniciar</button>
+      <div>
+      <h2>enfermedades</h2>
+      <a href=""></a>
+      </div>
+      
     </div>
   );
 };
