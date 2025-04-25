@@ -2,12 +2,15 @@ footer {
     background: linear-gradient(to top, #61b3e9, #ffffff);
     padding: 0.5rem;
     min-height: 50px;
+    display: flex; /* Usa flexbox para centrar */
+    justify-content: center; /* Centra horizontalmente */
+    align-items: center; /* Centra verticalmente */
 }
 
 
-.copy{
+#copy{
     color: #000000; 
     font-size: 0.8rem; 
-    text-align: left;
+    text-align: center;
     text-shadow: 0 0 5px #00596f81;
 }

@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { motion } from "framer-motion";
-import { useNavigate, Outlet } from "react-router-dom"; // Importa Outlet
+import { useNavigate} from "react-router-dom"; // Importa Outlet
 import "./CarouselDiseases.css";
+import { FaChevronLeft, FaChevronRight, FaEye } from "react-icons/fa"; // Importa los iconos
 
 const diseases = [
   {
@@ -12,7 +13,7 @@ const diseases = [
   {
     name: "CONJUNTIVITIS",
     image: "/images/Conjuntivitis.jpg",
-    ruta: "/diseases/conjunctivitis", // Ruta correspondiente
+    ruta: "/diseases/conjuntivitis", // Ruta correspondiente
   },
   {
     name: "DEGENERACIÓN MACULAR",
@@ -35,13 +36,18 @@ const CarouselDiseases = () => {
   };
 
   return (
+    <>
+    <h2 className="carousel-title"data-text="Enfermedades Oculares mas comunes">Enfermedades Oculares mas comunes</h2>
+    <p className="carousel-description">
+      Aquí puedes encontrar información sobre las enfermedades oculares más comunes. Haz clic en "Ver más" para obtener detalles adicionales.
+    </p>
     <div className="carousel-container">
       <button
-        className="arrow"
+        className="arrow left-arrow" // Añade clase específica para estilizar la flecha izquierda
         onClick={() => move(-1)}
         aria-label="Anterior"
       >
-        &lt;
+        <FaChevronLeft />
       </button>
       <div className="carousel">
         {diseases.map((item, i) => {
@@ -67,21 +73,21 @@ const CarouselDiseases = () => {
                 aria-label={`Ver más sobre ${item.name}`}
                 onClick={() => navigate(item.ruta)} // Navega a la ruta correspondiente
               >
-                Ver más
+                <FaEye className="watch-more-icon" />  Ver más
               </button>
             </motion.div>
           );
         })}
       </div>
       <button
-        className="arrow"
+        className="arrow right-arrow" // Añade clase específica para estilizar la flecha derecha
         onClick={() => move(1)}
         aria-label="Siguiente"
       >
-        &gt;
+        <FaChevronRight />
       </button>
-      <Outlet />
     </div>
+    </>
   );
 };
 

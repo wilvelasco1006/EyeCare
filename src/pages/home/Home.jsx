@@ -4,7 +4,7 @@ import "./Home.css";
 const Home = () => {
     const navigate = useNavigate();
     const handleClick = () => {
-        navigate("/diseases");
+        navigate("/diseases/content-diseases");
     }
         
     return (
