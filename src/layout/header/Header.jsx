@@ -11,7 +11,6 @@ const Header = () => {
   const closeModal = () => setShowModal(false);
 
   return (
-<<<<<<< HEAD
     <>
       <header>
         <nav className="nav">
@@ -31,28 +30,6 @@ const Header = () => {
       {/* Renderiza el modal si está activo */}
       {showModal && <Sign closeModal={closeModal} />}
     </>
-=======
-    <header>
-      <nav className="nav">
-        <img src="/images/nobackground.png" alt="eye" className="logo" />
-        <NavLink to="/" end>
-          Inicio
-        </NavLink>
-        <NavLink to="diseases/content-diseases" end>
-          Enfermedades
-        </NavLink>
-        <NavLink to="quiz" end>
-          Quiz
-        </NavLink>
-        <NavLink to="about-us" end>
-          Sobre nosotros
-        </NavLink>
-        <NavLink to="sign-in" end className="sign-in-link">
-          Sign in
-        </NavLink>
-      </nav>
-    </header>
->>>>>>> odpf
   );
 };
 
