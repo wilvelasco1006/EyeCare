@@ -3,95 +3,200 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 2rem;
-  gap: 2rem; /* Espacio entre las secciones */
+  padding: 1rem;
+  gap: 2rem;
+  
 }
 
 .cataracts-container {
-  display: grid;
-  grid-template-columns: 1fr 1fr; /* Dos columnas iguales */
-  gap: 2rem; /* Espacio entre las columnas */
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 2rem;
   width: 100%;
-  max-width: 1200px;
-  align-items: start; /* Alinea los elementos al inicio */
-}
-
-/* Text styles */
-.cataracts-text {
-  flex: 1;
-  max-width: 100%;
-  text-align: justify;
+  max-width: 1400px;
   padding: 1rem;
-  background-color: #f9f9f9; /* Fondo claro para destacar el texto */
-  border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra suave */
+  
 }
 
-.cataracts-text h1 {
+/* Información de texto */
+.Text-container-sectionOne {
+  flex: 1;
+  text-align: left;
+  padding: 1rem;
+  background-color: #f0f8ff;
+  
+}
+
+.cataracts-title {
   font-size: 3rem;
+  color: #333;
+  margin-bottom: 0.5rem;
+  font-weight: 700;
+ 
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+  margin-top: 1rem;
   margin-bottom: 1rem;
-  text-align: center;
-  font-weight: bold;
-  color: #000000;
 }
 
-.cataracts-text h2 {
-  margin-top: 1.5rem;
-  margin-bottom: 1rem;
-  text-align: center;
+.subtitle {
   font-size: 2rem;
+  color: #555;
+  margin-bottom: 1rem;
+}
+
+.cataracts-description {
+  background-color: #e6f2ff;
+  border-left: 3px solid #0066cc;
+  padding: 12px;
+  margin-bottom: 15px;
+  font-size: 1.2rem;
+}
+
+/* Estilos para el contenedor de details */
+.details-transition summary {
+  cursor: pointer;
+  padding: 12px;
+  color: #555;
+  background-color: #e6f2ff;
+  border-left: 3px solid #0066cc;
+  margin-bottom: 15px;
   font-weight: bold;
-  color: #333333;
+  font-size: 1.2rem;
 }
 
-.cataracts-content {
+.details-transition[open] {
+  animation: fadeInDetails 0.5s ease-out;
+}
+
+@keyframes fadeInDetails {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+/* Títulos de causas y efectos */
+.cataracts-heading {
+  font-size: 1.1rem;
+  margin-bottom: 0.5rem;
+  color: #333;
+  font-weight: 600;
+}
+/* Lista de causas y efectos */
+.cataracts-list {
+  list-style-type: none;
+  padding-left: 0;
+  margin: 0;
+  background-color: #f8fbff;
+  padding: 1opx;
+  margin-bottom: 1rem;
   font-size: 1rem;
-  line-height: 1.8;
+  color: #333;
+  
+}
+/* Listas internas */
+.cataracts-sublist {
+  list-style-type: disc;
+  padding-left: 1.5rem;
   margin-bottom: 1.5rem;
-}
-
-.cataracts-content ul {
-  padding-left: 1.5rem; /* Sangría para las listas */
-}
-
-.cataracts-content ul li {
-  margin-bottom: 0.8rem; /* Espacio entre los elementos de la lista */
+  color: #333;
   line-height: 1.6;
 }
+/* Para los ítems individuales */
+.cataracts-sublist li {
+  margin-bottom: 6px;
+}
 
-/* Button styles */
-.next-button {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin: 1rem auto;
-  background-color: transparent;
+.cataracts-list ul {
+  padding-left: 1.5rem;
+}
+
+.cataracts-list li {
+  margin-bottom: 8px;
+}
+
+/* Botón para ventana emergente */
+.modal-button {
+  background-color: #36aace;
+  color: white;
   border: none;
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  border-radius: 8px;
   cursor: pointer;
-  padding: 0;
-  transition: transform 0.2s ease;
+  margin-top: 1.5rem;
+  transition: background-color 0.3s ease;
 }
 
-.next-button:hover {
-  transform: scale(1.1); /* Efecto de zoom al pasar el mouse */
+.modal-button:hover {
+  background-color: #0056b3;
 }
 
-.next-icon {
-  width: 40px;
-  height: 40px;
+/* Ventana emergente */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 999;
 }
 
-/* Model container styles */
+.modal-content {
+  background: white;
+  padding: 2rem;
+  border-radius: 12px;
+  max-width: 90%;
+  max-height: 80%;
+  overflow-y: auto;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+}
+
+.modal-content h2 {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+
+.vision-image {
+  width: 100%;
+  max-width: 400px;
+  height: auto;
+  margin-bottom: 1rem;
+}
+
+.close-button {
+  background-color: #0056b3;
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.close-button:hover {
+  background-color: #36aace;
+}
+/* Contenedor del modelo 3D */
 .model-container {
+
   flex: 1;
-  max-width: 100%;
-  height: 400px;
-  background-color: #ffffff; /* Fondo blanco */
-  border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra suave */
-  position: relative; /* Posiciona el texto dentro del contenedor */
+  text-align: left;
+  padding: 1rem;
+  background-color: #f0f8ff;
 }
 
+/* Mensaje debajo del modelo */
 .model-tooltip {
   position: absolute;
   bottom: 10px; /* Ubica el texto en la parte inferior */
@@ -106,58 +211,14 @@
   animation: fadeIn 1s ease-out forwards;
 }
 
-/* Vision comparison styles */
-.vision-comparison {
-  text-align: center;
-  margin-top: 2rem;
-}
-
-.vision-images {
-  display: flex;
-  justify-content: center;
-  margin-top: 1rem;
-}
-
-.vision-image {
-  width: 400px;
-  height: auto;
-  border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-}
-
-/* Animations */
-.animated-list {
-  list-style: none;
-  padding-left: 1.5rem;
-}
-
-.fade-in-item {
-  opacity: 0;
-  transform: translateY(10px);
-  animation: fadeIn 1s ease-out forwards;
-}
-
+/* Animación para el mensaje */
 @keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
   to {
     opacity: 1;
     transform: translateY(0);
   }
-}
-
-@keyframes fadeInItem {
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
-/* Transición para el contenido al cambiar de sección */
-.fade-transition {
-  opacity: 0;
-  transform: translateY(10px);
-  transition: opacity 0.5s ease, transform 0.5s ease;
-}
-
-.fade-transition.active {
-  opacity: 1;
-  transform: translateY(0);
 }
