@@ -30,7 +30,8 @@ header {
 }
 
 .sign-in-link {
-    color: #000; /* Color de letra negro */
+    width: 80px;
+    color: #000; 
     border: 2px solid #b6ecf3;
     background-color: transparent;
     padding: 0.5rem 1rem;
@@ -41,6 +42,6 @@ header {
 }
 
 .sign-in-link:hover {
-    color: #104858; /* Cambia el color de la letra al pasar el mouse por encima */
-    background-color: #0f545e; /* Cambia el fondo al pasar el mouse por encima */
+    color: #5d6568; 
+    background-color: #6b8e94; 
 }
