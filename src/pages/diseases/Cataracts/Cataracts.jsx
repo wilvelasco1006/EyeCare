@@ -75,7 +75,7 @@ const Cataracts = () => {
         {/* Columna derecha: Modelo 3D */}
         <div className="model-container">
           <Canvas shadows camera={{ position: [0, 0, 2], fov: 50 }}>
-            <ambientLight castShadow intensity={1} />
+            <ambientLight castShadow intensity={0.5} />
             <directionalLight castShadow position={[2, 2, 2]} intensity={2} />
             <OrbitControls minDistance={0.5} maxDistance={1} />
             <EyeCataractModel scale={10} position={[0, 0, 0]} />
@@ -93,7 +93,7 @@ const Cataracts = () => {
           <div className="modal-content" onClick={(e) => e.stopPropagation()}>
             <h2>¿Cómo se ve la visión con cataratas?</h2>
             <img
-              src="/cataract-vision.jpg"
+              src="https://res.cloudinary.com/dijh9two4/image/upload/v1745616701/cataract-vision_spvbi3.jpg"
               alt="Visión con cataratas"
               className="vision-image"
             />

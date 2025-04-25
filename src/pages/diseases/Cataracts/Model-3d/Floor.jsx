@@ -14,9 +14,13 @@ const Floor = () => {
     console.log(floorTexture);
 
     return (
-      <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, -1, 0]} receiveShadow>
-        <planeGeometry args={[20, 20]} />
-        <meshStandardMaterial {...floorTexture} />
+      <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, -0.5, 0]} position-y ={-1} receiveShadow = {true}>
+        <planeGeometry args={[10, 10]} />
+        <meshStandardMaterial
+          color={"white"}
+          transparent={true}
+          opacity={0.18}
+        />
       </mesh>
     );
 }
