@@ -19,7 +19,7 @@ const Floor = () => {
         <meshStandardMaterial
           color={"white"}
           transparent={true}
-          opacity={0.18}
+          opacity={0.40}
         />
       </mesh>
     );

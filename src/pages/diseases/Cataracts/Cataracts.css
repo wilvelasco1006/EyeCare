@@ -5,6 +5,8 @@
   align-items: center;
   padding: 1rem;
   gap: 2rem;
+  background-color: whitesmoke;
+  
   
 }
 
@@ -17,16 +19,21 @@
   width: 100%;
   max-width: 1400px;
   padding: 1rem;
-  
+  margin: 0 auto;
+  background-color: whitesmoke;
+  height: auto;
 }
 
 /* Información de texto */
-.Text-container-sectionOne {
+.text-container-section-one {
   flex: 1;
   text-align: left;
+  flex-direction: column;
+  justify-content: center;
   padding: 1rem;
   background-color: #f0f8ff;
-  
+  border-radius: 8px;
+  box-shadow: 0 4px 8px #038ab096;
 }
 
 .cataracts-title {
@@ -34,15 +41,14 @@
   color: #333;
   margin-bottom: 0.5rem;
   font-weight: 700;
- 
   text-transform: uppercase;
   letter-spacing: 1px;
-  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+  text-shadow: 1px 1px 2px rgba(2, 3, 26, 0.944);
   margin-top: 1rem;
   margin-bottom: 1rem;
 }
 
-.subtitle {
+.cataracts-subtitle {
   font-size: 2rem;
   color: #555;
   margin-bottom: 1rem;
@@ -54,6 +60,10 @@
   padding: 12px;
   margin-bottom: 15px;
   font-size: 1.2rem;
+  line-height: 1.6;
+}
+.cataracts-description span{
+  color: #0066cc;
 }
 
 /* Estilos para el contenedor de details */
@@ -69,7 +79,7 @@
 }
 
 .details-transition[open] {
-  animation: fadeInDetails 0.5s ease-out;
+  animation: fadeInDetails 2s ease-out;
 }
 
 @keyframes fadeInDetails {
@@ -85,8 +95,8 @@
 /* Títulos de causas y efectos */
 .cataracts-heading {
   font-size: 1.1rem;
-  margin-bottom: 0.5rem;
-  color: #333;
+  margin-bottom: 1.5rem;
+  color: #555;
   font-weight: 600;
 }
 /* Lista de causas y efectos */
@@ -123,77 +133,86 @@
 }
 
 /* Botón para ventana emergente */
-.modal-button {
-  background-color: #36aace;
+.cataracts-modal-button {
+  background-color: #0598ec;
   color: white;
   border: none;
   padding: 0.75rem 1.5rem;
-  font-size: 1rem;
-  border-radius: 8px;
+  font-size: 1.2rem;
+  border-radius: 15px;
   cursor: pointer;
   margin-top: 1.5rem;
-  transition: background-color 0.3s ease;
+  transition:  0.3s ease;
 }
 
 .modal-button:hover {
-  background-color: #0056b3;
+  background-color: #0598ec;
+  
 }
 
 /* Ventana emergente */
-.modal-overlay {
+.cataracts-modal-overlay {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0, 0, 0, 0.5);
+  background: rgba(0, 0, 0, 0.20);
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 999;
+  transition:  0.3s ease;
 }
 
-.modal-content {
+.cataracts-modal-content {
   background: white;
   padding: 2rem;
   border-radius: 12px;
-  max-width: 90%;
-  max-height: 80%;
+  max-width: 100%;
+  max-height: 100%;
   overflow-y: auto;
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
 }
 
-.modal-content h2 {
+.cataracts-modal-content h2 {
   font-size: 2rem;
   margin-bottom: 1rem;
+  
 }
 
 .vision-image {
   width: 100%;
-  max-width: 400px;
+  max-width: 800px;
   height: auto;
   margin-bottom: 1rem;
 }
 
-.close-button {
-  background-color: #0056b3;
+.close-btn {
+  background-color: #0598ec;
   color: white;
   border: none;
   padding: 0.5rem 1rem;
-  border-radius: 6px;
+  border-radius: 15px;
   cursor: pointer;
 }
 
 .close-button:hover {
   background-color: #36aace;
 }
-/* Contenedor del modelo 3D */
-.model-container {
-
+/* Modelo 3D */
+.cataracts-model-container {
   flex: 1;
+  display: flex;
   text-align: left;
+  flex-direction: column;
+  justify-content: center;
   padding: 1rem;
-  background-color: #f0f8ff;
+  background-color: white;
+  border-radius: 15px;
+  box-shadow: 0 4px 8px #038ab096;
+  width: 500px;
+  height: 500px;
+  position: relative;/* Necesario para posicionar el tooltip dentro del contenedor */
 }
 
 /* Mensaje debajo del modelo */

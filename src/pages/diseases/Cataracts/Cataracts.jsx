@@ -26,16 +26,16 @@ const Cataracts = () => {
       {/* Contenedor principal */}
       <div className="cataracts-container">
         {/* Columna izquierda: Información */}
-        <div className="Text-container-sectionOne">
+        <div className="text-container-section-one">
           <h1 className="cataracts-title">Cataratas</h1>
-          <h2 className="subtitle">¿Qué son las cataratas?</h2>
+          <h2 className="catatacts-subtitle">¿Qué son las cataratas?</h2>
           <p className="cataracts-description">
-            Las cataratas son una opacidad o nubosidad en el cristalino del ojo,
-            el lente natural que permite enfocar la luz y formar imágenes claras
-            en la retina. Con el tiempo, esta nubosidad dificulta la visión,
-            afectando la calidad de vida de quien la padece. Aunque las
-            cataratas están relacionadas con el envejecimiento, también se
-            pueden desarrollar por lesiones oculares.
+            Las <span>cataratas</span> son una opacidad o nubosidad en el
+            cristalino del ojo, el lente natural que permite enfocar la luz y
+            formar imágenes claras en la retina. Con el tiempo, esta nubosidad
+            dificulta la visión, afectando la calidad de vida de quien la
+            padece. Aunque las cataratas están relacionadas con el
+            envejecimiento, también se pueden desarrollar por lesiones oculares.
           </p>
 
           {/* Información de causas y efectos */}
@@ -67,13 +67,16 @@ const Cataracts = () => {
           </details>
 
           {/* Botón para mostrar la imagen en una ventana emergente */}
-          <button className="modal-button" onClick={() => setShowModal(true)}>
-            ¿Cómo se ve la visión con cataratas?
+          <button
+            className="cataracts-modal-button"
+            onClick={() => setShowModal(true)}
+          >
+            ¿Cómo ve una persona con cataratas?
           </button>
         </div>
 
         {/* Columna derecha: Modelo 3D */}
-        <div className="model-container">
+        <div className="cataracts-model-container">
           <Canvas shadows camera={{ position: [0, 0, 2], fov: 50 }}>
             <ambientLight castShadow intensity={0.5} />
             <directionalLight castShadow position={[2, 2, 2]} intensity={2} />
@@ -82,25 +85,27 @@ const Cataracts = () => {
             <Floor />
           </Canvas>
           {showTooltip && <div className="model-tooltip">{tooltipMessage}</div>}
-
           {/* Mensaje debajo del modelo */}
         </div>
       </div>
 
       {/* Ventana emergente */}
       {showModal && (
-        <div className="modal-overlay" onClick={() => setShowModal(false)}>
-          <div className="modal-content" onClick={(e) => e.stopPropagation()}>
+        <div
+          className="cataracts-modal-overlay"
+          onClick={() => setShowModal(false)}
+        >
+          <div
+            className="cataracts-modal-content"
+            onClick={(e) => e.stopPropagation()}
+          >
             <h2>¿Cómo se ve la visión con cataratas?</h2>
             <img
               src="https://res.cloudinary.com/dijh9two4/image/upload/v1745616701/cataract-vision_spvbi3.jpg"
               alt="Visión con cataratas"
               className="vision-image"
             />
-            <button
-              className="close-button"
-              onClick={() => setShowModal(false)}
-            >
+            <button className="close-btn" onClick={() => setShowModal(false)}>
               Cerrar
             </button>
           </div>
