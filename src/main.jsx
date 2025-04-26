@@ -27,8 +27,8 @@ createRoot(document.getElementById("root")).render(
         </Route>
         <Route path="quiz" element={<Quiz />} />
         <Route path="*" element={<NotFound />} />
-        <Route path="about us" element={<AboutUs />} />
-        <Route path="sign in" element={<Sign />} />
+        <Route path="about-us" element={<AboutUs />} />
+        <Route path="sign-in" element={<Sign />} />
       </Routes>
     </Layout>
   </BrowserRouter>

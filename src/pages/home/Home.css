@@ -21,3 +21,140 @@
     color: #ffffff;
 
 }
+/*containers*/
+
+.Home-scroll-container {
+    height: 100vh;
+    width: 100%;
+    overflow-y:scroll;
+    scroll-snap-type: y mandatory; /* Fuerza el snap al hacer scroll */
+    scroll-behavior: smooth; /* Transición suave */
+}
+
+.Presentation-container,
+.diseases-container,
+.quiz-container,
+.aboutus-container {
+    height: 100vh; /* Cada sección ocupa 100% de la pantalla */
+    scroll-snap-align: start; /* Anclar al inicio */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem;
+}
+
+/* Presentation */
+.Presentation-container {
+    display: flex;
+    flex-direction: row; /* horizontal */
+    background-position: center;
+    justify-content: space-around;
+    height: 100vh; /* Ocupar toda la altura de la pantalla */
+    background-image: url("https://images.unsplash.com/photo-1656484899207-0fe871c028c3?q=80&w=1371&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D");
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    color: #fff;
+    text-align: left;
+    padding: 2rem;
+    gap: 2rem;
+    border-radius: 10px;
+    margin: 1rem 0;
+    box-shadow: 0 0 10px 0 #000;
+}
+
+.Presentation-text {
+    width: 45%;
+    background-color: rgba(0, 0, 0, 0.4); /* Fondo más oscuro para mejor lectura */
+    padding: 2rem;
+    border-radius: 12px;
+    font-size: 1.3rem;
+    line-height: 1.6;
+}
+
+.Presentation-text h2 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    color: #fff;
+}
+
+.Presentation-text p {
+    font-size: 1rem;
+    margin-bottom: 1rem;
+    color: rgba(255, 255, 255, 0.85);
+}
+.Presentation-container a{
+    text-decoration: none;
+    color: #fff;
+    font-size: 1.2rem;
+    background-color: #000000cb;
+    padding: 0.5rem 1rem;
+    border-radius: 10px;
+    transition: background-color 0.3s ease;
+}
+.canva-container {
+    width: 45%;
+    height: 400px;
+    border: none;
+    overflow: hidden;
+}
+/*Diseases*/
+.containers-wrapper {
+    background-image: url("https://safevision.com/wp-content/uploads/2021/03/AdobeStock_102065718-scaled.jpeg");
+    background-attachment: fixed;
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    justify-content: center;
+    align-items: stretch;
+    flex-wrap: wrap;
+    gap: 2rem;
+    padding: 2rem;
+}
+
+.diseases-container, .quiz-container {
+    background-color: rgba(113, 167, 229, 0.8); /* Fondo azul claro con opacidad */
+    color: #333333;
+    text-align: center;
+    padding: 3rem 2rem;
+    flex: 1 1 300px;
+    border-radius: 20px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    max-width: 500px;
+}
+
+.diseases-container:hover, .quiz-container:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.25);
+}
+
+.diseases-container h2, .quiz-container h2 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+}
+
+.diseases-container p, .quiz-container p {
+    font-size: 1.2rem;
+    margin: 0.5rem 0;
+}
+
+.diseases-container button, .quiz-container button {
+    background-color: #61b3e9;
+    color: #fff;
+    border: none;
+    padding: 0.8rem 1.5rem;
+    border-radius: 8px;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-top: 1rem;
+}
+
+.diseases-container button:hover, .quiz-container button:hover {
+    background-color: #4a9dd3;
+}
+
+
+

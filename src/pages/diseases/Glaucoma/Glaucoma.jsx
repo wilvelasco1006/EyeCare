@@ -22,9 +22,8 @@ const Glaucoma = () => {
         }
     ];
 
-    const [currentSection] = useState(0);
+    const [currentSection, ] = useState(0);
 
-    
     const [showModal, setShowModal] = useState(false);
 
     return (
@@ -33,12 +32,11 @@ const Glaucoma = () => {
                 <h2 className="glaucoma-title">Glaucoma</h2>
                 <h3 className="subtitle">{sections[currentSection].title}</h3>
                 <p className="glaucoma-description">{sections[currentSection].description}</p>
-            
                 {currentSection === 0 && (
                 <>
                     <details>
                         <summary className="details-glaucoma">Conoce mas sobre el glaucoma :</summary>
-                        <ul className="conjuntivitis-list">
+                        <ul className="glaucoma-list">
                             <li>Tipos de glaucoma: glaucoma de ángulo abierto, glaucoma de ángulo cerrado, glaucoma congénito.</li>
                             <li>Factores de riesgo: edad avanzada, antecedentes familiares, miopía alta.</li>
                             <li>Síntomas: pérdida gradual de la visión periférica, visión borrosa, halos alrededor de luces.</li>
@@ -51,39 +49,7 @@ const Glaucoma = () => {
                     </button>
                     </>
                 )}
-                {currentSection === 1 && (
-                <details>
-                    <summary className="details-glaucoma">Conoce mas causas del glaucoma :</summary>
-                    <ul className="conjuntivitis-list">
-                        <li>Aumento de la presión ocular</li>
-                        <li>Bloqueo en el drenaje del humor acuoso</li>
-                        <li>Herencia genética</li>
-                        <li>Lesiones oculares previas</li>
-                        <li>Diabetes no controlada</li>
-                        <li>Hipertensión arterial</li>
-                        <li>Uso prolongado de corticoides</li>
-                        <li>Inflamaciones oculares (uveítis)</li>
-                        <li>Cirugías oculares previas</li>
-                        <li>Edad avanzada (mayores de 60 años)</li>
-                        <li>Miopía alta</li>
-                        <li>Hipertensión ocular sin tratamiento</li>
-                        <li>Antecedentes familiares de glaucoma</li>
-                        <li>Problemas en el desarrollo del ojo (glaucoma congénito)</li>
-                    </ul>
-                </details>
-                )}
-                {currentSection === 2 && (
-                <details>
-                    <summary className="details-glaucoma">Conoce mas efectos del glaucoma :</summary>
-                    <ul className="conjuntivitis-list">
-                        <li>Pérdida gradual de la visión periférica</li>
-                        <li>Visión borrosa</li>
-                        <li>Halos alrededor de luces</li>
-                        <li>Dolor ocular y molestias visuales</li>
-                        <li>En etapas avanzadas, ceguera total</li>
-                    </ul>
-                </details>
-                )}
+                
             </div>
             <div className="model-container">
                 <Canvas shadows camera={{ position: [0, 0, 0.3], fov: 50 }}>
@@ -149,4 +115,5 @@ const Glaucoma = () => {
 };
 
 export default Glaucoma;
+
 
