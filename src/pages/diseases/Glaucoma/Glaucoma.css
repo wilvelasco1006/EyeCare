@@ -188,9 +188,9 @@
   cursor: pointer;
 }
 
-.modal-button {
+.glaucoma-modal-button {
   display: block;
-  margin: 0rem;
+  margin: 2rem auto 0; 
   padding: 0.5rem 1.5rem;
   background-color: #0077cc;
   color: white;

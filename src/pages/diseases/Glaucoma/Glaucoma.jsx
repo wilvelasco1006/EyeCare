@@ -44,7 +44,7 @@ const Glaucoma = () => {
                         </ul>
                     </details>
 
-                    <button className="modal-button" onClick={() => setShowModal(true)}>
+                    <button className="glaucoma-modal-button" onClick={() => setShowModal(true)}>
                         Efectos y Causas
                     </button>
                     </>
@@ -52,9 +52,19 @@ const Glaucoma = () => {
                 
             </div>
             <div className="model-container">
-                <Canvas shadows camera={{ position: [0, 0, 0.3], fov: 50 }}>
-                    <ambientLight intensity={2} />
-                    <directionalLight position={[2, 2, 2]} castShadow />
+                <Canvas shadows gl={{ shadowMap: true }} camera={{ position: [0, 0, 0.26], fov: 50 }} >
+                    <ambientLight intensity={1} />
+                    <directionalLight
+                    color={"white"}
+                    position={[2, 2, 2]}
+                    intensity={10}
+                    castShadow
+                    shadow-mapSize={[4096, 4096]}
+                    shadow-camera-left={-10} 
+                    shadow-camera-right={10} 
+                    shadow-camera-top={10} 
+                    shadow-camera-bottom={-10} 
+                    shadow-bias={-0.001} />
                     <OrbitControls />
                     <EyeGlaucomaModel scale={[10, 10, 10]} position={[0, 0, 0]} />
                     <Floor />
