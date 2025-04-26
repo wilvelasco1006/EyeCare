@@ -22,7 +22,7 @@ const Header = () => {
 
           {/* Este es el botón que abre el modal */}
           <button className="sign-in-link" onClick={openModal}>
-            Sign in
+            Iniciar Sesión
           </button>
         </nav>
       </header>
