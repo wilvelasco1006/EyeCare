@@ -28,7 +28,7 @@ const Glaucoma = () => {
 
     return (
         <div className="glaucoma-container">
-            <div className="Text-container-sectionOne">
+            <div className="Text-container-glaucoma">
                 <h2 className="glaucoma-title">Glaucoma</h2>
                 <h3 className="subtitle">{sections[currentSection].title}</h3>
                 <p className="glaucoma-description">{sections[currentSection].description}</p>
@@ -51,7 +51,7 @@ const Glaucoma = () => {
                 )}
                 
             </div>
-            <div className="model-container">
+            <div className="model-glaucoma-container">
                 <Canvas shadows gl={{ shadowMap: true }} camera={{ position: [0, 0, 0.26], fov: 50 }} >
                     <ambientLight intensity={1} />
                     <directionalLight
@@ -65,7 +65,8 @@ const Glaucoma = () => {
                     shadow-camera-top={10} 
                     shadow-camera-bottom={-10} 
                     shadow-bias={-0.001} />
-                    <OrbitControls />
+                    <OrbitControls minDistance={0.3
+                    } maxDistance={1} />
                     <EyeGlaucomaModel scale={[10, 10, 10]} position={[0, 0, 0]} />
                     <Floor />
                 </Canvas>
