@@ -44,18 +44,27 @@
     padding: 2rem;
 }
 
+.Presentation-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1; /* Envía la imagen al fondo */
+    filter: blur(5px); /* Desenfoque de fondo */
+    /* background-color: rgb(178, 223, 238); */
+    background-color: rgb(0, 0, 0, 0.5);
+}
+
 /* Presentation */
 .Presentation-container {
+    position: relative;
+    overflow: hidden;
     display: flex;
-    flex-direction: row; /* horizontal */
+    flex-direction: row;
     background-position: center;
     justify-content: space-around;
-    height: 100vh; /* Ocupar toda la altura de la pantalla */
-    background-image: url("https://images.unsplash.com/photo-1656484899207-0fe871c028c3?q=80&w=1371&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D");
-    background-size: cover;
-    background-position: center;
-    background-attachment: fixed;
-    color: #fff;
+    height: 100vh;
     text-align: left;
     padding: 2rem;
     gap: 2rem;
@@ -64,9 +73,25 @@
     box-shadow: 0 0 10px 0 #000;
 }
 
+.background-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url("https://images.unsplash.com/photo-1656484899207-0fe871c028c3?q=80&w=1371&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D");
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    filter: brightness(0.7) blur(4.5px);
+    z-index: 0;
+}
+
 .Presentation-text {
+    position: relative;
+    z-index: 1;
     width: 45%;
-    background-color: rgba(0, 0, 0, 0.4); /* Fondo más oscuro para mejor lectura */
+    background-color: rgba(0, 0, 0, 0.6); /* Fondo más oscuro para mejor lectura */
     padding: 2rem;
     border-radius: 12px;
     font-size: 1.3rem;
@@ -94,6 +119,8 @@
     transition: background-color 0.3s ease;
 }
 .canva-container {
+    position: relative;
+    z-index: 1;
     width: 45%;
     height: 400px;
     border: none;
@@ -101,7 +128,7 @@
 }
 /*Diseases*/
 .containers-wrapper {
-    background-image: url("https://safevision.com/wp-content/uploads/2021/03/AdobeStock_102065718-scaled.jpeg");
+    background-color: rgb(193, 227, 238); /* Fondo azul claro */
     background-attachment: fixed;
     background-size: cover;
     background-position: center;

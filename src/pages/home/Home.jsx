@@ -13,8 +13,8 @@ const Home = () => {
     return (
       <>
         <div className="scroll-container">
-        <div className="overlay"></div>
           <div className="Presentation-container">
+            <div className="background-image"></div>
             <div className="Presentation-text">
               <h2>¡Bienvenido a EyeCare!</h2>
               <p>¡Prepárate para aprender sobre las enfermedades oculares con una una inmersión 3D totalmente interactiva que te dejara boquiabierto!</p>
