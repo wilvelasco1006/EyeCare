@@ -1,11 +1,12 @@
 // Header.jsx
 import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
-import Sign from "./../../pages/sign-in/Sign";
+import useAuthStore from "../../stores/use-auth-store";
 import "./Header.css"; // Asegúrate de tener el CSS correspondiente 
-
+import Sign from "../../pages/sign-in/Sign"; // Asegúrate de que la ruta sea correcta
 const Header = () => {
   const [showModal, setShowModal] = useState(false);
+  const { userLooged, Logout } = useAuthStore();
 
   const openModal = () => setShowModal(true);
   const closeModal = () => setShowModal(false);
@@ -20,10 +21,18 @@ const Header = () => {
           <NavLink to="/quiz" end>Quiz</NavLink>
           <NavLink to="/about-us" end>Sobre nosotros</NavLink>
 
-          {/* Este es el botón que abre el modal */}
-          <button className="sign-in-link" onClick={openModal}>
-            Iniciar Sesión
-          </button>
+          {userLooged ? (
+            <>
+              <span className="user-name">Hola, {userLooged.displayName}</span>
+              <button className="sign-in-link" onClick={Logout}>
+                Cerrar Sesión
+              </button>
+            </>
+          ) : (
+            <button className="sign-in-link" onClick={openModal}>
+              Iniciar Sesión
+            </button>
+          )}
         </nav>
       </header>
 

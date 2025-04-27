@@ -50,3 +50,10 @@ header {
     color: #5d6568; 
     background-color: #6b8e94; 
 }
+
+.user-name {
+    margin-right: 1rem;
+    font-size: 1rem;
+    color: #3eb0d9;
+    font-weight: bold;
+}
