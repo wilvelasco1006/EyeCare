@@ -1,0 +1,284 @@
+.conjuntivitis-container {
+    font-family: sans-serif;
+    color: #333;
+
+}
+
+.sectionOne {
+    display: flex;
+    flex-direction: row;
+    background-image: url("https://i.pinimg.com/736x/72/3b/f8/723bf831b674ed3fefdcd0e9c0030644.jpg");
+    background-size: cover;
+    background-position: center;
+    margin: 30px 10px 0 10px;
+    border-radius: 30px;
+    position: relative;
+
+}
+
+.Text-container-sectionOne {
+    flex: 1;
+    padding: 1rem;
+    text-align: left;
+    height: 480px;
+    margin: 60px 10px 0 10px;
+    position: relative;
+    overflow-y: auto;
+    background: #F0F8FF;
+    border-radius: 20px;
+}
+
+.btn-atras {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    z-index: 10;
+    width: 80px;
+    height: 40px;
+    background: #52a1c0;
+    color: rgb(255, 255, 255);
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 1rem;
+}
+
+.conjuntivitis-title {
+    font-size: 3rem !important;
+    color: #333 !important;
+    margin-bottom: 0.5rem !important;
+}
+
+.subtitle {
+    font-size: 2rem;
+    color: #555;
+    margin-bottom: 1rem;
+}
+
+.conjuntivitis-description {
+    background-color: #F0F8FF;
+    border-left: 3px solid #0066cc;
+    padding: 12px;
+    margin-bottom: 15px;
+}
+
+/* Palabra "conjuntivitis" resaltada */
+.conjuntivitis-description span {
+    color: #0066cc;
+    font-weight: bold;
+}
+
+/* Estilos para el contenedor de details */
+.btn-more-info {
+    background-color: #0066cc;
+    color: white;
+    border: none;
+    width: auto;
+    height: auto;
+    border-radius: 5px;
+    padding: 10px 20px;
+    margin: auto;
+    margin-top: 15px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.btn-more-info:hover {
+    background-color: #005bb5;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    transform: scale(1.05);
+    ;
+}
+
+.model-container {
+    margin-top: 60px;
+    height: 500px;
+    padding-bottom: 0;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem 10rem 5rem 10rem;
+    /* antes: 5rem arriba y 10rem abajo */
+    min-width: 300px;
+    min-height: 300px;
+    border-radius: 20px;
+}
+
+
+
+.model-container canvas {
+    max-width: 100%;
+    max-height: 100%;
+    width: 400px;
+    height: 500px;
+    border: 2px solid #87ceeb;
+    border-radius: 8px;
+    box-sizing: border-box;
+}
+
+.box-message {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(255, 255, 255, 0.85);
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    font-size: 1.1rem;
+    padding: 1rem;
+    z-index: 10;
+    text-align: center;
+    pointer-events: none;
+    opacity: 0;
+    transform: scale(0.95);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.box-message.show {
+    opacity: 1;
+    transform: scale(1);
+}
+
+.btn-conjuntivitis {
+    width: 80px;
+    height: 40px;
+    background-color: #52a1c0;
+    border: none;
+    border-radius: 80px;
+    margin-top: 1rem;
+    /* separación del canvas */
+    color: white;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.btn-conjuntivitis:hover {
+    background-color: #3b8bbf;
+    box-shadow: 0 0 20px #52a1c0;
+}
+
+.floating-message {
+    position: absolute;
+    top: 3rem;
+    right: 2rem;
+    background-color: rgba(255, 255, 255, 0.9);
+    padding: 1rem 1.5rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+    font-size: 1rem;
+    max-width: 250px;
+    z-index: 10;
+    animation: fadeIn 0.5s ease;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Estilos para el modal */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.2);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.modal-content {
+    position: relative;
+    background: white;
+    padding: 1rem;
+    /* más compacto */
+    border-radius: 1rem;
+    width: 80%;
+    /* antes 90% */
+    max-width: 600px;
+    /* antes 800px */
+    max-height: 80vh;
+    /* más compacto también */
+    overflow-y: auto;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+}
+
+
+.close-modal {
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
+    background: transparent;
+    border: none;
+    font-size: 1.2rem;
+    color: #333;
+    cursor: pointer;
+    width: auto;
+    height: auto;
+    padding: 0;
+    margin: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+
+.close-modal:hover {
+    color: #ff4d4f;
+    background-color: transparent;
+}
+
+.slider-content {
+    height: 300px;
+    /* Altura estándar basada en el contenido más largo */
+    padding: 1rem;
+    background: #f0f8ff;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: left;
+    overflow: hidden;
+    /* Evita saltos por contenido que sobresalga */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+
+.slider-box {
+    margin-bottom: 10px;
+}
+
+.causa-title {
+    font-size: 1.25rem;
+    font-weight: bold;
+    color: #003366;
+    margin-bottom: 0.4rem;
+}
+
+.causa-description {
+    font-size: 1rem;
+    color: #333 !important;
+    line-height: 1.5;
+    height: 90px;
+    overflow-y: auto;
+    padding-right: 0.5rem;
+}

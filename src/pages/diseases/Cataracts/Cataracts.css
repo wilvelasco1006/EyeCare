@@ -162,6 +162,7 @@
   align-items: center;
   justify-content: center;
   transition:  0.3s ease;
+  z-index: 2000;
 }
 
 .cataracts-modal-content {

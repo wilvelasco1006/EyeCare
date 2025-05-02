@@ -91,7 +91,9 @@
     position: relative;
     z-index: 1;
     width: 45%;
-    height: 400px;
+    height: 430px;
+    margin:20px ;
+    box-sizing:content-box;
     background-color: rgba(0, 0, 0, 0.4); 
     padding: 2rem;
     border-radius: 12px;
@@ -106,16 +108,18 @@
 }
 
 .Presentation-text p {
-    font-size: 1rem;
+    font-size: 1.2rem;
     margin-bottom: 1rem;
     color: rgba(255, 255, 255, 0.85);
 }
+
 .Presentation-container a{
     text-decoration: none;
     color: #fff;
     font-size: 1.2rem;
     background-color: #000000cb;
     padding: 0.5rem 1rem;
+    margin-top: 30px;
     border-radius: 10px;
     transition: background-color 0.3s ease;
 }
