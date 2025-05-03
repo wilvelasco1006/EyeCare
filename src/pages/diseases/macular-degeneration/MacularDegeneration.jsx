@@ -7,6 +7,7 @@ import Floor from "./models-3d/Floor";
 import Lights from "./lights/Lights";
 import { FaChevronRight } from "react-icons/fa";
 import * as THREE from "three"; 
+import Staging from "../staging/Staging";
 
 const CameraController = ({ viewIndex }) => {
   const { camera } = useThree();
@@ -103,6 +104,7 @@ const MacularDegeneration = () => {
           {messages[viewIndex]}
         </div>
         <Canvas camera={{ position: [0, 0, 2], fov: 50 }} shadows={true}>
+          <Staging />
           <OrbitControls autoRotate enableZoom={true} minDistance={1} maxDistance={5} />
           <MacularModel />
           <CameraController viewIndex={viewIndex} />

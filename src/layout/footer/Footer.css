@@ -1,7 +1,8 @@
 footer {
-    background: linear-gradient(to top, #61b3e9, #ffffff);
+    background: #f5f5f5;
     padding: 0.5rem;
     min-height: 50px;
+    height: 4.5rem;
     display: flex; /* Usa flexbox para centrar */
     justify-content: center; /* Centra horizontalmente */
     align-items: center; /* Centra verticalmente */

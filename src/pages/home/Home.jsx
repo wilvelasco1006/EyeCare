@@ -17,9 +17,8 @@ const Home = () => {
             <div className="background-image"></div>
             <div className="Presentation-text">
               <h2>¡Bienvenido a EyeCare!</h2>
-              <p>¡Prepárate para aprender sobre las enfermedades oculares con una una inmersión 3D totalmente interactiva que te dejara boquiabierto!</p>
-              <p> Tu guía completa sobre enfermedades oculares. Aprende, evalúa tus conocimientos y cuida tu salud visual.</p>
-              <p>¡Explora, aprende y diviértete!</p>
+              <p>Aprende con EyeCare</p>
+              <p> Tu guía completa sobre enfermedades oculares</p>
               <p>¡Haz click en el botón para empezar!</p>
               <a className="btn" href="#diseases">¡Empezar!</a>
             </div>
