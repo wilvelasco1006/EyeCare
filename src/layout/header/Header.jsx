@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
 import useAuthStore from "../../stores/use-auth-store";
-import "./Header.css"; // Asegúrate de tener el CSS correspondiente 
+import "./Header.css"; // Asegúrate de tener el CSS correspondiente
 import Sign from "../../pages/sign-in/Sign"; // Asegúrate de que la ruta sea correcta
 const Header = () => {
   const [showModal, setShowModal] = useState(false);
@@ -16,10 +16,18 @@ const Header = () => {
       <header>
         <nav className="nav">
           <img src="/images/nobackground.png" alt="eye" className="logo" />
-          <NavLink to="/" end>Inicio</NavLink>
-          <NavLink to="/diseases/content-diseases" end>Enfermedades</NavLink>
-          <NavLink to="/quiz" end>Quiz</NavLink>
-          <NavLink to="/about-us" end>Sobre nosotros</NavLink>
+          <NavLink to="/" end>
+            Inicio
+          </NavLink>
+          <NavLink to="/diseases/content-diseases" end>
+            Enfermedades
+          </NavLink>
+          <NavLink to="/quiz" end>
+            Quiz
+          </NavLink>
+          <NavLink to="/about-us" end>
+            Sobre nosotros
+          </NavLink>
 
           {userLooged ? (
             <>

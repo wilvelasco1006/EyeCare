@@ -1,80 +1,100 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import "./Cataracts.css";
 import { Canvas } from "@react-three/fiber";
 import { OrbitControls } from "@react-three/drei";
 import { EyeCataractModel } from "./Model-3d/EyeCataractModel";
 import Floor from "./Model-3d/Floor";
+import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 
 const Cataracts = () => {
-  const [showTooltip, setShowTooltip] = useState(true);
-  const [tooltipMessage, setTooltipMessage] = useState(
-    "Usa click izquierdo para rotar el modelo o la rueda para acercar o alejar"
-  );
+  const [sectionIndex, setSectionIndex] = useState(0);
   const [showModal, setShowModal] = useState(false);
 
-  useEffect(() => {
-    // Alternar entre los mensajes y visibilidad cada 5 segundos
-    const interval = setInterval(() => {
-      setShowTooltip((prev) => !prev);
-    }, 5000);
+  const sections = [
+    {
+      title: "¿En qué consiste?",
+      content: (
+        <p>
+          Las cataratas son una opacidad o nubosidad en el cristalino del ojo,
+          el lente natural que permite enfocar la luz y formar imágenes claras
+          en la retina. Con el tiempo, esta nubosidad dificulta la visión,
+          afectando la calidad de vida de quien la padece. Aunque las cataratas
+          están relacionadas con el envejecimiento, también se pueden
+          desarrollar por lesiones oculares.
+        </p>
+      ),
+    },
+    {
+      title: "Causas",
+      content: (
+        <ul>
+          <li>Envejecimiento natural del ojo.</li>
+          <li>Lesiones oculares que dañan el cristalino.</li>
+          <li>Exposición prolongada a la luz ultravioleta.</li>
+          <li>Enfermedades como la diabetes.</li>
+          <li>Uso prolongado de medicamentos como corticosteroides.</li>
+        </ul>
+      ),
+    },
+    {
+      title: "Efectos en la visión",
+      content: (
+        <ul>
+          <li>Visión borrosa o nublada.</li>
+          <li>Sensibilidad a la luz.</li>
+          <li>Colores menos brillantes.</li>
+          <li>Dificultad para ver de noche.</li>
+        </ul>
+      ),
+    },
+  ];
 
-    return () => clearInterval(interval);
-  }, []);
+  const handleNext = () =>
+    setSectionIndex((prev) => (prev + 1) % sections.length);
+  const handlePrev = () =>
+    setSectionIndex((prev) => (prev === 0 ? sections.length - 1 : prev - 1));
 
   return (
     <div className="cataracts-page">
-      {/* Contenedor principal */}
       <div className="cataracts-container">
-        {/* Columna izquierda: Información */}
+        {/* Columna izquierda: Texto e interacción */}
         <div className="text-container-section-one">
           <h1 className="cataracts-title">Cataratas</h1>
-          <h2 className="catatacts-subtitle">¿Qué son las cataratas?</h2>
-          <p className="cataracts-description">
-            Las <span>cataratas</span> son una opacidad o nubosidad en el
-            cristalino del ojo, el lente natural que permite enfocar la luz y
-            formar imágenes claras en la retina. Con el tiempo, esta nubosidad
-            dificulta la visión, afectando la calidad de vida de quien la
-            padece. Aunque las cataratas están relacionadas con el
-            envejecimiento, también se pueden desarrollar por lesiones oculares.
-          </p>
+          <h2 className="cataracts-subtitle">{sections[sectionIndex].title}</h2>
 
-          {/* Información de causas y efectos */}
-          <details className="details-transition">
-            <summary className="cataracts-summary">
-              Causas y efectos en la visión
-            </summary>
-            <div className="cataracts-section">
-              <div>
-                <h4 className="cataracts-heading">Causas:</h4>
-                <ul className="cataracts-sublist">
-                  <li>Envejecimiento natural del ojo.</li>
-                  <li>Lesiones oculares que dañan el cristalino.</li>
-                  <li>Exposición prolongada a la luz ultravioleta.</li>
-                  <li>Enfermedades como la diabetes.</li>
-                  <li>Uso prolongado de medicamentos como corticosteroides.</li>
-                </ul>
+          {/* Zona scrollable */}
+          <div className="cataracts-content">
+            {sections[sectionIndex].content}
+          </div>
+
+          {/* Zona fija inferior: navegación + botón */}
+          <div className="actions">
+            <div className="navigation">
+              <button onClick={handlePrev} className="nav-button">
+                <FaChevronLeft />
+              </button>
+              <div className="dots">
+                {sections.map((_, idx) => (
+                  <span
+                    key={idx}
+                    className={`dot ${idx === sectionIndex ? "active" : ""}`}
+                  >
+                    •
+                  </span>
+                ))}
               </div>
-              <div>
-                <h4 className="cataracts-heading">Efectos en la visión:</h4>
-                <ul className="cataracts-sublist">
-                  <li>Visión borrosa o nublada.</li>
-                  <li>Sensibilidad a la luz.</li>
-                  <li>Colores menos brillantes.</li>
-                  <li>Dificultad para ver de noche.</li>
-                </ul>
-              </div>
+              <button onClick={handleNext} className="nav-button">
+                <FaChevronRight />
+              </button>
             </div>
-          </details>
-
-          {/* Botón para mostrar la imagen en una ventana emergente */}
-          <button
-            className="cataracts-modal-button"
-            onClick={() => setShowModal(true)}
-          >
-            ¿Cómo ve una persona con cataratas?
-          </button>
+            <button
+              className="cataracts-modal-button"
+              onClick={() => setShowModal(true)}
+            >
+              ¿Cómo ve una persona con cataratas?
+            </button>
+          </div>
         </div>
-
         {/* Columna derecha: Modelo 3D */}
         <div className="cataracts-model-container">
           <Canvas shadows camera={{ position: [0, 0, 2], fov: 50 }}>
@@ -84,12 +104,10 @@ const Cataracts = () => {
             <EyeCataractModel scale={10} position={[0, 0, 0]} />
             <Floor />
           </Canvas>
-          {showTooltip && <div className="model-tooltip">{tooltipMessage}</div>}
-          {/* Mensaje debajo del modelo */}
         </div>
       </div>
 
-      {/* Ventana emergente */}
+      {/* Ventana emergente (modal) */}
       {showModal && (
         <div
           className="cataracts-modal-overlay"
