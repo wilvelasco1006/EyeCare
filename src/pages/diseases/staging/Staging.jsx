@@ -3,7 +3,16 @@ import { Environment } from "@react-three/drei";
 const Staging = () => {
   return (
     <Environment
-        files={"/public/staging/hdris/surgery/surgery-2k.hdr"} // Escena
+        file={[
+          "px.png",
+          "nx.png",
+          "py.png",
+          "ny.png",
+          "pz.png",
+          "nz.png",
+          
+        ]}
+        path="/staging/cubemaps/surgery/"
         ground={{
             heigh: 60,
             radius: 100,
@@ -13,4 +22,4 @@ const Staging = () => {
   )
 }
 
-export default Staging
+export default Staging;

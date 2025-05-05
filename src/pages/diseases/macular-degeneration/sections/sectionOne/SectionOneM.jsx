@@ -1,18 +1,20 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/no-unknown-property */
 import { useNavigate } from "react-router";
-import "./SectionOne.css";
+import "./SectionOneM.css";
 import { Canvas } from "@react-three/fiber";
 import { OrbitControls } from "@react-three/drei";
 import { useState, useEffect } from "react";
-import { EyeHealthModel } from "../../model-3d/EyeHealthModel";
+import { MacularModel } from "../../models-3d/MacularModel";
 import { FaChevronCircleRight, FaTimes } from "react-icons/fa";
-import Floor from "../../model-3d/Floor";
+import Floor from "../../models-3d/Floor";
 import CameraController from "../../../utils/CameraController";
 import SliderControls from "../../../utils/SliderControls/SliderControls";
+import Staging from "../../../staging/Staging";
+import Lights from "../../lights/Lights";
 
 const SectionOne = () => {
-    
+
     const [showModal, setShowModal] = useState(false);
     const [showInstruction, setShowInstruction] = useState(true);
     const navigate = useNavigate();
@@ -23,9 +25,9 @@ const SectionOne = () => {
     }, []);
 
     const messages = [
-        "Vista frontal del ojo con irritacion inicial.",
-        "Vista lateral para observar el enrojecimiento y como se expande.",
-        "Vista superior para apreciar inflamación general.",
+        "Vista frontal de la mácula.",
+        "Vista lateral de la mácula.",
+        "Vista superior para mejor panorama de la mácula.",
     ];
     const totalViews = messages.length;
     const [viewIndex, setViewIndex] = useState(0);
@@ -38,29 +40,29 @@ const SectionOne = () => {
     // Slider informativo de causas
     const causas = [
         {
-            titulo: "¿Que es?",
-            descripcion: "La conjuntivitis, también conocida como ojo rosado, esuna inflamación de la conjuntiva, la membrana delgada y transparenteque recubre la parte blanca del ojo y el interior de los párpados.Esta inflamación hace que los vasos sanguíneos de la conjuntiva sehagan más visibles, lo que le da al ojo un aspecto rojizo o rosado."
+            titulo: "¿En qué consiste?",
+            descripcion: (
+                <p>
+                    La <span>Degeneración Macular</span> es una enfermedad ocular que afecta la mácula,
+                    la parte central de la retina encargada de la visión fina y detallada necesaria para leer,
+                    conducir, reconocer rostros, etc. Con el tiempo, la mácula se deteriora y
+                    causa visión borrosa o puntos ciegos en el centro del campo visual.
+                </p>
+            )
         },
         {
-            titulo: "Conjuntivitis Viral",
-            descripcion:
-                "Causada por adenovirus. Es altamente contagiosa y suele acompañarse de fiebre, dolor de garganta y lagrimeo constante.",
+            titulo: "Causas",
+            descripcion: (
+                <ul>
+                    <li>La degeneración macular puede ser seca o húmeda.</li>
+                    <li>La forma seca es más común y se produce por el adelgazamiento de la mácula.</li>
+                    <li>Las personas con DMAE pueden conservar la visión periférica</li>
+                    <li>Algunas investigaciones sugieren que la luz azul de pantallas podría contribuir al riesgo, pero aún no hay evidencia concluyente.</li>
+                    <li>Fumar duplica o triplica las probabilidades de desarrollar DMAE, ya que daña los vasos sanguíneos de la retina y acelera el estrés oxidativo en el ojo.</li>
+                </ul>
+            )
         },
-        {
-            titulo: "Conjuntivitis Bacteriana",
-            descripcion:
-                "Provocada por bacterias como Staphylococcus o Streptococcus. Produce secreción espesa y amarillenta, y es muy contagiosa.",
-        },
-        {
-            titulo: "Conjuntivitis Alérgica",
-            descripcion:
-                "Originada por alérgenos como polen, ácaros o pelo de animales. Produce picazón intensa, lagrimeo y ojos rojos, pero no es contagiosa.",
-        },
-        {
-            titulo: "Conjuntivitis Irritativa",
-            descripcion:
-                "Causada por químicos, humo o cloro. Genera ardor y enrojecimiento, y desaparece al eliminar el agente irritante.",
-        },
+
     ];
 
     const [causaIndex, setCausaIndex] = useState(0);
@@ -72,10 +74,10 @@ const SectionOne = () => {
     return (
         <>
             <div className="sectionOne">
-                
+
                 <div className="Text-container-sectionOne">
-                <button className="btn-atras" onClick={() => window.history.back()}> Atrás</button>
-                    <h2 className="conjuntivitis-title">Conjuntivitis</h2>
+                    <button className="btn-atras" onClick={() => window.history.back()}> Atrás</button>
+                    <h2 className="macular-title">Degeneracion Macular</h2>
                     {/* Slider informativo de causas */}
                     <div className="slider-content">
                         {/* 1) Track: todos los slides en fila */}
@@ -107,7 +109,7 @@ const SectionOne = () => {
                         </div>
                     </div>
                     <button className="btn-more-info" onClick={() => setShowModal(true)}>
-                            Ver más
+                        Ver más
                     </button>
 
 
@@ -124,35 +126,29 @@ const SectionOne = () => {
                 <div className="model-container">
                     <div className="floating-message">{messages[viewIndex]}</div>
                     <Canvas camera={{ position: [0.9, 0.3, 2], fov: 70 }} shadows={true}>
-                        <ambientLight intensity={0.5} />
-                        <directionalLight
-                            position={[2, 2, 2]}
-                            intensity={3}
-                            castShadow={true}
-                            shadow-mapSize={[2048, 2048]}
-                        />
+                        <Lights />
+                        <Staging />
                         <OrbitControls />
                         <CameraController viewIndex={viewIndex} />
-                        <EyeHealthModel scale={[0.5, -0.5, -0.5]} position={[0, 0, 1]} />
+                        <MacularModel scale={[0.5, -0.5, -0.5]} position={[0, 0, 1]} />
                         <Floor />
                     </Canvas>
                     <button
                         title="Presiona el botón para cambiar de vista"
                         onClick={handleNext}
-                        className="btn-conjuntivitis"
+                        className="btn-macular"
                     >
                         <FaChevronCircleRight style={{ fontSize: "2rem" }} />
                     </button>
                 </div>
             </div>
-
             {showModal && (
                 <div className="modal-overlay" onClick={() => setShowModal(false)}>
-                    <div className="modal-content" onClick={(e) => e.stopPropagation()}>
+                    <div className="modal-content" onClick={e => e.stopPropagation()}>
+                        <h2>Factores y Efectos</h2>
                         <button className="close-modal" onClick={() => setShowModal(false)}>
                             <FaTimes style={{ fontSize: "1.5rem" }} />
                         </button>
-                        <h2>Factores y Efectos</h2>
                         <table className="info-table">
                             <thead>
                                 <tr>
@@ -164,64 +160,35 @@ const SectionOne = () => {
                             <tbody>
                                 <tr>
                                     <td>Biológicas</td>
-                                    <td>
-                                        - Virus
-                                        <br />
-                                        - Bacterias
-                                        <br />
-                                        - Alérgenos
-                                    </td>
-                                    <td>
-                                        - Enrojecimiento ocular
-                                        <br />
-                                        - Secreción ocular
-                                        <br />
-                                        - Picazón y ardor
-                                    </td>
+                                    <td>- Edad avanzada<br />- Genética/herencia<br />- Color de ojos claros</td>
+                                    <td>- Visión central borrosa<br />- Pérdida progresiva de detalles finos<br />- Manchas oscuras</td>
                                 </tr>
                                 <tr>
                                     <td>Hábitos y estilo de vida</td>
-                                    <td>
-                                        - Uso de lentes de contacto
-                                        <br />
-                                        - Exposición a irritantes ambientales
-                                        <br />
-                                        - Falta de higiene ocular
-                                    </td>
-                                    <td>
-                                        - Sensibilidad a la luz
-                                        <br />
-                                        - Inflamación de los párpados
-                                        <br />
-                                        - Dificultad para abrir los ojos al despertar
-                                    </td>
+                                    <td>- Tabaquismo<br />- Dieta pobre en antioxidantes<br />- Sedentarismo</td>
+                                    <td>- Dificultad para leer, conducir o reconocer rostros<br />- Adaptación lenta a la oscuridad</td>
                                 </tr>
                                 <tr>
                                     <td>Condiciones de salud</td>
-                                    <td>
-                                        - Enfermedades autoinmunes
-                                        <br />
-                                        - Infecciones respiratorias superiores
-                                        <br />
-                                        - Alergias estacionales
-                                    </td>
-                                    <td>
-                                        - Visión borrosa temporal
-                                        <br />
-                                        - Sensación de cuerpo extraño en el ojo
-                                        <br />
-                                        - Complicaciones si no se trata adecuadamente
-                                    </td>
+                                    <td>- Obesidad<br />- Hipertensión arterial<br />- Enfermedades cardiovasculares</td>
+                                    <td>- Necesidad de ayudas visuales<br />- Reducción de la capacidad funcional</td>
+                                </tr>
+                                <tr>
+                                    <td>Ambientales</td>
+                                    <td>- Exposición prolongada a la luz UV sin protección ocular</td>
+                                    <td>- Metamorfopsia<br />- Dificultad con los cambios de iluminación</td>
+                                </tr>
+                                <tr>
+                                    <td>Psicológicas/Sociales</td>
+                                    <td>- Impacto emocional de la pérdida visual</td>
+                                    <td>- Ansiedad<br />- Depresión<br />- Aislamiento social<br />- Disminución de la calidad de vida</td>
                                 </tr>
                             </tbody>
                         </table>
-                        <img
-                            src="https://www.oftalmologico.com.mx/enfermedades/images/conjuntivitis_4.png"
-                            alt="conjuntivitis"
-                        />
                     </div>
                 </div>
             )}
+
         </>
     );
 };

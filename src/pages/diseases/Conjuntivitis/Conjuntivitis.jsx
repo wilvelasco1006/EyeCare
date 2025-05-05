@@ -1,8 +1,10 @@
-import SectionOne from "./sections/sectionOne/SectionOne";
+import SectionOneC from "./sections/sectionOne/SectionOneC";
+import SectionTwoC from "./sections/sectionTwo/SectionTwoC";
 import './Conjuntivitis.css';
 // eslint-disable-next-line no-unused-vars
 import React, { useRef, useEffect } from 'react';
 import { ChevronDown, ChevronUp } from 'lucide-react';
+
 
 const Conjuntivitis = () => {
     const sectionRefs = [useRef(null), useRef(null), useRef(null)];
@@ -25,7 +27,7 @@ const Conjuntivitis = () => {
     return (
         <div className="scroll-container">
             <section ref={sectionRefs[0]} className="section1">
-                <SectionOne />
+                <SectionOneC />
                 <button 
                     className="scroll-button1" 
                     onClick={() => scrollToSection(1)}
@@ -43,13 +45,7 @@ const Conjuntivitis = () => {
                 >
                     <ChevronUp size={40} />
                 </button>
-                
-                <h2>Prevención y Tratamiento</h2>
-                <div className="content-container">
-                    {/* Aquí va el contenido de tu segunda sección */}
-                    <p>Esta sección puede contener información sobre prevención y tratamientos para la conjuntivitis.</p>
-                </div>
-                
+                <SectionTwoC />
                 <button 
                     className="scroll-button2" 
                     onClick={() => scrollToSection(2)}

@@ -1,9 +1,3 @@
-.conjuntivitis-container {
-    font-family: sans-serif;
-    color: #333;
-
-}
-
 .sectionOne {
     display: flex;
     flex-direction: row;
@@ -21,12 +15,13 @@
     padding: 1rem;
     text-align: left;
     height: 480px;
-    margin: 60px 10px 0 10px;
     position: relative;
     overflow-y: auto;
-    background: #F0F8FF;
+    background: #ffffff;
     border-radius: 20px;
+    margin: 60px 10px 0 0; /* solo margen derecho */
 }
+
 
 .btn-atras {
     position: absolute;
@@ -56,18 +51,6 @@
     margin-bottom: 1rem;
 }
 
-.conjuntivitis-description {
-    background-color: #F0F8FF;
-    border-left: 3px solid #0066cc;
-    padding: 12px;
-    margin-bottom: 15px;
-}
-
-/* Palabra "conjuntivitis" resaltada */
-.conjuntivitis-description span {
-    color: #0066cc;
-    font-weight: bold;
-}
 
 /* Estilos para el contenedor de details */
 .btn-more-info {
@@ -93,30 +76,37 @@
 }
 
 .model-container {
-    margin-top: 60px;
-    height: 500px;
-    padding-bottom: 0;
+    flex: 1;
+    display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    padding: 2rem 10rem 5rem 10rem;
-    /* antes: 5rem arriba y 10rem abajo */
+
+    height: 500px;
     min-width: 300px;
     min-height: 300px;
-    border-radius: 20px;
-}
 
+    position: relative;
+    border-radius: 20px;
+    padding: 2rem 1rem 5rem 1rem;
+    margin: 60px 0 0 10px; /* solo margen izquierdo */
+}
 
 
 .model-container canvas {
-    max-width: 100%;
-    max-height: 100%;
     width: 400px;
     height: 500px;
+    max-width: 100%;
+    max-height: 100%;
+    
     border: 2px solid #87ceeb;
     border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
     box-sizing: border-box;
+
+    transition: transform 0.3s ease;
 }
+
 
 .box-message {
     position: absolute;
@@ -192,33 +182,65 @@
 }
 
 /* Estilos para el modal */
+
+
 .modal-overlay {
     position: fixed;
     top: 0;
     left: 0;
-    right: 0;
-    bottom: 0;
-    background: rgba(0, 0, 0, 0.2);
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
     display: flex;
-    justify-content: center;
     align-items: center;
-    z-index: 1000;
+    justify-content: center;
+    z-index: 2000;
 }
 
 .modal-content {
-    position: relative;
     background: white;
-    padding: 1rem;
-    /* más compacto */
-    border-radius: 1rem;
-    width: 80%;
-    /* antes 90% */
-    max-width: 600px;
-    /* antes 800px */
-    max-height: 80vh;
-    /* más compacto también */
+    padding: 2rem;
+    border-radius: 12px;
+    max-width: 90%;
+    max-height: 80%;
     overflow-y: auto;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 0 15px #90C0F7;
+}
+
+.modal-content h2 {
+    font-size: 3rem;
+    font-weight: bold;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+    margin-bottom: 1.5rem;
+}
+
+
+
+
+.info-table {
+    width: 100%;
+    border-collapse: collapse;
+    border: 2px solid #444;
+    /* Borde exterior de toda la tabla */
+}
+
+.info-table th,
+.info-table td {
+    border: 1px solid #444;
+    /* Bordes internos claros y definidos */
+    padding: 0.75rem;
+    text-align: left;
+    vertical-align: top;
+}
+
+.info-table th {
+    background-color: #90C0F7;
+    font-weight: bold;
+    color: #222;
+}
+
+.info-table tr:nth-child(even) {
+    background-color: #ffffff;
 }
 
 
