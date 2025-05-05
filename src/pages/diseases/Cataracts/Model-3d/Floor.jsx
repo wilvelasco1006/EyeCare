@@ -1,3 +1,4 @@
+/* eslint-disable react/no-unknown-property */
 import { useTexture } from "@react-three/drei";
 import React, { useMemo } from "react"; 
 const Floor = () => {
