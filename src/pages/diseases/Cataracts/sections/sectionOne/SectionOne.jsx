@@ -6,7 +6,7 @@ import "./SectionOne.css";
 import { Canvas, useThree } from "@react-three/fiber";
 import { OrbitControls, useKeyboardControls } from "@react-three/drei";
 import { FaChevronCircleRight, FaTimes, FaPause, FaPlay } from "react-icons/fa";
-import Floor from "../../model-3d/Floor";
+// import Floor from "../../model-3d/Floor";
 import SliderControls from "../../../utils/SliderControls/SliderControls";
 import { EyeCataractModel } from "../../model-3d/EyeCataractModel";
 import Staging from "../../../staging/Staging";
@@ -250,7 +250,7 @@ const SectionOne = () => {
                             animationSpeed={animationSpeed}
                             setHoverMessage={setHoverMessage}
                         />
-                        <Floor />
+                        {/* <Floor /> */}
                     </Canvas>
 
                     <button
