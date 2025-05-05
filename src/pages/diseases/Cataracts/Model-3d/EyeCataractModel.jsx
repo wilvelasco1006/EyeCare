@@ -52,7 +52,7 @@ export const EyeCataractModel = React.forwardRef(
         dispose={null}
         onPointerOver={() =>
           setHoverMessage(
-            "Usa la rueda del mouse para acercar y alejar y click izquierdo para rotar"
+            "Usa la rueda del mouse para acercar y alejar y click izquierdo para rotar, presiona 'R' para reiniciar la vista"
           )
         }
         onPointerOut={() => setHoverMessage("")}

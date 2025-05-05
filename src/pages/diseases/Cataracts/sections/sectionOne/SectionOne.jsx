@@ -9,6 +9,7 @@ import { FaChevronCircleRight, FaTimes, FaPause, FaPlay } from "react-icons/fa";
 import Floor from "../../model-3d/Floor";
 import SliderControls from "../../../utils/SliderControls/SliderControls";
 import { EyeCataractModel } from "../../model-3d/EyeCataractModel";
+import Staging from "../../../staging/Staging";
 
 // Componente controlador de cámara y modelo
 const CameraAndModelController = ({ animationSpeed, setHoverMessage }) => {
@@ -51,7 +52,7 @@ const CameraAndModelController = ({ animationSpeed, setHoverMessage }) => {
             <OrbitControls
                 ref={controlsRef}
                 minDistance={0.5}
-                maxDistance={4}
+                maxDistance={1}
                 enablePan={true}
                 enableRotate={true}
                 enableZoom={true}
@@ -106,7 +107,7 @@ const SectionOne = () => {
             descripcion: (
                 <>
                     <p>
-                        Las <span>cataratas</span> son una opacidad o nubosidad en el
+                        Las cataratas son una opacidad o nubosidad en el
                         cristalino del ojo, el lente natural que permite enfocar la luz y
                         formar imágenes claras en la retina. Con el tiempo, esta nubosidad
                         dificulta la visión, afectando la calidad de vida de quien la
@@ -215,7 +216,10 @@ const SectionOne = () => {
                             />
                         </div>
                     </div>
-                    <button className="btn-more-info" onClick={() => setShowModal(true)}>
+                    <button
+                        className="btn-more-info"
+                        onClick={() => setShowModal(true)}
+                    >
                         ¿Cómo ve una persona con cataratas?
                     </button>
                     {showInstruction && (
@@ -230,7 +234,9 @@ const SectionOne = () => {
                 </div>
                 <div className="model-container">
                     <div className="floating-message">{messages[viewIndex]}</div>
-                    {hoverMessage && <div className="hover-message">{hoverMessage}</div>}
+                    {hoverMessage && (
+                        <div className="hover-message">{hoverMessage}</div>
+                    )}
                     <Canvas camera={{ position: [0, 0, 2], fov: 50 }} shadows={true}>
                         <ambientLight castShadow intensity={0.5} />
                         <directionalLight
@@ -239,12 +245,14 @@ const SectionOne = () => {
                             castShadow={true}
                             shadow-mapSize={[2048, 2048]}
                         />
+                        <Staging />
                         <CameraAndModelController
                             animationSpeed={animationSpeed}
                             setHoverMessage={setHoverMessage}
                         />
                         <Floor />
                     </Canvas>
+
                     <button
                         title={
                             animationSpeed === 0
@@ -263,7 +271,10 @@ const SectionOne = () => {
             {showModal && (
                 <div className="modal-overlay" onClick={() => setShowModal(false)}>
                     <div className="modal-content" onClick={(e) => e.stopPropagation()}>
-                        <button className="close-modal" onClick={() => setShowModal(false)}>
+                        <button
+                            className="close-modal"
+                            onClick={() => setShowModal(false)}
+                        >
                             <FaTimes style={{ fontSize: "1.5rem" }} />
                         </button>
                         <img
