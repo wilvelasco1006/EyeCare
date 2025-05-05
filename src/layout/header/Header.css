@@ -26,8 +26,9 @@ header {
 }
 
 .nav a {
-    color: #000; /* Color de letra negro */
+    color:  #1e4152 ; /* Color de letra negro */
     text-decoration: none;
+    font-weight: 500;
 }
 
 .nav a:hover {
@@ -36,7 +37,8 @@ header {
 
 .sign-in-link {
     width: 150px;
-    color: #000; 
+    color:  #1e4152;
+    font-weight: 500;
     border: 2px solid #b6ecf3;
     background-color: transparent;
     padding: 0.5rem 1rem;
@@ -47,8 +49,8 @@ header {
 }
 
 .sign-in-link:hover {
-    color: #5d6568; 
-    background-color: #6b8e94; 
+    color: #4cada4 ; 
+    background-color: #c5d9dd; 
 }
 
 .user-name {

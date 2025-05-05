@@ -1,128 +1,85 @@
 /* eslint-disable react/no-unknown-property */
+import SectionOneG from "./sections/sectionOneG/SectionOneG";
 import "./Glaucoma.css";
+import React, { useRef, useEffect } from 'react';
 import { Canvas } from "@react-three/fiber";
 import { EyeGlaucomaModel } from "./model-3d/EyeGlaucomaModel";
 import { OrbitControls } from "@react-three/drei";
 import { useState } from "react";
+import {ChevronDown, ChevronUp} from 'lucide-react';
 import Floor from "./model-3d/Floor";
 
 const Glaucoma = () => {
-    const sections = [
-        {
-            title: "¿Qué es el glaucoma?",
-            description: "El glaucoma es una enfermedad del ojo que puede causar pérdida de visión si no se detecta y trata a tiempo. Se produce por un daño en el nervio óptico, generalmente asociado a una presión ocular alta. Al principio no presenta síntomas, pero con el tiempo puede afectar seriamente la visión. Un diagnóstico temprano y el tratamiento adecuado ayudan a controlar la enfermedad y preservar la vista."
-        },
-        {
-            title: "Causas del glaucoma",
-            description: "El glaucoma puede ser causado por aumento de la presión ocular, bloqueo en el drenaje del humor acuoso, herencia genética, lesiones oculares, y otros factores de riesgo como diabetes o hipertensión."
-        },
-        {
-            title: "Efectos en el cuerpo humano",
-            description: "El glaucoma afecta principalmente al nervio óptico. Si no se trata, puede provocar pérdida gradual de la visión periférica y, en etapas avanzadas, ceguera total. También puede generar dolor ocular y molestias visuales."
-        }
+    const sectionsRefs = [useRef(null), useRef(null), useRef(null)
     ];
 
-    const [currentSection, ] = useState(0);
+    const scrollToSection = (index) => {
+      sectionsRefs[index]?.current?.scrollIntoView({ behavior: 'smooth' });
+    };
 
-    const [showModal, setShowModal] = useState(false);
+    useEffect(() => {
+            const handleScroll = () => {
+                // Implementación de detección de sección si lo necesitas
+            };
+            
+            window.addEventListener('scroll', handleScroll);
+            return () => window.removeEventListener('scroll', handleScroll);
+        }, []);
 
     return (
-        <div className="glaucoma-container">
-            <div className="Text-container-glaucoma">
-                <h2 className="glaucoma-title">Glaucoma</h2>
-                <h3 className="subtitle">{sections[currentSection].title}</h3>
-                <p className="glaucoma-description">{sections[currentSection].description}</p>
-                {currentSection === 0 && (
-                <>
-                    <details>
-                        <summary className="details-glaucoma">Conoce mas sobre el glaucoma :</summary>
-                        <ul className="glaucoma-list">
-                            <li>Tipos de glaucoma: glaucoma de ángulo abierto, glaucoma de ángulo cerrado, glaucoma congénito.</li>
-                            <li>Factores de riesgo: edad avanzada, antecedentes familiares, miopía alta.</li>
-                            <li>Síntomas: pérdida gradual de la visión periférica, visión borrosa, halos alrededor de luces.</li>
-                            <li>Tratamiento: medicamentos, cirugía láser, cirugía convencional.</li>
-                        </ul>
-                    </details>
-
-                    <button className="glaucoma-modal-button" onClick={() => setShowModal(true)}>
-                        Efectos y Causas
-                    </button>
-                    </>
-                )}
-                
-            </div>
-            <div className="model-glaucoma-container">
-                <Canvas shadows gl={{ shadowMap: true }} camera={{ position: [0, 0, 0.26], fov: 50 }} >
-                    <ambientLight intensity={1} />
-                    <directionalLight
-                    color={"white"}
-                    position={[2, 2, 2]}
-                    intensity={10}
-                    castShadow
-                    shadow-mapSize={[4096, 4096]}
-                    shadow-camera-left={-10} 
-                    shadow-camera-right={10} 
-                    shadow-camera-top={10} 
-                    shadow-camera-bottom={-10} 
-                    shadow-bias={-0.001} />
-                    <OrbitControls minDistance={0.3
-                    } maxDistance={1} />
-                    <EyeGlaucomaModel scale={[10, 10, 10]} position={[0, 0, 0]} />
-                    <Floor />
-                </Canvas>
-            </div>
-            
-            {showModal && (
-                    <div className="modal-overlay" onClick={() => setShowModal(false)}>
-                      <div className="modal-content fancy-modal" onClick={e => e.stopPropagation()}>
-                        <h2 className="modal-title"> Factores y Efectos del Glaucoma 👁️‍🗨️</h2>
-                        <div className="card-container">
-                          
-                          {/* Biológicas */}
-                          <div className="info-card">
-                            <h3>🧬 Biológicas</h3>
-                            <p><strong>Causas:</strong> Edad avanzada, herencia genética, ojos claros</p>
-                            <p><strong>Efectos:</strong> Visión central borrosa, pérdida de detalles finos, manchas oscuras</p>
-                          </div>
-                  
-                          {/* Hábitos */}
-                          <div className="info-card">
-                            <h3>🍔 Hábitos y Estilo de Vida</h3>
-                            <p><strong>Causas:</strong> Tabaquismo, mala alimentación, sedentarismo</p>
-                            <p><strong>Efectos:</strong> Dificultad para leer, conducir o reconocer rostros, adaptación lenta a la oscuridad</p>
-                          </div>
-                  
-                          {/* Salud */}
-                          <div className="info-card">
-                            <h3>❤️ Condiciones de Salud</h3>
-                            <p><strong>Causas:</strong> Obesidad, hipertensión, enfermedades cardiovasculares</p>
-                            <p><strong>Efectos:</strong> Necesidad de ayudas visuales, reducción de la capacidad funcional</p>
-                          </div>
-                  
-                          {/* Ambientales */}
-                          <div className="info-card">
-                            <h3>🌞 Ambientales</h3>
-                            <p><strong>Causas:</strong> Exposición prolongada a la luz UV sin protección</p>
-                            <p><strong>Efectos:</strong> Metamorfopsia, dificultad con cambios de iluminación</p>
-                          </div>
-                  
-                          {/* Psicológicas */}
-                          <div className="info-card">
-                            <h3>🧠 Psicológicas/Sociales</h3>
-                            <p><strong>Causas:</strong> Impacto emocional de la pérdida visual</p>
-                            <p><strong>Efectos:</strong> Ansiedad, depresión, aislamiento, baja calidad de vida</p>
-                          </div>
-                        </div>
-                  
-                        <button className="close-button" onClick={() => setShowModal(false)}>Cerrar</button>
-                      </div>
-                    </div>
-                  )}
-                  
-
-        </div>
-        
-    );
+      <div className="scroll-container-glaucoma">
+          <section ref={sectionsRefs[0]} className="section1">
+              <SectionOneG />
+              <button 
+                  className="scroll-button1G"
+                  onClick={() => scrollToSection(1)}
+                  aria-label="Desplazar a la siguiente sección"
+              >
+                  <ChevronDown size={40} />
+              </button>
+          </section>
+          
+          <section ref={sectionsRefs[1]} className="section2">
+              <button 
+                  className="scroll-button-up1G" 
+                  onClick={() => scrollToSection(0)}
+                  aria-label="Volver a la sección anterior"
+              >
+                  <ChevronUp size={40} />
+              </button>
+              
+              <h2>Prevención y Tratamiento</h2>
+              <div className="content-container">
+                  {/* Aquí va el contenido de tu segunda sección */}
+                  <p>Esta sección puede contener información sobre prevención y tratamientos para el glaucoma.</p>
+              </div>
+              
+              <button 
+                  className="scroll-button2" 
+                  onClick={() => scrollToSection(2)}
+                  aria-label="Desplazar a la última sección"
+              >
+                  <ChevronDown size={40} />
+              </button>
+          </section>
+          
+          <section ref={sectionsRefs[2]} className="section3">
+              <button 
+                  className="scroll-button-up1" 
+                  onClick={() => scrollToSection(1)}
+                  aria-label="Volver a la sección anterior"
+              >
+                  <ChevronUp size={40} />
+              </button>
+              
+              <h2>Cuándo consultar al médico</h2>
+              <div className="content-container">
+                  {/* Aquí va el contenido de tu tercera sección */}
+                  <p>Información importante sobre cuándo buscar atención médica para problemas de glaucoma.</p>
+              </div>
+          </section>
+      </div>
+  );
 };
 
 export default Glaucoma;
