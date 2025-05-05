@@ -10,6 +10,7 @@ import { FaChevronCircleRight, FaTimes } from "react-icons/fa";
 import Floor from "../../model-3d/Floor";
 import CameraController from "../../../utils/CameraController";
 import SliderControls from "../../../utils/SliderControls/SliderControls";
+import Staging from "../../../staging/Staging";
 
 const SectionOne = () => {
     
@@ -40,11 +41,6 @@ const SectionOne = () => {
         {
             titulo: "¿Que es?",
             descripcion: "El Glaucoma es una enfermedad ocular que daña el nervio óptico, generalmente debido a un aumento de la presión dentro del ojo. Si no se trata a tiempo, puede causar pérdida gradual de la visión e incluso ceguera. Es una condición silenciosa, ya que muchas veces no presenta síntomas en sus etapas iniciales."
-        },
-        {
-            titulo: "Sintomas",
-            descripcion:
-                "Los síntomas pueden incluir visión borrosa, halos alrededor de las luces, pérdida de visión periférica y dolor ocular. Es importante realizar chequeos regulares para detectar el glaucoma a tiempo.",
         },
         {
             titulo: "Causas",
@@ -125,6 +121,7 @@ const SectionOne = () => {
                     <div className="floating-message">{messages[viewIndex]}</div>
                     <Canvas camera={{ position: [0.9, 0.3, 2], fov: 70 }} shadows={true}>
                         <ambientLight intensity={0.5} />
+                        <Staging />
                         <directionalLight
                             position={[2, 2, 2]}
                             intensity={10}
@@ -138,7 +135,7 @@ const SectionOne = () => {
                         
                         <OrbitControls />
                         <CameraController viewIndex={viewIndex} />
-                        <EyeGlaucomaModel scale={[60, 60, 60]} position={[0, 0, 0]} />
+                        <EyeGlaucomaModel scale={[60, 60, 60]} position={[0, 0.2, 0]} />
                         <Floor />
                     </Canvas>
                     <button
