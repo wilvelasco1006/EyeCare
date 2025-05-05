@@ -1,12 +1,10 @@
-import { useTexture } from "@react-three/drei";
-import { useMemo } from "react"; 
-const Floor = () => {
-    return (
-      <mesh rotation-x={[-Math.PI / 2, 0, 0]} position={[0, -1, 0]} position-y={-1} receiveShadow={true}>
-        <planeGeometry args={[20, 20]} />
-        <meshStandardMaterial color={"white"} transparent  opacity={0.40}/>
+/* eslint-disable react/no-unknown-property */
+const Floor =() => {
+  return (
+      <mesh receiveShadow={true} rotation={[-Math.PI / 2, 0, 0]} position={[0, -0.5, 0]}>
+          <planeGeometry args={[10, 10]} />
+          <meshStandardMaterial color="lightblue" />
       </mesh>
-    );
-}
-
+  );
+};
 export default Floor;

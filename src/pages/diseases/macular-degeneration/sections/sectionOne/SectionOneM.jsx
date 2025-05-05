@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/no-unknown-property */
 import { useNavigate } from "react-router";
-import "./SectionOneM.css";
+import "./sectionOneM.css";
 import { Canvas } from "@react-three/fiber";
 import { OrbitControls } from "@react-three/drei";
 import { useState, useEffect } from "react";

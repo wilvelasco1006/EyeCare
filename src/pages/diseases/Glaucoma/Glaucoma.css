@@ -1,203 +1,86 @@
-.glaucoma-container {
-    display: flex; 
-    flex-direction: row; 
-    align-items: flex-start; 
-    justify-content: space-between; 
-    padding: 2rem; /* Añade un poco de espacio alrededor del contenedor */
-    background-color: #f0f8ff; /* Un color de fondo claro como en el prototipo */
-    border-radius: 8px; /* Bordes redondeados para un aspecto suave */
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); /* Una ligera sombra para elevación */
-    margin: 2rem; /* Margen alrededor del contenedor principal */
-  }
+/** Estilos generales para el contenedor de desplazamiento **/
+.scroll-container {
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  position: relative;
+}
+
+/** Estilos para cada sección **/
+.section1,
+.section2,
+.section3 {
+  height: 100vh;
+  width: 100%;
+  position: relative;
+  overflow: hidden;
   
-  .Text-container-glaucoma {
-    flex: 1; /* Permite que el contenedor de texto ocupe el espacio disponible */
-    padding: 1rem;
-    text-align: left; /* Alinea el texto a la izquierda */
-  }
-  
-  .glaucoma-title {
-    font-size: 2.5rem; /* Tamaño grande para el título principal */
-    color: #333; /* Color del título */
-    margin-bottom: 0.5rem; /* Espacio debajo del título */
-  }
-  
-  .subtitle {
-    font-size: 1.5rem; /* Tamaño para el subtítulo/pregunta */
-    color: #555; /* Color del subtítulo */
-    margin-bottom: 1rem; /* Espacio debajo del subtítulo */
-  }
-  
-  .glaucoma-description {
-    font-size: 1rem; /* Tamaño para la descripción */
-    color: #666; /* Color de la descripción */
-    line-height: 1.6; /* Espacio entre líneas para mejor legibilidad */
-  }
-  
-  .model-glaucoma-container {
-    flex: 1; /* Permite que el contenedor del modelo ocupe el espacio disponible */
-    padding: 1rem;
-    display: flex;
-    justify-content: center; /* Centra el modelo horizontalmente */
-    align-items: flex-start; /* Centra el modelo verticalmente (si es necesario) */
-    width: 300px; /* Ancho mínimo para el contenedor del modelo */
-    height: 400px; /* Alto mínimo para el contenedor del modelo */
-  }
-  
-  /* Estilos adicionales para el Canvas (opcional, dependiendo de cómo quieras que se vea) */
-  .model-glaucoma-container canvas {
-    
-    width: 200px; /* o el tamaño que desees por defecto */
-    height: 200px;
-    border: 2px solid #87ceeb;
-    border-radius: 8px;
-    box-sizing: border-box;
-  }
-
-  .glaucoma-buttons {
-    margin-top: 20px;
-    display: flex;
-    gap: 10px;
 }
 
-.glaucoma-button {
-    background-color: #4da5ff;
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 10px;
-    cursor: pointer;
-    font-size: 1rem;
-    transition: background-color 0.3s;
-}
-
-.glaucoma-button:hover {
-    background-color: #357abd;
-}
-
-.details-glaucoma {
-  margin-top: 20px; /* Espacio respecto a los botones */
-  font-size: 1.1rem; /* Letra un poco más grande */
-  color: #1a3c6e; /* Azul oscuro, puedes cambiarlo */
-  margin-bottom: 2rem;
-}
-
-.details-glaucoma summary {
-  cursor: pointer;
-  font-weight: 600;
-}
-
-.details-glaucoma ul {
-  margin-top: 10px;
-  padding-left: 20px;
-}
-
-.fancy-modal {
-  max-height: 80vh;
-  overflow-y: auto;
-  background: #f9f9f9;
-  padding: 2rem;
-  border-radius: 12px;
-  box-shadow: 0 0 20px rgba(0,0,0,0.2);
-}
-
-.modal-title {
-  text-align: center;
-  margin-bottom: 1rem;
-  font-size: 1.8rem;
-  color: #444;
-}
-
-.card-container {
+/** Botones de desplazamiento **/
+.scroll-button1,
+.scroll-button2,
+.scroll-button-up1 {
+  position: absolute;
+  background-color: rgba(82, 161, 192, 0.7);
+  border: none;
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
   display: flex;
-  flex-wrap: wrap;
-  gap: 1rem;
-  justify-content: space-around;
-}
-
-.info-card {
-  background: #fff;
-  padding: 1rem;
-  border-radius: 10px;
-  width: 280px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-  transition: transform 0.2s ease;
-}
-
-.info-card:hover {
-  transform: scale(1.02);
-}
-
-.close-button {
-  display: block;
-  margin: 2rem auto 0;
-  padding: 0.5rem 1.5rem;
-  background-color: #0077cc;
-  color: white;
-  border: none;
-  border-radius: 8px;
-  font-size: 1rem;
+  justify-content: center;
+  align-items: center;
   cursor: pointer;
-}
-.fancy-modal {
-  max-height: 80vh;
-  overflow-y: auto;
-  background: #f9f9f9;
-  padding: 2rem;
-  border-radius: 12px;
-  box-shadow: 0 0 20px rgba(0,0,0,0.2);
+  transition: all 0.3s ease;
+  z-index: 100;
 }
 
-.modal-title {
-  text-align: center;
-  margin-bottom: 1rem;
-  font-size: 1.8rem;
-  color: #444;
+.scroll-button1,
+.scroll-button2 {
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%);
 }
 
-.card-container {
+.scroll-button-up1 {
+  top: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.scroll-button1:hover,
+.scroll-button2:hover,
+.scroll-button-up1:hover {
+  background-color: rgba(82, 161, 192, 1);
+  box-shadow: 0 0 20px rgba(82, 161, 192, 0.6);
+}
+
+/** Estilos específicos para la sección dos **/
+.section2 {
+  background-color: #f5f9ff;
   display: flex;
-  flex-wrap: wrap;
-  gap: 1rem;
-  justify-content: space-around;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
 }
 
-.info-card {
-  background: #fff;
-  padding: 1rem;
-  border-radius: 10px;
-  width: 280px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-  transition: transform 0.2s ease;
+/** Estilos específicos para la sección tres **/
+.section3 {
+  background-color: #e9f5ff;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
 }
 
-.info-card:hover {
-  transform: scale(1.02);
+/** Media queries para responsividad **/
+@media (max-width: 768px) {
+  .scroll-button1,
+  .scroll-button2,
+  .scroll-button-up1 {
+    width: 50px;
+    height: 50px;
+  }
 }
-
-.close-button {
-  display: block;
-  margin: 2rem auto 0;
-  padding: 0.5rem 1.5rem;
-  background-color: #0077cc;
-  color: white;
-  border: none;
-  border-radius: 8px;
-  font-size: 1rem;
-  cursor: pointer;
-}
-
-.glaucoma-modal-button {
-  display: block;
-  margin: 0rem ; 
-  padding: 0.5rem 1.5rem;
-  background-color: #0077cc;;
-  color: white;
-  border: none;
-  border-radius: 8px;
-  font-size: 1rem;
-  cursor: pointer;
-}
-
-
-
