@@ -41,32 +41,32 @@ const SectionOneM = () => {
         {
             titulo: "¿En qué consiste?",
             descripcion: (
-                <p>
+                <>
                     La <span>Degeneración Macular</span> es una enfermedad ocular que afecta la mácula,
                     la parte central de la retina encargada de la visión fina y detallada necesaria para leer,
                     conducir, reconocer rostros, etc. Con el tiempo, la mácula se deteriora y
                     causa visión borrosa o puntos ciegos en el centro del campo visual.
-                </p>
+                </>
             )
         },
         {
             titulo: "Datos",
             descripcion: (
-                <p>
+                <>
                     La degeneración macular puede ser seca o húmeda. La forma seca es más común y se produce por el adelgazamiento de la mácula.
                     La forma seca es más común y se produce por el adelgazamiento de la mácula.
                     Las personas con DMAE pueden conservar la visión periférica.
-                </p>
+                </>
             )
         },
         {
             titulo: "Factores de riesgo",
             descripcion:(
-                <p>
+                <>
                     Es más común en personas mayores de 60 años.
                     Fumar multiplica el riesgo de desarrollar DMAE.
                     La obesidad y la hipertensión también son factores de riesgo.
-                </p>
+                </>
             )
         },
 

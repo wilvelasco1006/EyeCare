@@ -1,9 +1,9 @@
 import SectionOneM from "./sections/sectionOne/SectionOneM";
+import SectionTwoM from "./sections/section-two/SectionTwoM";
 import './MacularDegeneration.css';
 // eslint-disable-next-line no-unused-vars
 import React, { useRef, useEffect } from 'react';
 import { ChevronDown, ChevronUp } from 'lucide-react';
-import SectionTwoM from "./sections/section-two/SectionTwoM";
 
 const MacularDegeneration = () => {
     const sectionRefs = [useRef(null), useRef(null), useRef(null)];
