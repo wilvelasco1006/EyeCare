@@ -1,0 +1,182 @@
+/** Contenedor principal - Ahora con altura completa **/
+.model-container {
+    margin: 0;
+    width: 70%;
+    height: 1000px;
+    /* Altura completa de la ventana */
+    overflow: hidden;
+    position: relative;
+}
+
+/** Canvas de Three.js **/
+.model-container canvas {
+    width: 100% !important;
+    height: 100% !important;
+    outline: none;
+    background: linear-gradient(to bottom, #e6f7ff, #ffffff);
+}
+
+/** Título **/
+.title h1 {
+    color: white;
+    text-shadow: 0 0 15px rgba(102, 202, 248, 0.8), 0 0 10px rgba(0, 0, 0, 0.4);
+    font-size: 2rem;
+    font-weight: 600;
+    background-color: rgba(30, 144, 255, 0.4);
+    padding: 0.7rem 1.5rem;
+    border-radius: 8px;
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    letter-spacing: 0.5px;
+    transform: translateZ(0);
+}
+
+/** Mensaje informativo **/
+.mensaje-info {
+    background: rgba(0, 0, 0, 0.75);
+    color: white;
+    padding: 1rem 1.5rem;
+    border-radius: 10px;
+    max-width: 350px;
+    font-size: 1rem;
+    text-align: center;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    border-left: 4px solid #66caf8;
+    line-height: 1.5;
+    transform: translateZ(0);
+    position: relative;
+    z-index: 100;
+}
+
+/** Indicador de interacción **/
+.eye-indicator {
+    position: absolute;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: rgba(0, 0, 0, 0.6);
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    opacity: 0.8;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+}
+
+/** Etiquetas de los ojos **/
+.eye-label {
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    padding: 0.4rem 0.8rem;
+    border-radius: 4px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    transform: translateZ(0);
+}
+
+/** Mensaje flotante animado **/
+.mensaje-info-container {
+    position: fixed;
+    /* Cambiado a fixed para mejor posicionamiento */
+    bottom: 10%;
+    left: 50%;
+    transform: translateX(-50%);
+    max-width: 400px;
+    z-index: 1000;
+    animation: fadeIn 0.3s ease-in;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateX(-50%) translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(-50%) translateY(0);
+    }
+}
+
+/** Responsive design **/
+@media (max-width: 768px) {
+    .title h1 {
+        font-size: 1.6rem;
+        padding: 0.5rem 1rem;
+    }
+
+    .mensaje-info {
+        padding: 0.8rem 1.2rem;
+        font-size: 0.9rem;
+        max-width: 300px;
+    }
+}
+
+/* Para alturas muy pequeñas (móviles en horizontal) */
+@media (max-height: 500px) {
+    .title h1 {
+        font-size: 1.4rem;
+        padding: 0.4rem 1rem;
+    }
+
+    .mensaje-info-container {
+        bottom: 5%;
+    }
+}
+/** Animación para que el texto suba lentamente **/
+.animated-symptoms {
+    animation: moveUp 5s infinite alternate ease-in-out;
+}
+
+@keyframes moveUp {
+    from {
+        transform: translateY(20px) translateZ(0);
+    }
+    to {
+        transform: translateY(-20px) translateZ(0);
+    }
+}
+
+/* Ajustes generales del modelo y texto */
+.model-container {
+    margin: 0;
+    width: 70%;
+    height: 1000px;
+    overflow: hidden;
+    position: relative;
+}
+
+.model-container canvas {
+    width: 100% !important;
+    height: 100% !important;
+    outline: none;
+    background: linear-gradient(to bottom, #e6f7ff, #ffffff);
+}
+
+.title h1 {
+    color: white;
+    text-shadow: 0 0 15px rgba(102, 202, 248, 0.8), 0 0 10px rgba(0, 0, 0, 0.4);
+    font-size: 2.5rem;
+    font-weight: 600;
+    background-color: rgba(30, 144, 255, 0.4);
+    padding: 0.7rem 1.5rem;
+    border-radius: 8px;
+    backdrop-filter: blur(5px);
+    letter-spacing: 0.5px;
+}
+
+.sintomas-info {
+    background: rgba(0, 0, 0, 0.75);
+    color: white;
+    padding: 1rem 1.5rem;
+    border-radius: 10px;
+    max-width: 350px;
+    font-size: 1rem;
+    text-align: center;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    border-left: 4px solid #66caf8;
+    line-height: 1.5;
+    position: relative;
+    z-index: 100;
+}

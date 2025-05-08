@@ -1,9 +1,10 @@
 
 import SectionOne from "./sections/sectionOne/SectionOne";
+import SectionTwoCT from "./sections/sectionTwoCT/sectionTwoCT"
 import '../Cataracts/Cataracts.css';
 // eslint-disable-next-line no-unused-vars
 import React, { useRef, useEffect } from 'react';
-import { ChevronDown, ChevronUp } from 'lucide-react';
+import { ChevronDown, ChevronUp, Eye } from 'lucide-react';
 
 const Cataracts = () => {
     const sectionRefs = [useRef(null), useRef(null), useRef(null)];
@@ -44,7 +45,7 @@ const Cataracts = () => {
                 >
                     <ChevronUp size={40} />
                 </button>
-                
+                <SectionTwoCT/>
                 <h2>Prevención y Tratamiento</h2>
                 <div className="content-container">
                     {/* Aquí va el contenido de tu segunda sección */}
