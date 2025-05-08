@@ -1,5 +1,4 @@
-/* eslint-disable no-unused-vars */
-/* eslint-disable react/no-unknown-property */
+
 import { useNavigate } from "react-router";
 import "./sectionOneM.css";
 import { Canvas } from "@react-three/fiber";
@@ -13,7 +12,7 @@ import SliderControls from "../../../utils/SliderControls/SliderControls";
 import Staging from "../../../staging/Staging";
 import Lights from "../../lights/Lights";
 
-const SectionOne = () => {
+const SectionOneM = () => {
 
     const [showModal, setShowModal] = useState(false);
     const [showInstruction, setShowInstruction] = useState(true);
@@ -51,15 +50,23 @@ const SectionOne = () => {
             )
         },
         {
-            titulo: "Causas",
+            titulo: "Datos",
             descripcion: (
-                <ul>
-                    <li>La degeneración macular puede ser seca o húmeda.</li>
-                    <li>La forma seca es más común y se produce por el adelgazamiento de la mácula.</li>
-                    <li>Las personas con DMAE pueden conservar la visión periférica</li>
-                    <li>Algunas investigaciones sugieren que la luz azul de pantallas podría contribuir al riesgo, pero aún no hay evidencia concluyente.</li>
-                    <li>Fumar duplica o triplica las probabilidades de desarrollar DMAE, ya que daña los vasos sanguíneos de la retina y acelera el estrés oxidativo en el ojo.</li>
-                </ul>
+                <p>
+                    La degeneración macular puede ser seca o húmeda. La forma seca es más común y se produce por el adelgazamiento de la mácula.
+                    La forma seca es más común y se produce por el adelgazamiento de la mácula.
+                    Las personas con DMAE pueden conservar la visión periférica.
+                </p>
+            )
+        },
+        {
+            titulo: "Factores de riesgo",
+            descripcion:(
+                <p>
+                    Es más común en personas mayores de 60 años.
+                    Fumar multiplica el riesgo de desarrollar DMAE.
+                    La obesidad y la hipertensión también son factores de riesgo.
+                </p>
             )
         },
 
@@ -73,75 +80,74 @@ const SectionOne = () => {
 
     return (
         <>
-            <div className="sectionOne">
+        <div className="sectionOne">
+            <div className="Text-container-sectionOne">
+                <button className="btn-atras" onClick={() => window.history.back()}> Atrás</button>
+                <h2 className="macular-title">Degeneracion Macular</h2>
+                {/* Slider informativo de causas */}
+                <div className="slider-content">
+                    {/* 1) Track: todos los slides en fila */}
+                    <div
+                        className="slider-track"
+                        style={{
+                            transform: `translateX(-${causaIndex * 100}%)`,
+                            transition: "transform 0.4s ease-in-out",
+                        }}
+                    >
+                        {causas.map((c, idx) => (
+                            <div key={idx} className="slider-box">
+                                <h3 className="causa-title">{c.titulo}</h3>
+                                <p className="causa-description">{c.descripcion}</p>
+                            </div>
+                        ))}
+                    </div>
 
-                <div className="Text-container-sectionOne">
-                    <button className="btn-atras" onClick={() => window.history.back()}> Atrás</button>
-                    <h2 className="macular-title">Degeneracion Macular</h2>
-                    {/* Slider informativo de causas */}
-                    <div className="slider-content">
-                        {/* 1) Track: todos los slides en fila */}
-                        <div
-                            className="slider-track"
-                            style={{
-                                transform: `translateX(-${causaIndex * 100}%)`,
-                                transition: "transform 0.4s ease-in-out",
-                            }}
-                        >
-                            {causas.map((c, idx) => (
-                                <div key={idx} className="slider-box">
-                                    <h3 className="causa-title">{c.titulo}</h3>
-                                    <p className="causa-description">{c.descripcion}</p>
-                                </div>
-                            ))}
-                        </div>
+                    {/* 2) Controles + botón */}
+                    <div className="actions">
+                        <SliderControls
+                            current={causaIndex}
+                            total={causas.length}
+                            onPrev={handleCausaPrev}
+                            onNext={handleCausaNext}
+                            onSelect={handleCausaSelect}
+                        />
 
-                        {/* 2) Controles + botón */}
-                        <div className="actions">
-                            <SliderControls
-                                current={causaIndex}
-                                total={causas.length}
-                                onPrev={handleCausaPrev}
-                                onNext={handleCausaNext}
-                                onSelect={handleCausaSelect}
-                            />
+                    </div>
+                </div>
+                <button className="btn-more-info" onClick={() => setShowModal(true)}>
+                    Ver más
+                </button>
 
+
+                {showInstruction && (
+                    <div className="box-message show">
+                        <div>
+                            <h3>¡Es hora de navegar!</h3>
+                            <p>Dale a la flecha para saber un poco más...</p>
                         </div>
                     </div>
-                    <button className="btn-more-info" onClick={() => setShowModal(true)}>
-                        Ver más
-                    </button>
-
-
-                    {showInstruction && (
-                        <div className="box-message show">
-                            <div>
-                                <h3>¡Es hora de navegar!</h3>
-                                <p>Dale a la flecha para saber un poco más...</p>
-                            </div>
-                        </div>
-                    )}
-                </div>
-
-                <div className="model-container">
-                    <div className="floating-message">{messages[viewIndex]}</div>
-                    <Canvas camera={{ position: [0.9, 0.3, 2], fov: 70 }} shadows={true}>
-                        <Lights />
-                        <Staging />
-                        <OrbitControls />
-                        <CameraController viewIndex={viewIndex} />
-                        <MacularModel scale={[0.5, -0.5, -0.5]} position={[0, 0, 1]} />
-                        <Floor />
-                    </Canvas>
-                    <button
-                        title="Presiona el botón para cambiar de vista"
-                        onClick={handleNext}
-                        className="btn-macular"
-                    >
-                        <FaChevronCircleRight style={{ fontSize: "2rem" }} />
-                    </button>
-                </div>
+                )}
             </div>
+
+            <div className="model-container">
+                <div className="floating-message">{messages[viewIndex]}</div>
+                <Canvas camera={{ position: [0.9, 0.3, 2], fov: 70 }} shadows={true}>
+                    <Lights />
+                    <Staging />
+                    <OrbitControls />
+                    <CameraController viewIndex={viewIndex} />
+                    <MacularModel scale={[0.5, -0.5, -0.5]} position={[0, 0, 1]} />
+                    <Floor />
+                </Canvas>
+                <button
+                    title="Presiona el botón para cambiar de vista"
+                    onClick={handleNext}
+                    className="btn-macular"
+                >
+                    <FaChevronCircleRight style={{ fontSize: "2rem" }} />
+                </button>
+            </div>
+        </div>
             {showModal && (
                 <div className="modal-overlay" onClick={() => setShowModal(false)}>
                     <div className="modal-content" onClick={e => e.stopPropagation()}>
@@ -193,4 +199,4 @@ const SectionOne = () => {
     );
 };
 
-export default SectionOne;
+export default SectionOneM;
