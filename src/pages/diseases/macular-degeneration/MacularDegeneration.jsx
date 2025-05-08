@@ -1,8 +1,9 @@
-import SectionOne from "./sections/sectionOne/SectionOneM";
+import SectionOneM from "./sections/sectionOne/SectionOneM";
 import './MacularDegeneration.css';
 // eslint-disable-next-line no-unused-vars
 import React, { useRef, useEffect } from 'react';
 import { ChevronDown, ChevronUp } from 'lucide-react';
+import SectionTwoM from "./sections/section-two/SectionTwoM";
 
 const MacularDegeneration = () => {
     const sectionRefs = [useRef(null), useRef(null), useRef(null)];
@@ -25,7 +26,7 @@ const MacularDegeneration = () => {
     return (
         <div className="scroll-container">
             <section ref={sectionRefs[0]} className="section1">
-                <SectionOne />
+                <SectionOneM />
                 <button 
                     className="scroll-button1" 
                     onClick={() => scrollToSection(1)}
@@ -43,13 +44,7 @@ const MacularDegeneration = () => {
                 >
                     <ChevronUp size={40} />
                 </button>
-                
-                <h2>Prevención y Tratamiento</h2>
-                <div className="content-container">
-                    {/* Aquí va el contenido de tu segunda sección */}
-                    <p>Esta sección puede contener información sobre prevención y tratamientos para la conjuntivitis.</p>
-                </div>
-                
+                <SectionTwoM />
                 <button 
                     className="scroll-button2" 
                     onClick={() => scrollToSection(2)}
