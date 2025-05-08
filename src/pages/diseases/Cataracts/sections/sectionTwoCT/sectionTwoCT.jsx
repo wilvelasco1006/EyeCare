@@ -26,7 +26,7 @@ const Scene = () => {
         const targetPos = healthyEyeRef.current
             .getWorldPosition(new THREE.Vector3())
             .add(new THREE.Vector3(0, 0, 1.5));
-        setMessage("Este es un ojo sano. Haz clic en el modelo para interactuar.");
+        setMessage("Este es un ojo afecatado por cataratas");
         setTarget(targetPos);
     };
 
