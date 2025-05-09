@@ -1,17 +1,25 @@
 import SectionOne from "./sections/sectionOne/SectionOne";
-import SectionTwoCT from "./sections/sectionTwoCT/sectionTwoCT"; // Importación corregida con mayúscula correcta
+import SectionTwoCT from "./sections/sectionTwoCT/sectionTwoCT";
 import "../Cataracts/Cataracts.css";
 import React, { useRef, useEffect, useState } from "react";
-import { ChevronDown, ChevronUp, Eye } from "lucide-react";
 
 const Cataracts = () => {
     const sectionRefs = [useRef(null), useRef(null), useRef(null)];
     const [activeSection, setActiveSection] = useState(0);
+    const [isScrolling, setIsScrolling] = useState(false); // Estado para controlar el scroll
 
     // Función para manejar el scroll suave entre secciones
     const scrollToSection = (index) => {
+        if (isScrolling) return; // Evitar scroll mientras uno está en progreso
+
+        setIsScrolling(true);
         sectionRefs[index]?.current?.scrollIntoView({ behavior: "smooth" });
         setActiveSection(index);
+
+        // Desbloquear el scroll después de la animación
+        setTimeout(() => {
+            setIsScrolling(false);
+        }, 1000); // 1 segundo, ajusta según la duración de tu animación
     };
 
     // Para detectar la sección actual visible
@@ -38,6 +46,32 @@ const Cataracts = () => {
         window.addEventListener("scroll", handleScroll);
         return () => window.removeEventListener("scroll", handleScroll);
     }, []);
+
+    // Manejar el evento wheel (rueda del mouse)
+    useEffect(() => {
+        const handleWheel = (event) => {
+            if (isScrolling) return; // Si ya está scrolleando, no hacer nada
+
+            // Determinar la dirección del scroll
+            const direction = event.deltaY > 0 ? 1 : -1;
+
+            // Calcular la siguiente sección
+            const nextSection = Math.min(
+                Math.max(activeSection + direction, 0),
+                sectionRefs.length - 1
+            );
+
+            // Si es una sección diferente, scrollear hacia ella
+            if (nextSection !== activeSection) {
+                event.preventDefault(); // Prevenir el scroll normal
+                scrollToSection(nextSection);
+            }
+        };
+
+        // Agregar el evento con opción passive: false para poder usar preventDefault()
+        window.addEventListener("wheel", handleWheel, { passive: false });
+        return () => window.removeEventListener("wheel", handleWheel);
+    }, [activeSection, isScrolling]);
 
     return (
         <div className="scroll-container">
@@ -69,49 +103,18 @@ const Cataracts = () => {
             {/* Sección 1: Introducción - Causas y efectos */}
             <section ref={sectionRefs[0]} className="section1">
                 <SectionOne />
-                <button
-                    className="scroll-button1 pulse-animation"
-                    onClick={() => scrollToSection(1)}
-                    aria-label="Desplazar a la siguiente sección"
-                >
-                    <ChevronDown size={40} />
-                </button>
             </section>
 
             {/* Sección 2: Síntomas - Solo modelo 3D interactivo */}
             <section ref={sectionRefs[1]} className="section2">
-                <button
-                    className="scroll-button-up1"
-                    onClick={() => scrollToSection(0)}
-                    aria-label="Volver a la sección anterior"
-                >
-                    <ChevronUp size={40} />
-                </button>
-
                 {/* Solo el modelo 3D con información integrada de síntomas */}
                 <div className="model-section-full">
                     <SectionTwoCT />
                 </div>
-
-                <button
-                    className="scroll-button2"
-                    onClick={() => scrollToSection(2)}
-                    aria-label="Desplazar a la última sección"
-                >
-                    <ChevronDown size={40} />
-                </button>
             </section>
 
             {/* Sección 3: Prevención y Tratamiento */}
             <section ref={sectionRefs[2]} className="section3">
-                <button
-                    className="scroll-button-up1"
-                    onClick={() => scrollToSection(1)}
-                    aria-label="Volver a la sección anterior"
-                >
-                    <ChevronUp size={40} />
-                </button>
-
                 <h2>Cuándo consultar al médico</h2>
                 <div className="content-container">
                     {/* Aquí va el contenido de tu tercera sección */}
@@ -120,14 +123,6 @@ const Cataracts = () => {
                         problemas de conjuntivitis.
                     </p>
                 </div>
-
-                <button
-                    className="scroll-button2"
-                    onClick={() => scrollToSection(0)}
-                    aria-label="Volver a la primera sección"
-                >
-                    <ChevronDown size={40} />
-                </button>
             </section>
         </div>
     );

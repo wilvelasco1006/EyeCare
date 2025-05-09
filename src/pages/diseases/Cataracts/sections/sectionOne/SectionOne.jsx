@@ -187,7 +187,7 @@ const SectionOne = () => {
                     </button>
                     <h2 className="cataracts-title">Cataratas</h2>
                     {/* Slider informativo de causas */}
-                    <div className="slider-content">
+                    <div className="slider-container">
                         {/* 1) Track: todos los slides en fila */}
                         <div
                             className="slider-track"
