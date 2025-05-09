@@ -26,37 +26,37 @@ const Scene = () => {
   })
 
   const handleEyeClick = () => {
-    const targetPos = eyeRef.current.getWorldPosition(new THREE.Vector3()).add(new THREE.Vector3(0, 0, 2))
-    setMessage("Vista superficial del ojo.")
+    const targetPos = eyeRef.current.getWorldPosition(new THREE.Vector3()).add(new THREE.Vector3(0, 0, 3))
+    setMessage("Este es el Ojo sano.")
     setTarget(targetPos)
   }
 
   const handleMaculaClick = () => {
-    const targetPos = maculaRef.current.getWorldPosition(new THREE.Vector3()).add(new THREE.Vector3(0, 0, 2))
-    setMessage("Vista interior para mejor panorama de la mácula.")
+     const targetPos = maculaRef.current.getWorldPosition(new THREE.Vector3()).add(new THREE.Vector3(0, 0, 3))
+      setMessage("Así se ve la Mácula Afectada y estos son algunos síntomas: \n" + "Visión borrosa o distorsionada.\n" + "Dificultad para ver colores.\n" + "Puntos ciegos en la visión central. Entre otros")
     setTarget(targetPos)
   }
 
   return (
     <>
       {/* Floating title */}
-      <Html position={[0, 1, -2]} center distanceFactor={8} wrapperClass="title">
-        <h1>Vista lateral de la mácula</h1>
+      <Html position={[0, 1, -2]} center distanceFactor={3} wrapperClass="title" transform>
+        <h1>Comparación entre el Exterior del Ojo Sano y la Mácula Afectada en el Interior</h1>
       </Html>
 
       {/* Eye model */}
-      <group ref={eyeRef} position={[-0.6, 0, 1]} onClick={handleEyeClick}>
+      <group ref={eyeRef} position={[-0.6, -0.5, 0]} onClick={handleEyeClick}>
         <Eye scale={[10.5, 10.5, 10.5]} />
       </group>
 
       {/* Macula model */}
-      <group ref={maculaRef} position={[0.6, 0, 1]} onClick={handleMaculaClick}>
+      <group ref={maculaRef} position={[0.6, -0.5, 0]} onClick={handleMaculaClick}>
         <Macula scale={[0.5, 0.5, 0.5]} />
       </group>
 
       {/* Floating message */}
       {message && (
-        <Html position={[0, -1, 0]} center distanceFactor={6}>
+        <Html position={[0, -1, 0]} center distanceFactor={2} transform>
           <div className="mensaje-info">{message}</div>
         </Html>
       )}
@@ -70,9 +70,9 @@ const Scene = () => {
 const SectionTwoM = () => {
   return (
     <div className="model-container">
-        <Canvas camera={{ position: [0, 0.3, 2.5], fov: 60 }} shadows={true}>
+        <Canvas camera={{ position: [0, 0, 5], fov: 60 }} shadows={true}>
             <Lights />
-            <OrbitControls autoRotate={-0.15} enablePan={false}  maxDistance={4} minDistance={1.5}/>
+            <OrbitControls enablePan={false}  maxDistance={4} minDistance={1.5}/>
             <Scene />
         </Canvas>
     </div>

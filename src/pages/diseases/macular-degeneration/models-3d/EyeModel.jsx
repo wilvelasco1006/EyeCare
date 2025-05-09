@@ -15,6 +15,7 @@ export function Eye (props) {
 
   return (
     <>
+      <pointLight position={[10, 10, 10]}/>
       <primitive object={scene} {...props} />
       <group {...props} dispose={null}>
         <group name="Scene">
