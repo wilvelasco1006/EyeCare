@@ -1,16 +1,17 @@
 /** Contenedor principal - Ahora con altura completa **/
-.model-container {
+.model-container-s{
     margin: 0;
-    width: 70%;
-    height: 1000px; /* Altura completa de la ventana */
+    width: 90%;
+    height: 500px; /* Altura completa de la ventana */
     overflow: hidden;
     position: relative;
+    align-items: center;
 }
 
 /** Canvas de Three.js **/
-.model-container canvas {
-    width: 100% !important;
-    height: 100% !important;
+.model-container-s canvas {
+    width: 70%;
+    height: 400px;
     outline: none;
     background: linear-gradient(to bottom, #e6f7ff, #ffffff);
 }
@@ -27,7 +28,7 @@
     backdrop-filter: blur(5px);
     -webkit-backdrop-filter: blur(5px);
     letter-spacing: 0.5px;
-    transform: translateZ(0);
+    
 }
 
 /** Mensaje informativo **/
@@ -45,33 +46,6 @@
     transform: translateZ(0);
     position: relative;
     z-index: 100;
-}
-
-/** Indicador de interacción **/
-.eye-indicator {
-    position: absolute;
-    bottom: 2rem;
-    left: 50%;
-    transform: translateX(-50%);
-    background-color: rgba(0, 0, 0, 0.6);
-    color: white;
-    padding: 0.5rem 1rem;
-    border-radius: 20px;
-    font-size: 0.9rem;
-    opacity: 0.8;
-    transition: opacity 0.3s ease;
-    pointer-events: none;
-}
-
-/** Etiquetas de los ojos **/
-.eye-label {
-    background-color: rgba(0, 0, 0, 0.5);
-    color: white;
-    padding: 0.4rem 0.8rem;
-    border-radius: 4px;
-    font-size: 0.9rem;
-    font-weight: 500;
-    transform: translateZ(0);
 }
 
 /** Mensaje flotante animado **/
