@@ -7,6 +7,7 @@ import Floor from "../../models-3d/Floor";
 import { useRef, useState } from "react";
 import Staging from "../../../staging/Staging";
 import "./SectionTwoM.css"
+import * as THREE from "three";
 
 const Scene = () => {
   const eyeRef = useRef()
