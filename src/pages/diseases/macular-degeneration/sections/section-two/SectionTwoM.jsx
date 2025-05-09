@@ -46,7 +46,7 @@ const Scene = () => {
 
       {/* Eye model */}
       <group ref={eyeRef} position={[-0.6, 0, 1]} onClick={handleEyeClick}>
-        <Eye scale={[0.5, 0.5, 0.5]} />
+        <Eye scale={[10.5, 10.5, 10.5]} />
       </group>
 
       {/* Macula model */}
