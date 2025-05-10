@@ -1,10 +1,11 @@
 .sectionOne {
+    height: 700px;
     display: flex;
     flex-direction: row;
     background-image: url("https://i.pinimg.com/736x/72/3b/f8/723bf831b674ed3fefdcd0e9c0030644.jpg");
     background-size: cover;
     background-position: center;
-    margin: 30px 10px 0 10px;
+    margin: 0px 10px 0 10px;
     border-radius: 30px;
     position: relative;
 
