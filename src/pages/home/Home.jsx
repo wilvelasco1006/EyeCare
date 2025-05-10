@@ -12,7 +12,7 @@ const Home = () => {
         
     return (
       <>
-        <div className="scroll-container">
+        <div className="Home-scroll-container">
           <div className="Presentation-container">
             <div className="background-image"></div>
             <div className="Presentation-text">
