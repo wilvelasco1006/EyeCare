@@ -15,19 +15,18 @@ const Scene = () => {
   const { camera } = useThree();
   const [message, setMessage] = useState(null);
   const [target, setTarget] = useState(null);
+  const [showHint, setShowHint] = useState(false);
 
-  // Access keyboard controls
   const [subscribeKeys] = useKeyboardControls();
 
-  // Reset camera and message
   const resetView = () => {
     camera.position.set(0, 0, 5);
     camera.lookAt(0, 0, 0);
     setTarget(null);
     setMessage(null);
+    setShowHint(false); // Oculta la microcopia
   };
 
-  // React to key press (from KeyboardControls)
   useEffect(() => {
     const unsubscribe = subscribeKeys(
       (state) => state.reset,
@@ -38,7 +37,6 @@ const Scene = () => {
     return () => unsubscribe();
   }, [subscribeKeys]);
 
-  // Smooth camera movement
   useFrame(() => {
     if (target) {
       camera.position.lerp(target, 0.05);
@@ -50,12 +48,17 @@ const Scene = () => {
     const targetPos = eyeRef.current.getWorldPosition(new THREE.Vector3()).add(new THREE.Vector3(0, 0, 3));
     setMessage("Este es el Ojo sano.");
     setTarget(targetPos);
+    setShowHint(true);
   };
 
   const handleMaculaClick = () => {
     const targetPos = maculaRef.current.getWorldPosition(new THREE.Vector3()).add(new THREE.Vector3(0, 0, 3));
-    setMessage("Así se ve la Mácula Afectada y estos son algunos síntomas: \n" + "Visión borrosa o distorsionada.\n" + "Dificultad para ver colores.\n" + "Puntos ciegos en la visión central. Entre otros");
+    setMessage("Así se ve la Mácula Afectada y estos son algunos síntomas: \n" +
+      "Visión borrosa o distorsionada.\n" +
+      "Dificultad para ver colores.\n" +
+      "Puntos ciegos en la visión central. Entre otros");
     setTarget(targetPos);
+    setShowHint(true);
   };
 
   return (
@@ -79,6 +82,13 @@ const Scene = () => {
       {message && (
         <Html position={[0, -1, 0]} center distanceFactor={2} transform>
           <div className="mensaje-info">{message}</div>
+        </Html>
+      )}
+
+      {/* Hint message */}
+      {showHint && (
+        <Html position={[0, 1, 0]} center distanceFactor={1.5} transform>
+          <div className="tecla-hint">🔁 Presiona la tecla <strong>R</strong> para volver a la vista original.</div>
         </Html>
       )}
 
