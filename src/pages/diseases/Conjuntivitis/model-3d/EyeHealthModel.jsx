@@ -14,3 +14,5 @@ export function EyeHealthModel(props) {
 }
 
 useGLTF.preload('/models-3d/conjuntivitis/health-eye.glb')
+
+export default EyeHealthModel;

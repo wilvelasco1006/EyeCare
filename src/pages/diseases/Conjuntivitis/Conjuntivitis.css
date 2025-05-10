@@ -1,86 +1,196 @@
-/** Estilos generales para el contenedor de desplazamiento **/
-.scroll-container {
+/* Estilos generales para el contenedor de desplazamiento */
+.scroll-container-c {
   width: 100%;
   height: 100vh;
-  overflow: hidden;
-  position: relative;
+  overflow-y: auto; 
+  overflow-x: hidden; 
+  position: relative; 
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-/** Estilos para cada sección **/
-.section1,
-.section2,
-.section3 {
+/* Estilos para cada sección */
+.section1C,
+.section2C,
+.section3C {
   height: 100vh;
-  width: 100%;
+  width: 100%; /* Cambiado de 90% a 100% para evitar scroll horizontal */
   position: relative;
   overflow: hidden;
-  
-}
-
-/** Botones de desplazamiento **/
-.scroll-button1,
-.scroll-button2,
-.scroll-button-up1 {
-  position: absolute;
-  background-color: rgba(82, 161, 192, 0.7);
-  border: none;
-  border-radius: 50%;
-  width: 60px;
-  height: 60px;
+  scroll-snap-align: start; /* Punto de snap */
   display: flex;
+  flex-direction: column;
   justify-content: center;
-  align-items: center;
+  padding: 2rem;
+  box-sizing: border-box; /* Asegura que el padding no afecte el ancho total */
+  margin: 0 auto; /* Centrado horizontal */
+}
+
+/* Navegación lateral con puntos */
+.side-navigation {
+  position: fixed;
+  right: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  z-index: 1000;
+}
+
+.nav-dot {
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  background-color: rgba(82, 161, 192, 0.5);
   cursor: pointer;
   transition: all 0.3s ease;
-  z-index: 100;
+  position: relative;
 }
 
-.scroll-button1,
-.scroll-button2 {
-  bottom: 30px;
-  left: 50%;
-  transform: translateX(-50%);
-}
-
-.scroll-button-up1 {
-  top: 30px;
-  left: 50%;
-  transform: translateX(-50%);
-}
-
-.scroll-button1:hover,
-.scroll-button2:hover,
-.scroll-button-up1:hover {
+.nav-dot:hover, .nav-dot.active {
   background-color: rgba(82, 161, 192, 1);
-  box-shadow: 0 0 20px rgba(82, 161, 192, 0.6);
+  transform: scale(1.2);
+  box-shadow: 0 0 12px rgba(82, 161, 192, 0.8);
 }
 
-/** Estilos específicos para la sección dos **/
-.section2 {
-  background-color: #f5f9ff;
+.dot-tooltip {
+  position: absolute;
+  right: 25px;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: rgba(82, 161, 192, 0.9);
+  color: white;
+  padding: 5px 10px;
+  border-radius: 4px;
+  font-size: 0.8rem;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+  white-space: nowrap;
+}
+
+.nav-dot:hover .dot-tooltip {
+  opacity: 1;
+}
+
+/* Animación de pulso para el botón */
+.pulse-animation {
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(82, 161, 192, 0.7);
+  }
+  70% {
+    box-shadow: 0 0 0 15px rgba(82, 161, 192, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(82, 161, 192, 0);
+  }
+}
+
+/* Contenedor de prevención */
+.prevention-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 20px;
+  width: 100%;
+  max-width: 1200px;
+  margin-bottom: 2rem;
+}
+
+/* Tarjetas de prevención */
+.prevention-card {
+  background-color: white;
+  border-radius: 10px;
+  padding: 1.5rem;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  border-left: 4px solid #66caf8;
+}
+
+.prevention-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+}
+
+.prevention-card h3 {
+  color: #2c7da0;
   display: flex;
-  flex-direction: column;
-  justify-content: center;
   align-items: center;
-  padding: 2rem;
+  gap: 10px;
+  margin-top: 0;
 }
 
-/** Estilos específicos para la sección tres **/
-.section3 {
-  background-color: #e9f5ff;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  padding: 2rem;
+.prevention-card .icon {
+  color: #66caf8;
 }
 
-/** Media queries para responsividad **/
+/* Estilos para la sección de contenido */
+.content-container {
+  width: 100%;
+  max-width: 1200px;
+  padding: 2rem;
+  background-color: rgba(255, 255, 255, 0.9);
+  border-radius: 10px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  box-sizing: border-box; /* Asegura que el padding no afecte el ancho total */
+}
+
+h2 {
+  color: #2c7da0;
+  font-size: 2.5rem;
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+
+/* Media queries para responsividad */
+@media (max-width: 1200px) {
+  .prevention-cards, .alert-container {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
 @media (max-width: 768px) {
   .scroll-button1,
   .scroll-button2,
   .scroll-button-up1 {
     width: 50px;
     height: 50px;
+  }
+ 
+  h2 {
+    font-size: 2rem;
+  }
+ 
+  .side-navigation {
+    right: 10px;
+  }
+ 
+  .prevention-cards, .alert-container {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 480px) {
+  h2 {
+    font-size: 1.8rem;
+  }
+ 
+  .prevention-card, .alert-item {
+    padding: 1rem;
+  }
+ 
+  .side-navigation {
+    right: 5px;
+  }
+ 
+  .nav-dot {
+    width: 12px;
+    height: 12px;
   }
 }

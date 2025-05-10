@@ -1,42 +1,17 @@
-.Home{
-    width: 400; 
-    height: auto;
-    margin: 50px;
 
-}
-.Home button{
-    margin: auto;
-    margin-top: 50px;
-    width: 50%;
-    height: 50px;
-    background-color: #000;
-    color: #fff;
-    border: none;
-    border-radius: 10px;
-    cursor: pointer;
-
-}
-.Home button:hover{
-    background-color: #000000cb;
-    color: #ffffff;
-
-}
-/*containers*/
-
+/* Contenedor de scroll principal */
 .Home-scroll-container {
-    height: 100vh;
+    height: 100vh; /* Altura total de la ventana */
     width: 100%;
-    overflow-y:scroll;
-    scroll-snap-type: y mandatory; /* Fuerza el snap al hacer scroll */
-    scroll-behavior: smooth; /* Transición suave */
+    overflow-y: scroll; /* Habilita el scroll vertical */
+    scroll-behavior: smooth; /* Añade desplazamiento suave */
 }
 
 .Presentation-container,
 .diseases-container,
 .quiz-container,
 .aboutus-container {
-    height: 100vh; /* Cada sección ocupa 100% de la pantalla */
-    scroll-snap-align: start; /* Anclar al inicio */
+    min-height: 100vh; /* Altura mínima de cada sección */
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -68,9 +43,9 @@
     text-align: left;
     padding: 2rem;
     gap: 2rem;
-    border-radius: 10px;
+    border-radius: 15px;
     margin: 1rem 0;
-    box-shadow: 0 0 10px 0 #000;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
 }
 
 .background-image {
@@ -83,7 +58,7 @@
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
-    filter: brightness(0.7) blur(4.5px);
+    filter: brightness(0.65) blur(4px);
     z-index: 0;
 }
 
@@ -91,49 +66,140 @@
     position: relative;
     z-index: 1;
     width: 45%;
-    height: 430px;
-    margin:20px ;
-    box-sizing:content-box;
-    background-color: rgba(0, 0, 0, 0.4); 
-    padding: 2rem;
-    border-radius: 12px;
+    height: auto;
+    margin: 20px;
+    box-sizing: content-box;
+    background-color: rgba(0, 0, 0, 0.5); 
+    padding: 2.5rem;
+    border-radius: 16px;
     font-size: 1.3rem;
     line-height: 1.6;
+    border-left: 4px solid #4a9dd3;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(10px);
+}
+
+.welcome-header {
+    margin-bottom: 1.5rem;
+    position: relative;
+}
+
+.accent-line {
+    height: 3px;
+    width: 80px;
+    background: linear-gradient(90deg, #4a9dd3, #61b3e9);
+    margin-top: 0.5rem;
+    border-radius: 2px;
 }
 
 .Presentation-text h2 {
-    font-size: 2.5rem;
-    margin-bottom: 1rem;
+    font-size: 2.8rem;
+    margin-bottom: 0.3rem;
     color: #fff;
+    font-weight: 700;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
 }
 
-.Presentation-text p {
-    font-size: 1.2rem;
+.Presentation-text .tagline {
+    font-size: 1.4rem;
     margin-bottom: 1rem;
+    color: #61b3e9;
+    font-weight: 600;
+}
+
+.Presentation-text .description {
+    font-size: 1.3rem;
+    margin-bottom: 1rem;
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.Presentation-text .call-to-action {
+    font-size: 1.2rem;
+    margin-bottom: 1.5rem;
     color: rgba(255, 255, 255, 0.85);
 }
 
-.Presentation-container a{
+.button-group {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.Presentation-text .btn {
+    display: inline-block;
     text-decoration: none;
     color: #fff;
-    font-size: 1.2rem;
-    background-color: #000000cb;
-    padding: 0.5rem 1rem;
-    margin-top: 30px;
-    border-radius: 10px;
-    transition: background-color 0.3s ease;
+    font-size: 1.1rem;
+    font-weight: 600;
+    padding: 0.8rem 1.5rem;
+    border-radius: 50px;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    text-align: center;
 }
+
+.Presentation-text .primary-btn {
+    background: linear-gradient(90deg, #4a9dd3, #61b3e9);
+    border: none;
+}
+
+.Presentation-text .primary-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 7px 20px rgba(0, 0, 0, 0.25);
+    background: linear-gradient(90deg, #3b8ec4, #52a4da);
+}
+
+.Presentation-text .login-btn {
+    background: transparent;
+    border: 2px solid #61b3e9;
+}
+
+.Presentation-text .login-btn:hover {
+    background-color: rgba(97, 179, 233, 0.15);
+    transform: translateY(-3px);
+}
+
+.login-message {
+    font-size: 1rem;
+    color: rgba(255, 255, 255, 0.7);
+    margin-top: 1rem;
+    padding: 1rem;
+    background-color: rgba(0, 0, 0, 0.3);
+    border-radius: 8px;
+    border-left: 3px solid #61b3e9;
+}
+
+.highlight {
+    color: #61b3e9;
+    font-weight: 600;
+}
+
 .canva-container {
     position: relative;
     z-index: 1;
     width: 45%;
-    height: 400px;
+    height: 450px;
     border: none;
     overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
-/*Diseases*/
+
+.eye-model-wrapper {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+    background: transparent;
+}
+
+/* Diseases */
 .containers-wrapper {
-    background-color: rgb(255, 255, 255); /* Fondo azul claro */
+    background-color: rgb(255, 255, 255); /* Fondo blanco */
     background-attachment: fixed;
     background-size: cover;
     background-position: center;
@@ -143,6 +209,7 @@
     flex-wrap: wrap;
     gap: 2rem;
     padding: 2rem;
+    min-height: 100vh; /* Asegura que ocupe al menos la altura de la pantalla */
 }
 
 .diseases-container, .quiz-container {
@@ -187,6 +254,3 @@
 .diseases-container button:hover, .quiz-container button:hover {
     background-color: #4a9dd3;
 }
-
-
-

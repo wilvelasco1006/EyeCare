@@ -74,11 +74,11 @@ const SectionOneC = () => {
         <>
             <div className="sectionOne">
                 
-                <div className="Text-container-sectionOne">
+                <div className="Text-container-sectionOneC">
                 <button className="btn-atras" onClick={() => window.history.back()}> Atrás</button>
                     <h2 className="conjuntivitis-title">Conjuntivitis</h2>
                     {/* Slider informativo de causas */}
-                    <div className="slider-content">
+                    <div className="slider-contentC">
                         {/* 1) Track: todos los slides en fila */}
                         <div
                             className="slider-track"
