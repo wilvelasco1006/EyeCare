@@ -1,21 +1,30 @@
 /* Estilos generales para el contenedor de desplazamiento */
-.scroll-container {
+.scroll-container-c {
   width: 100%;
   height: 100vh;
-  overflow: hidden;
-  position: relative;
-  scroll-behavior: smooth;
+  overflow-y: auto; 
+  overflow-x: hidden; 
+  position: relative; 
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 /* Estilos para cada sección */
-.section1,
-.section2,
-.section3 {
+.section1C,
+.section2C,
+.section3C {
   height: 100vh;
-  width: 100%;
+  width: 100%; /* Cambiado de 90% a 100% para evitar scroll horizontal */
   position: relative;
   overflow: hidden;
-  scroll-snap-align: start;
+  scroll-snap-align: start; /* Punto de snap */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 2rem;
+  box-sizing: border-box; /* Asegura que el padding no afecte el ancho total */
+  margin: 0 auto; /* Centrado horizontal */
 }
 
 /* Navegación lateral con puntos */
@@ -83,8 +92,6 @@
   }
 }
 
-
-
 /* Contenedor de prevención */
 .prevention-cards {
   display: grid;
@@ -122,7 +129,23 @@
   color: #66caf8;
 }
 
+/* Estilos para la sección de contenido */
+.content-container {
+  width: 100%;
+  max-width: 1200px;
+  padding: 2rem;
+  background-color: rgba(255, 255, 255, 0.9);
+  border-radius: 10px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  box-sizing: border-box; /* Asegura que el padding no afecte el ancho total */
+}
 
+h2 {
+  color: #2c7da0;
+  font-size: 2.5rem;
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
 
 
 /* Media queries para responsividad */
@@ -139,27 +162,35 @@
     width: 50px;
     height: 50px;
   }
-  
-  .section-title {
+ 
+  h2 {
     font-size: 2rem;
   }
-  
+ 
   .side-navigation {
     right: 10px;
   }
-  
+ 
   .prevention-cards, .alert-container {
     grid-template-columns: 1fr;
   }
 }
 
 @media (max-width: 480px) {
-  .section-title {
+  h2 {
     font-size: 1.8rem;
   }
-  
+ 
   .prevention-card, .alert-item {
     padding: 1rem;
   }
+ 
+  .side-navigation {
+    right: 5px;
+  }
+ 
+  .nav-dot {
+    width: 12px;
+    height: 12px;
+  }
 }
-  

@@ -6,39 +6,6 @@
 import React from 'react';
 import { useGLTF } from '@react-three/drei';
 
-// Healthy Eye Component
-export function HealthyEye(props) {
-  const { nodes, materials } = useGLTF('/models-3d/conjuntivitis/eye-infected.glb');
-  return (
-    <group {...props} dispose={null}>
-      <mesh
-        castShadow
-        receiveShadow
-        geometry={nodes.Sclera.geometry}
-        material={materials.Sclera}
-        position={[-1.236, 0.256, 1.076]}
-        rotation={[Math.PI / 2, 0, 0]}
-      />
-      <mesh
-        castShadow
-        receiveShadow
-        geometry={nodes.Iris001.geometry}
-        material={materials.Iris}
-        position={[-2.362, 0.016, 0.176]}
-        rotation={[Math.PI / 2, 0, 0]}
-      />
-      <mesh
-        castShadow
-        receiveShadow
-        geometry={nodes.Cornea001.geometry}
-        material={materials.Cornea}
-        position={[-2.403, 0.023, 0.2]}
-        rotation={[Math.PI / 2, 0, 0]}
-        scale={1.134}
-      />
-    </group>
-  );
-}
 
 // Infected Eye Component
 export function InfectedEye(props) {
@@ -76,4 +43,4 @@ export function InfectedEye(props) {
 // Preload the model
 useGLTF.preload('/models-3d/conjuntivitis/eye-infected.glb');
 
-export default { HealthyEye, InfectedEye };
+export default InfectedEye;
