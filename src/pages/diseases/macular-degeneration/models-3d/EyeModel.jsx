@@ -1,49 +1,46 @@
-import { useGLTF } from '@react-three/drei'
+import { useGLTF, useAnimations } from '@react-three/drei'
+import { useEffect } from 'react'
 
 //Component for the Eye model
 export function Eye (props) {
-  const { nodes, materials } = useGLTF('/EyeCarePI5/public/models-3d/macularDegeneration/Eye.glb')
-  return (
-    <group {...props} dispose={null}>
-      <group name="Scene">
-        <mesh
-          name="Cornea"
-          castShadow
-          receiveShadow
-          geometry={nodes.Cornea.geometry}
-          material={materials.CorneaMaterial}
-        />
-        <mesh
-          name="Eye"
-          castShadow
-          receiveShadow
-          geometry={nodes.Eye.geometry}
-          material={materials.EyeMaterial}
-          morphTargetDictionary={nodes.Eye.morphTargetDictionary}
-          morphTargetInfluences={nodes.Eye.morphTargetInfluences}
-        />
-      </group>
-    </group>
-  )
-}
+  const { nodes, materials } = useGLTF('/models-3d/macularDegeneration/Eye.glb')
+  const { scene, animations } = useGLTF('/models-3d/macularDegeneration/Eye.glb')
+  const { actions } = useAnimations(animations, scene)
 
-//Component for the Macular model
-export function Macula (props) {
-  const { nodes, materials } = useGLTF('/models-3d/macularDegeneration/Eye.glb');
-  
+  useEffect(() => {
+    if (actions && actions['Watching']) {
+      actions['Watching'].reset().play()
+    }
+  }, [actions])
+
   return (
-    <group {...props} dispose={null}>
-      <mesh 
-      geometry={nodes.MacularDegeneration.geometry} 
-      material={materials.MacularMaterial} 
-      castShadow
-      />
-    </group>
+    <>
+      <pointLight position={[10, 10, 10]}/>
+      <primitive object={scene} {...props} />
+      <group {...props} dispose={null}>
+        <group name="Scene">
+          <mesh
+            name="Cornea"
+            castShadow
+            receiveShadow
+            geometry={nodes.Cornea.geometry}
+            material={materials.CorneaMaterial}
+          />
+          <mesh
+            name="Eye"
+            castShadow
+            receiveShadow
+            geometry={nodes.Eye.geometry}
+            material={materials.EyeMaterial}
+            morphTargetDictionary={nodes.Eye.morphTargetDictionary}
+            morphTargetInfluences={nodes.Eye.morphTargetInfluences}
+          />
+        </group>
+      </group>
+    </>
   )
 }
 
 useGLTF.preload('/models-3d/macularDegeneration/Eye.glb')
-
-export default { Eye, Macula};
 
 
