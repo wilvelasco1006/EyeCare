@@ -4,38 +4,36 @@ import "../Cataracts/Cataracts.css";
 import React, { useRef, useEffect, useState } from "react";
 
 const Cataracts = () => {
+    const containerRef = useRef(null);
     const sectionRefs = [useRef(null), useRef(null), useRef(null)];
     const [activeSection, setActiveSection] = useState(0);
-    const [isScrolling, setIsScrolling] = useState(false); // Estado para controlar el scroll
 
     // Función para manejar el scroll suave entre secciones
     const scrollToSection = (index) => {
-        if (isScrolling) return; // Evitar scroll mientras uno está en progreso
-
-        setIsScrolling(true);
         sectionRefs[index]?.current?.scrollIntoView({ behavior: "smooth" });
         setActiveSection(index);
-
-        // Desbloquear el scroll después de la animación
-        setTimeout(() => {
-            setIsScrolling(false);
-        }, 1000); // 1 segundo, ajusta según la duración de tu animación
     };
 
     // Para detectar la sección actual visible
     useEffect(() => {
         const handleScroll = () => {
-            const currentScrollPos = window.pageYOffset;
+            if (!containerRef.current) return;
+
+            const currentScrollPos = containerRef.current.scrollTop;
+            const containerHeight = containerRef.current.clientHeight;
 
             // Determinar qué sección es visible
             sectionRefs.forEach((ref, index) => {
                 if (ref.current) {
-                    const sectionTop = ref.current.offsetTop - 100;
-                    const sectionBottom = sectionTop + ref.current.offsetHeight;
+                    const sectionTop =
+                        ref.current.offsetTop - containerRef.current.offsetTop;
+                    const sectionHeight = ref.current.offsetHeight;
 
+                    // Si la sección está en la vista (con un margen de tolerancia)
                     if (
-                        currentScrollPos >= sectionTop &&
-                        currentScrollPos < sectionBottom
+                        currentScrollPos >= sectionTop - containerHeight * 0.3 &&
+                        currentScrollPos <
+                        sectionTop + sectionHeight - containerHeight * 0.3
                     ) {
                         setActiveSection(index);
                     }
@@ -43,38 +41,22 @@ const Cataracts = () => {
             });
         };
 
-        window.addEventListener("scroll", handleScroll);
-        return () => window.removeEventListener("scroll", handleScroll);
-    }, []);
+        const container = containerRef.current;
+        if (container) {
+            container.addEventListener("scroll", handleScroll);
+            // Llamar inicialmente para establecer la sección activa
+            handleScroll();
+        }
 
-    // Manejar el evento wheel (rueda del mouse)
-    useEffect(() => {
-        const handleWheel = (event) => {
-            if (isScrolling) return; // Si ya está scrolleando, no hacer nada
-
-            // Determinar la dirección del scroll
-            const direction = event.deltaY > 0 ? 1 : -1;
-
-            // Calcular la siguiente sección
-            const nextSection = Math.min(
-                Math.max(activeSection + direction, 0),
-                sectionRefs.length - 1
-            );
-
-            // Si es una sección diferente, scrollear hacia ella
-            if (nextSection !== activeSection) {
-                event.preventDefault(); // Prevenir el scroll normal
-                scrollToSection(nextSection);
+        return () => {
+            if (container) {
+                container.removeEventListener("scroll", handleScroll);
             }
         };
-
-        // Agregar el evento con opción passive: false para poder usar preventDefault()
-        window.addEventListener("wheel", handleWheel, { passive: false });
-        return () => window.removeEventListener("wheel", handleWheel);
-    }, [activeSection, isScrolling]);
+    }, []);
 
     return (
-        <div className="scroll-container">
+        <div ref={containerRef} className="scroll-container-CT">
             {/* Navegación lateral fija */}
             <div className="side-navigation">
                 <div
@@ -101,12 +83,12 @@ const Cataracts = () => {
             </div>
 
             {/* Sección 1: Introducción - Causas y efectos */}
-            <section ref={sectionRefs[0]} className="section1">
+            <section ref={sectionRefs[0]} className="section1-CT">
                 <SectionOne />
             </section>
 
             {/* Sección 2: Síntomas - Solo modelo 3D interactivo */}
-            <section ref={sectionRefs[1]} className="section2">
+            <section ref={sectionRefs[1]} className="section2-CT">
                 {/* Solo el modelo 3D con información integrada de síntomas */}
                 <div className="model-section-full">
                     <SectionTwoCT />
@@ -114,7 +96,7 @@ const Cataracts = () => {
             </section>
 
             {/* Sección 3: Prevención y Tratamiento */}
-            <section ref={sectionRefs[2]} className="section3">
+            <section ref={sectionRefs[2]} className="section3-CT">
                 <h2>Cuándo consultar al médico</h2>
                 <div className="content-container">
                     {/* Aquí va el contenido de tu tercera sección */}
@@ -127,5 +109,6 @@ const Cataracts = () => {
         </div>
     );
 };
+
 
 export default Cataracts;

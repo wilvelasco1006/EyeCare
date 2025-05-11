@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/no-unknown-property */
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, Suspense } from "react";
 import { useNavigate } from "react-router";
 import "./SectionOne.css";
 import { Canvas, useThree } from "@react-three/fiber";
@@ -58,13 +58,17 @@ const CameraAndModelController = ({ animationSpeed, setHoverMessage }) => {
                 enableRotate={true}
                 enableZoom={true}
             />
-            <EyeCataractModel
-                ref={modelRef}
-                scale={10}
-                position={[0, 0, 0]}
-                setHoverMessage={setHoverMessage}
-                animationSpeed={animationSpeed}
-            />
+            <Suspense fallback={null}>
+                <EyeCataractModel
+                    ref={modelRef}
+                    scale={10}
+                    position={[0, 0, 0]}
+                    setHoverMessage={setHoverMessage}
+                    animationSpeed={animationSpeed}
+                />
+
+            </Suspense>
+            
         </>
     );
 };
@@ -238,7 +242,10 @@ const SectionOne = () => {
                             castShadow={true}
                             shadow-mapSize={[2048, 2048]}
                         />
-                        <Staging />
+                        <Suspense fallback={null}>
+                            <Staging />
+                        </Suspense>
+                        
                         <CameraAndModelController
                             animationSpeed={animationSpeed}
                             setHoverMessage={setHoverMessage}
