@@ -4,7 +4,7 @@
     align-items: center;
     gap: 25px;
     padding: 20px;
-    background-color: #eef5ff; /* Fondo claro como el de tu captura */
+    background-color: #fff; /* Fondo claro como el de tu captura */
   }
   
   .arrow-btn {
@@ -50,7 +50,7 @@
   position: relative;
   overflow: hidden;        /* oculta lo que sobresalga */
   height: 300px;           /* o la altura que definas */
-  background: #f0f8ff;
+  background: #fff;
   padding: 1rem;
   border-radius: 12px;
   display: flex;

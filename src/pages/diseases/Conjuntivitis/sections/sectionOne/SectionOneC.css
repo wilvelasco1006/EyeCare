@@ -1,25 +1,26 @@
 .sectionOne {
+    height: 700px;
     display: flex;
     flex-direction: row;
     background-image: url("https://i.pinimg.com/736x/72/3b/f8/723bf831b674ed3fefdcd0e9c0030644.jpg");
     background-size: cover;
     background-position: center;
-    margin: 30px 10px 0 10px;
+    margin: 0px 10px 0 10px;
     border-radius: 30px;
     position: relative;
 
 }
 
-.Text-container-sectionOne {
+.Text-container-sectionOneC {
     flex: 1;
     padding: 1rem;
-    text-align: left;
-    height: 480px;
+    text-align: center;
+    height: 490px;
     position: relative;
-    overflow-y: auto;
+    overflow-y: hidden;
     background: #ffffff;
     border-radius: 20px;
-    margin: 60px 10px 0 0; /* solo margen derecho */
+    margin: 60px 10px 0 20px;
 }
 
 
@@ -53,7 +54,7 @@
 
 
 /* Estilos para el contenedor de details */
-.btn-more-info {
+.btn-more-infoC {
     background-color: #0066cc;
     color: white;
     border: none;
@@ -68,10 +69,11 @@
     transition: background-color 0.3s ease, transform 0.3s ease;
 }
 
-.btn-more-info:hover {
+.btn-more-infoC:hover {
     background-color: #005bb5;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
     transform: scale(1.05);
+
     ;
 }
 
@@ -89,7 +91,8 @@
     position: relative;
     border-radius: 20px;
     padding: 2rem 1rem 5rem 1rem;
-    margin: 60px 0 0 10px; /* solo margen izquierdo */
+    margin: 60px 0 0 10px;
+    /* solo margen izquierdo */
 }
 
 
@@ -98,7 +101,7 @@
     height: 500px;
     max-width: 100%;
     max-height: 100%;
-    
+
     border: 2px solid #87ceeb;
     border-radius: 8px;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
@@ -244,7 +247,13 @@
 }
 
 
-.close-modal {
+
+
+
+.close-modal-conjuntivitis {
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
     background: transparent;
     border: none;
     font-size: 1.2rem;
@@ -253,7 +262,7 @@
     width: auto;
     height: auto;
     padding: 0;
-    margin-right : 10px;
+    margin-right: 10px;
     margin: 20px;
     display: flex;
     align-items: center;
@@ -262,18 +271,17 @@
 
 
 
-.close-modal:hover {
+.close-modal-conjuntivitis:hover {
     color: #ff4d4f;
     background-color: transparent;
 }
 
-.slider-content {
+.slider-contentC {
     height: 300px;
     /* Altura estándar basada en el contenido más largo */
     padding: 1rem;
-    background: #f0f8ff;
+    background: #fff;
     border-radius: 12px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     text-align: left;
     overflow: hidden;
     /* Evita saltos por contenido que sobresalga */
