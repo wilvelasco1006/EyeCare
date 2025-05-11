@@ -77,9 +77,7 @@ const SectionOneC = () => {
                 <div className="Text-container-sectionOneC">
                 <button className="btn-atras" onClick={() => window.history.back()}> Atrás</button>
                     <h2 className="conjuntivitis-title">Conjuntivitis</h2>
-                    {/* Slider informativo de causas */}
                     <div className="slider-contentC">
-                        {/* 1) Track: todos los slides en fila */}
                         <div
                             className="slider-track"
                             style={{
@@ -94,8 +92,6 @@ const SectionOneC = () => {
                                 </div>
                             ))}
                         </div>
-
-                        {/* 2) Controles + botón */}
                         <div className="actions">
                             <SliderControls
                                 current={causaIndex}
@@ -151,7 +147,7 @@ const SectionOneC = () => {
             {showModal && (
                 <div className="modal-overlay" onClick={() => setShowModal(false)}>
                     <div className="modal-content" onClick={(e) => e.stopPropagation()}>
-                        <button className="close-modal" onClick={() => setShowModal(false)}>
+                        <button className="close-modal-conjuntivitis" onClick={() => setShowModal(false)}>
                             <FaTimes style={{ fontSize: "1.5rem" }} />
                         </button>
                         <h2>Factores y Efectos</h2>

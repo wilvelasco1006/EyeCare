@@ -10,7 +10,9 @@ const Sign = ({ closeModal }) => {
   const navigate = useNavigate(); // Para redirigir después del inicio de sesión
 
   const handleLogin = useCallback(() => {
+    
     loginGoogleWithPopup()
+    closeModal()
       .then(() => {
         // Redirige al usuario a la página principal después de iniciar sesión
         navigate("/");
@@ -20,13 +22,14 @@ const Sign = ({ closeModal }) => {
         // Redirige al usuario a la página de inicio de sesión en caso de error
         navigate("/sign-in");
       });
-  }, [loginGoogleWithPopup, navigate]);
+  }, [loginGoogleWithPopup, navigate]   
+);
 
   return (
     <div className="modal-overlay" onClick={closeModal}>
       <div className="modal-content-sign" onClick={(e) => e.stopPropagation()}>
         <div className="section-one">
-          <button className="close-modal" onClick={closeModal}>
+          <button className="close-modal-sign-in" onClick={closeModal}>
             <FaTimes style={{ fontSize: "1.5rem" }} />
           </button>
           <h2>Iniciar Sesión</h2>

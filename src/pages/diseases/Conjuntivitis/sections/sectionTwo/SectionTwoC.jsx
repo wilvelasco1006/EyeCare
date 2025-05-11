@@ -9,7 +9,18 @@ import Floor from "../../model-3d/Floor";
 import Staging from "../../../staging/Staging";
 import "./SectionTwoC.css";
 
-const Scene = () => {
+// Componente para el mensaje flotante de tecla R
+const FloatingKeyHint = ({ show }) => {
+    if (!show) return null;
+    
+    return (
+        <div className="floating-key-hint">
+            Presiona la tecla <span className="key-highlight">R</span> para volver atrás
+        </div>
+    );
+};
+
+const Scene = ({ setShowKeyHint }) => {
     const healthyEyeRef = useRef();
     const infectedEyeRef = useRef();
     const healthyModelRef = useRef();
@@ -50,6 +61,7 @@ const Scene = () => {
         setRotateHealthy(false);
         setRotateInfected(false);
         setCameraLocked(false);
+        setShowKeyHint(false);
 
         // Resetear rotación de los ojos
         if (healthyModelRef.current) healthyModelRef.current.rotation.set(0, 0, 0);
@@ -65,6 +77,7 @@ const Scene = () => {
             }
         );
         return () => unsubscribe();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [subscribeKeys]);
 
     const handleHealthyClick = () => {
@@ -75,6 +88,7 @@ const Scene = () => {
         setRotateInfected(false);
         setTarget(targetPos);
         setCameraLocked(true);
+        setShowKeyHint(true); // Mostramos el mensaje flotante al hacer clic en el ojo sano
     };
 
     const handleInfectedClick = () => {
@@ -85,6 +99,7 @@ const Scene = () => {
         setRotateInfected(true);
         setTarget(targetPos);
         setCameraLocked(true);
+        setShowKeyHint(true); // Mostramos el mensaje flotante al hacer clic en el ojo infectado
     };
 
     return (
@@ -133,8 +148,26 @@ const Scene = () => {
 };
 
 const SectionTwoC = () => {
+    const [showKeyHint, setShowKeyHint] = useState(false);
+
+    // Configurar temporizador para ocultar el mensaje después de 8 segundos cuando cambie a true
+    useEffect(() => {
+        let timer;
+        if (showKeyHint) {
+            timer = setTimeout(() => {
+                setShowKeyHint(false);
+            }, 8000);
+        }
+        return () => {
+            if (timer) clearTimeout(timer);
+        };
+    }, [showKeyHint]);
+
     return (
         <div className="section2-container">
+            {/* Mensaje flotante para la tecla R */}
+            <FloatingKeyHint show={showKeyHint} />
+            
             <div className="presentation-container-2">
                 <h2>Conoce los síntomas de la conjuntivitis</h2>
                 <p>Dale click a cada ojo para conocer la información, y sumérgete en el aprendizaje</p>
@@ -155,7 +188,7 @@ const SectionTwoC = () => {
                         />
                         <spotLight position={[10, 10, 10]} angle={0.15} penumbra={1} castShadow />
                         <OrbitControls enablePan={false} maxDistance={4} minDistance={1.5} />
-                        <Scene />
+                        <Scene setShowKeyHint={setShowKeyHint} />
                     </Canvas>
                 </KeyboardControls>
             </div>
