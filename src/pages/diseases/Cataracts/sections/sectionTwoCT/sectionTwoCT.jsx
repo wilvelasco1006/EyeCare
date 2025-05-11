@@ -5,7 +5,7 @@ import * as THREE from "three";
 import { Suspense } from "react";
 import Staging from "../../../staging/Staging";
 import { EyeBlank } from "../../Model-3d/EyeBlank";
-import "../../sections/sectionTwoCT/SectionTwoCT.css";
+import "./SectionTwoCT.css";
 import Floor from "../../Model-3d/Floor";
 
 const Scene = () => {
