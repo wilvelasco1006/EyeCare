@@ -70,7 +70,7 @@ const SectionOne = () => {
             <div className="sectionOneG">
                 
                 <div className="Text-container-sectionOneG">
-                <button className="btn-atrasG" onClick={() => window.history.back()}> Atrás</button>
+                    <button className="btn-atrasG" onClick={() => navigate('/diseases/content-diseases?from=glaucoma')}> Atrás</button>
                     <h2 className="glaucoma-title">Glaucoma</h2>
                     {/* Slider informativo de causas */}
                     <div className="slider-content">

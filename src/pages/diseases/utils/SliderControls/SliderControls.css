@@ -46,6 +46,7 @@
   }
   
   /* Slider completo */
+
 .slider-container {
   position: relative;
   overflow: hidden;        /* oculta lo que sobresalga */
@@ -72,7 +73,7 @@
   padding: 0 1rem;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: center;
 }
 
 /* Zona fija debajo: controles + botón */

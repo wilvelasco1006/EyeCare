@@ -1,6 +1,6 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import { useNavigate} from "react-router-dom"; // Importa Outlet
+import { useNavigate, useLocation} from "react-router-dom"; // Importa Outlet
 import "./CarouselDiseases.css";
 import { FaChevronLeft, FaChevronRight, FaEye } from "react-icons/fa"; // Importa los iconos
 
@@ -8,33 +8,55 @@ const diseases = [
   {
     name: "GLAUCOMA",
     image: "/images/Glaucoma.png",
-    ruta: "/diseases/glaucoma", // Ruta correspondiente
+    ruta: "/diseases/glaucoma",
+    id: "glaucoma" // identificador único
   },
   {
     name: "CONJUNTIVITIS",
     image: "/images/Conjuntivitis.jpg",
     ruta: "/diseases/conjuntivitis", // Ruta correspondiente
+    id: "conjuntivitis" 
   },
   {
     name: "DEGENERACIÓN MACULAR",
     image: "/images/Degeneracion.jpg",
     ruta: "/diseases/macular-degeneration", // Ruta correspondiente
+    id: "macular-degeneration" // identificador único
   },
   {
     name: "CATARATAS",
     image: "/images/Cataratas.jpg",
     ruta: "/diseases/cataracts", // Ruta correspondiente
+    id: "cataratas" // identificador único
   },
 ];
 
 const CarouselDiseases = () => {
   const [index, setIndex] = useState(1); // comienza en el centro
   const navigate = useNavigate(); // Inicializa useNavigate
+  const location = useLocation(); // Obtener información de la ubicación actual
 
+  // Al cargar el componente, verificar si hay un parámetro de enfermedad en la URL
+  useEffect(() => {
+    // Extraer el posible parámetro 'from' de la URL
+    const params = new URLSearchParams(location.search);
+    const fromDisease = params.get('from');
+
+    // Si existe el parámetro, encontrar el índice correcto
+    if (fromDisease) {
+      const diseaseIndex = diseases.findIndex(disease => disease.id === fromDisease);
+      if (diseaseIndex !== -1) {
+        setIndex(diseaseIndex);
+      }
+    }
+  }, [location]);
   const move = (direction) => {
     setIndex((prev) => (prev + direction + diseases.length) % diseases.length);
   };
-
+  const handleViewMore = (disease, i) => {
+    // Navegar a la enfermedad y también recordar el índice actual
+    navigate(disease.ruta);
+  };
   return (
     <>
     <h2 className="carousel-title"data-text="Enfermedades Oculares mas comunes">Enfermedades Oculares mas comunes</h2>
@@ -71,7 +93,7 @@ const CarouselDiseases = () => {
               <button
                 className="watch-more"
                 aria-label={`Ver más sobre ${item.name}`}
-                onClick={() => navigate(item.ruta)} // Navega a la ruta correspondiente
+                onClick={() => handleViewMore(item, i)}// Navega a la ruta correspondiente
               >
                 <FaEye className="watch-more-icon" />  Ver más
               </button>

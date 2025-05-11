@@ -1,12 +1,13 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/no-unknown-property */
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, Suspense } from "react";
 import { useNavigate } from "react-router";
 import "./SectionOne.css";
 import { Canvas, useThree } from "@react-three/fiber";
 import { OrbitControls, useKeyboardControls } from "@react-three/drei";
 import { FaChevronCircleRight, FaTimes, FaPause, FaPlay } from "react-icons/fa";
 import Floor from "../../Model-3d/Floor";
+// import Floor from "../../model-3d/Floor";
 import SliderControls from "../../../utils/SliderControls/SliderControls";
 import { EyeCataractModel } from "../../Model-3d/EyeCataractModel";
 import Staging from "../../../staging/Staging";
@@ -57,13 +58,17 @@ const CameraAndModelController = ({ animationSpeed, setHoverMessage }) => {
                 enableRotate={true}
                 enableZoom={true}
             />
-            <EyeCataractModel
-                ref={modelRef}
-                scale={10}
-                position={[0, 0, 0]}
-                setHoverMessage={setHoverMessage}
-                animationSpeed={animationSpeed}
-            />
+            <Suspense fallback={null}>
+                <EyeCataractModel
+                    ref={modelRef}
+                    scale={10}
+                    position={[0, 0, 0]}
+                    setHoverMessage={setHoverMessage}
+                    animationSpeed={animationSpeed}
+                />
+
+            </Suspense>
+            
         </>
     );
 };
@@ -106,15 +111,12 @@ const SectionOne = () => {
             titulo: "¿En qué consiste?",
             descripcion: (
                 <>
-                    <p>
-                        Las cataratas son una opacidad o nubosidad en el
-                        cristalino del ojo, el lente natural que permite enfocar la luz y
-                        formar imágenes claras en la retina. Con el tiempo, esta nubosidad
-                        dificulta la visión, afectando la calidad de vida de quien la
-                        padece. Aunque las cataratas están relacionadas con el
-                        envejecimiento, también se pueden desarrollar por las siguientes
-                        causas.
-                    </p>
+                    Las cataratas son una opacidad o nubosidad en el cristalino del ojo,
+                    el lente natural que permite enfocar la luz y formar imágenes claras
+                    en la retina. Con el tiempo, esta nubosidad dificulta la visión,
+                    afectando la calidad de vida de quien la padece. Aunque las cataratas
+                    están relacionadas con el envejecimiento, también se pueden
+                    desarrollar por las siguientes causas.
                 </>
             ),
         },
@@ -183,13 +185,13 @@ const SectionOne = () => {
         <>
             <div className="sectionOne">
                 <div className="Text-container-sectionOne">
-                    <button className="btn-atras" onClick={() => window.history.back()}>
+                    <button className="btn-atras" onClick={() => navigate('/diseases/content-diseases?from=cataratas')}>
                         {" "}
                         Atrás
                     </button>
                     <h2 className="cataracts-title">Cataratas</h2>
                     {/* Slider informativo de causas */}
-                    <div className="slider-content">
+                    <div className="slider-container">
                         {/* 1) Track: todos los slides en fila */}
                         <div
                             className="slider-track"
@@ -216,10 +218,7 @@ const SectionOne = () => {
                             />
                         </div>
                     </div>
-                    <button
-                        className="btn-more-info"
-                        onClick={() => setShowModal(true)}
-                    >
+                    <button className="btn-more-info" onClick={() => setShowModal(true)}>
                         Ver más
                     </button>
                     {showInstruction && (
@@ -234,9 +233,7 @@ const SectionOne = () => {
                 </div>
                 <div className="model-container">
                     <div className="floating-message">{messages[viewIndex]}</div>
-                    {hoverMessage && (
-                        <div className="hover-message">{hoverMessage}</div>
-                    )}
+                    {hoverMessage && <div className="hover-message">{hoverMessage}</div>}
                     <Canvas camera={{ position: [0, 0, 2], fov: 50 }} shadows={true}>
                         <ambientLight castShadow intensity={0.5} />
                         <directionalLight
@@ -245,12 +242,15 @@ const SectionOne = () => {
                             castShadow={true}
                             shadow-mapSize={[2048, 2048]}
                         />
-                        <Staging />
+                        <Suspense fallback={null}>
+                            <Staging />
+                        </Suspense>
+                        
                         <CameraAndModelController
                             animationSpeed={animationSpeed}
                             setHoverMessage={setHoverMessage}
                         />
-                        <Floor />
+                        {/* <Floor /> */}
                     </Canvas>
 
                     <button
@@ -271,10 +271,7 @@ const SectionOne = () => {
             {showModal && (
                 <div className="modal-overlay" onClick={() => setShowModal(false)}>
                     <div className="modal-content" onClick={(e) => e.stopPropagation()}>
-                        <button
-                            className="close-modal"
-                            onClick={() => setShowModal(false)}
-                        >
+                        <button className="close-modal-cataratas" onClick={() => setShowModal(false)}>
                             <FaTimes style={{ fontSize: "1.5rem" }} />
                         </button>
                         <img
