@@ -17,10 +17,10 @@
     text-align: center;
     height: 490px;
     position: relative;
-    overflow-y:hidden;
+    overflow-y: hidden;
     background: #ffffff;
     border-radius: 20px;
-    margin: 60px 10px 0 20px; 
+    margin: 60px 10px 0 20px;
 }
 
 
@@ -91,7 +91,8 @@
     position: relative;
     border-radius: 20px;
     padding: 2rem 1rem 5rem 1rem;
-    margin: 60px 0 0 10px; /* solo margen izquierdo */
+    margin: 60px 0 0 10px;
+    /* solo margen izquierdo */
 }
 
 
@@ -100,7 +101,7 @@
     height: 500px;
     max-width: 100%;
     max-height: 100%;
-    
+
     border: 2px solid #87ceeb;
     border-radius: 8px;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
@@ -246,7 +247,13 @@
 }
 
 
-.close-modal {
+
+
+
+.close-modal-conjuntivitis {
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
     background: transparent;
     border: none;
     font-size: 1.2rem;
@@ -255,7 +262,7 @@
     width: auto;
     height: auto;
     padding: 0;
-    margin-right : 10px;
+    margin-right: 10px;
     margin: 20px;
     display: flex;
     align-items: center;
@@ -264,7 +271,7 @@
 
 
 
-.close-modal:hover {
+.close-modal-conjuntivitis:hover {
     color: #ff4d4f;
     background-color: transparent;
 }
