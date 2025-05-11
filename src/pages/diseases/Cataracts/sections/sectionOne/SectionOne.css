@@ -197,7 +197,7 @@
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
 }
 
-.close-modal {
+.close-modal-cataratas {
     position: absolute;
     top: 0.5rem;
     right: 0.5rem;
@@ -215,7 +215,7 @@
     justify-content: center;
 }
 
-.close-modal:hover {
+.close-modal-cataratas:hover {
     color: #ff4d4f;
     background-color: transparent;
 }

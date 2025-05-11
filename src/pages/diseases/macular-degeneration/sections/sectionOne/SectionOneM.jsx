@@ -82,7 +82,7 @@ const SectionOneM = () => {
         <>
         <div className="sectionOne">
             <div className="Text-container-sectionOne">
-                <button className="btn-atras" onClick={() => window.history.back()}> Atrás</button>
+                    <button className="btn-atras" onClick={() => navigate('/diseases/content-diseases?from=macular-degeneration')}> Atrás</button>
                 <h2 className="macular-title">Degeneracion Macular</h2>
                 {/* Slider informativo de causas */}
                 <div className="slider-content">

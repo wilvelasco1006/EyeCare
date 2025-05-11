@@ -199,6 +199,10 @@ const Scene = () => {
 const SectionTwoCT = () => {
     return (
         <div className="section2CT-container">
+            <div className="presentation-container-CT">
+                <h2>Conoce los síntomas de las cataratas</h2>
+                <p>Dale click al ojo para conocer los diversos síntomas y sumérgete en el aprendizaje.</p>
+            </div>
             <div className="model-container-CT">
                 <KeyboardControls
                     map={[

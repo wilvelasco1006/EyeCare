@@ -185,7 +185,7 @@ const SectionOne = () => {
         <>
             <div className="sectionOne">
                 <div className="Text-container-sectionOne">
-                    <button className="btn-atras" onClick={() => window.history.back()}>
+                    <button className="btn-atras" onClick={() => navigate('/diseases/content-diseases?from=cataratas')}>
                         {" "}
                         Atrás
                     </button>
@@ -271,7 +271,7 @@ const SectionOne = () => {
             {showModal && (
                 <div className="modal-overlay" onClick={() => setShowModal(false)}>
                     <div className="modal-content" onClick={(e) => e.stopPropagation()}>
-                        <button className="close-modal" onClick={() => setShowModal(false)}>
+                        <button className="close-modal-cataratas" onClick={() => setShowModal(false)}>
                             <FaTimes style={{ fontSize: "1.5rem" }} />
                         </button>
                         <img
