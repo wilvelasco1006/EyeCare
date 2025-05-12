@@ -69,7 +69,7 @@ const Scene = () => {
       </Html>
 
       {/* Eye model */}
-      <group ref={eyeRef} position={[-0.6, -0.5, 0]} onClick={handleEyeClick}>
+      <group ref={eyeRef} position={[-1, -0.5, 0]} onClick={handleEyeClick}>
         <Eye scale={[10.5, 10.5, 10.5]} />
       </group>
 
@@ -100,19 +100,25 @@ const Scene = () => {
 
 const SectionTwoM = () => {
   return (
-    <div className="model-container">
+    <>
+      <div className="presentation-container-2">
+        <h2>Conoce los síntomas de la Degeneración Macular</h2>
+        <p>Dale click a cada ojo para conocer la información, y sumérgete en el aprendizaje</p>
+      </div>
+    <div className="model-container-macular">
       <KeyboardControls
         map={[
           { name: 'reset', keys: ['r', 'R'] },
         ]}
       >
-        <Canvas camera={{ position: [0, 0, 5], fov: 60 }} shadows={true}>
+        <Canvas camera={{ position: [0, 0.3, 2.5], fov: 60 }} shadows={true}>
           <Lights />
           <OrbitControls enablePan={false} maxDistance={4} minDistance={1.5} />
           <Scene />
         </Canvas>
       </KeyboardControls>
     </div>
+    </>
   );
 };
 

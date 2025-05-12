@@ -1,4 +1,3 @@
-
 import { useNavigate } from "react-router";
 import "./sectionOneM.css";
 import { Canvas } from "@react-three/fiber";
@@ -46,6 +45,26 @@ const SectionOneM = () => {
                     la parte central de la retina encargada de la visión fina y detallada necesaria para leer,
                     conducir, reconocer rostros, etc. Con el tiempo, la mácula se deteriora y
                     causa visión borrosa o puntos ciegos en el centro del campo visual.
+                </>
+            )
+        },
+        {
+            titulo: "DMAE Seca (o atrófica)",
+            descripcion: (
+                <>
+                    Es la forma más común (alrededor del 80-90% de los casos) y avanza lentamente. 
+                    Se caracteriza por la acumulación de drusas (depósitos amarillos) 
+                    bajo la retina y el deterioro progresivo de las células de la mácula.
+                </>
+            )
+        },
+        {
+            titulo: "DMAE Húmeda (o exudativa/neovascular)",
+            descripcion: (
+                <>
+                    Menos frecuente (10-20% de los casos), pero más agresiva. 
+                    Ocurre cuando crecen vasos sanguíneos anormales bajo la retina, que sangran o filtran líquido, 
+                    dañando la mácula rápidamente.
                 </>
             )
         },
