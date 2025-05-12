@@ -7,6 +7,7 @@ export function EyeGlaucomaModel(props) {
   const { nodes, materials, animations } = useGLTF('/models-3d/glaucoma/eyeGlaucomaM.glb')
   const { actions } = useAnimations(animations, group)
 
+/*
   useEffect(() => {
     if (actions) {
       Object.values(actions).forEach((action) => {
@@ -14,7 +15,7 @@ export function EyeGlaucomaModel(props) {
       })
     }
   }, [actions])
-
+*/  
   return (
     <group ref={group} {...props} dispose={null}>
       <group name="Scene">
@@ -33,3 +34,5 @@ export function EyeGlaucomaModel(props) {
 }
 
 useGLTF.preload('/models-3d/glaucoma/eyeGlaucomaM.glb')
+
+export default EyeGlaucomaModel;
