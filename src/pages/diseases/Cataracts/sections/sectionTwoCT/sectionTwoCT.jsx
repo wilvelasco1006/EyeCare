@@ -25,31 +25,31 @@ const Scene = () => {
             title: "Visión borrosa o nublada",
             description: "Las cataratas hacen que los objetos aparezcan difuminados, como si estuvieras mirando a través de un vidrio esmerilado o una ventana empañada.",
             eyeDirection: [0.5, 0.3, 0],
-            position: [1.5, 0, 0] // posición a la derecha
+            position: [1.2, -0.3, 0] // posición a la derecha
         },
         {
             title: "Sensibilidad a la luz",
             description: "La luz brillante puede causar molestia o deslumbramiento, especialmente al conducir de noche con los faros de coches que vienen en dirección contraria.",
-            eyeDirection: [-0.5, 0.2, 0],
-            position: [-1.5, 0, 0] // posición a la izquierda
+            eyeDirection: [-0.9, 0.2, 0],
+            position: [-1.2, -0.1, 0] // posición a la izquierda
         },
         {
             title: "Colores menos brillantes",
             description: "Los colores parecen desvanecidos o amarillentos, perdiendo su intensidad original. Es como ver el mundo a través de un filtro sepia.",
             eyeDirection: [0, 0.4, 0],
-            position: [0, -0.5, 0] // posición abajo
+            position: [0, -0.8, 0] // posición abajo
         },
         {
             title: "Dificultad para ver de noche",
             description: "La visión nocturna se deteriora notablemente, haciendo difícil actividades como conducir o leer en condiciones de poca luz.",
             eyeDirection: [0, -0.4, 0],
-            position: [0, 0.9, 0] // posición arriba
+            position: [0, 0.5, 0] // posición arriba
         },
         {
             title: "Visión doble en un solo ojo",
             description: "Algunas personas experimentan diplopía monocular, donde ven imágenes duplicadas aunque tengan un solo ojo abierto.",
             eyeDirection: [-0.9, 0.3, 0],
-            position: [-1.5, -0.4, 0] // posición izquierda abajo
+            position: [-1.3, -0.2, 0] // posición izquierda abajo
         }
     ];
 
@@ -185,8 +185,8 @@ const Scene = () => {
 
             {/* Indicador de tecla R para resetear */}
             {!showHint && (
-                <Html position={[-1, 0.9, 0]} center distanceFactor={1.2} transform>
-                    <div className="tecla-hint">🔄 Presiona la tecla <strong>R</strong> para reiniciar</div>
+                <Html position={[-1.5, -1.1, 0]} center distanceFactor={1.2} transform>
+                    <div className="tecla-hint">🔄 Presiona la tecla <strong>R</strong> para reiniciar. <br/> Da click en la parte central del ojo para ver cada síntoma</div>
                 </Html>
             )}
 
@@ -199,7 +199,7 @@ const Scene = () => {
 const SectionTwoCT = () => {
     return (
         <div className="section2CT-container">
-            <div className="presentation-container-CT">
+            <div className="CT-intro">
                 <h2>Conoce los síntomas de las cataratas</h2>
                 <p>Dale click al ojo para conocer los diversos síntomas y sumérgete en el aprendizaje.</p>
             </div>

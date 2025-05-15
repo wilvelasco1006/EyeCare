@@ -81,7 +81,7 @@ const SectionOne = () => {
     const navigate = useNavigate();
 
     useEffect(() => {
-        const timer = setTimeout(() => setShowInstruction(false), 2000);
+        const timer = setTimeout(() => setShowInstruction(false), 1500);
         return () => clearTimeout(timer);
     }, []);
 
@@ -183,7 +183,7 @@ const SectionOne = () => {
 
     return (
         <>
-            <div className="sectionOne">
+            <div className="sectionOneCT">
                 <div className="Text-container-sectionOne">
                     <button className="btn-atras" onClick={() => navigate('/diseases/content-diseases?from=cataratas')}>
                         {" "}
