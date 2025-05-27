@@ -72,7 +72,7 @@ const SectionOneC = () => {
 
     return (
         <>
-            <div className="sectionOne">
+            <div className="sectionOneC">
                 <div className="Text-container-sectionOneC">
                         <button className="btn-atras" onClick={() => navigate('/diseases/content-diseases?from=conjuntivitis')}> Atrás</button>
                     <h2 className="conjuntivitis-title">Conjuntivitis</h2>

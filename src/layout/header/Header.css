@@ -5,6 +5,7 @@ header {
     min-height: 50px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2); /* Sombra más realista */
     top: 0;
+    z-index: 2000;
 }
 
 .nav {

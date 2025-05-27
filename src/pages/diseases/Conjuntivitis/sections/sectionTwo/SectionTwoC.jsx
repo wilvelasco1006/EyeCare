@@ -12,7 +12,7 @@ import "./SectionTwoC.css";
 // Componente para el mensaje flotante de tecla R
 const FloatingKeyHint = ({ show }) => {
     if (!show) return null;
-    
+
     return (
         <div className="floating-key-hint">
             Presiona la tecla <span className="key-highlight">R</span> para volver atrás
@@ -77,7 +77,7 @@ const Scene = ({ setShowKeyHint }) => {
             }
         );
         return () => unsubscribe();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [subscribeKeys]);
 
     const handleHealthyClick = () => {
@@ -126,7 +126,7 @@ const Scene = ({ setShowKeyHint }) => {
             {/* Mensaje para ojo sano */}
             {healthyMessage && (
                 <Html position={[-1.5, -1, 0]} center distanceFactor={6}>
-                    <div className="mensaje-info mensaje-sano">
+                    <div className="mensaje-inf">
                         Ojo sano: sin enrojecimiento ni inflamación.
                     </div>
                 </Html>
@@ -135,7 +135,7 @@ const Scene = ({ setShowKeyHint }) => {
             {/* Mensaje para ojo infectado */}
             {infectedMessage && (
                 <Html position={[1.5, -1, 0]} center distanceFactor={6}>
-                    <div className="mensaje-info mensaje-infectado">
+                    <div className="mensaje-inf">
                         Síntomas de conjuntivitis: enrojecimiento, inflamación, secreción purulenta.
                     </div>
                 </Html>
@@ -167,7 +167,7 @@ const SectionTwoC = () => {
         <div className="section2-container">
             {/* Mensaje flotante para la tecla R */}
             <FloatingKeyHint show={showKeyHint} />
-            
+
             <div className="presentation-container-2">
                 <h2>Conoce los síntomas de la conjuntivitis</h2>
                 <p>Dale click a cada ojo para conocer la información, y sumérgete en el aprendizaje</p>
