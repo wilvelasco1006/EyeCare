@@ -221,7 +221,7 @@ const SectionOne = () => {
                     <button className="btn-more-info" onClick={() => setShowModal(true)}>
                         Ver más
                     </button>
-                    {showInstruction && (
+                    {/* {showInstruction && (
                         <div className="box-message show">
                             <div>
                                 <h3>¡Es hora de navegar!</h3>
@@ -229,7 +229,7 @@ const SectionOne = () => {
                                 <p>Presiona R para restablecer la vista</p>
                             </div>
                         </div>
-                    )}
+                    )} */}
                 </div>
                 <div className="model-container">
                     <div className="floating-message">{messages[viewIndex]}</div>

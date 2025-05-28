@@ -1,5 +1,6 @@
 import SectionOne from "./sections/sectionOne/SectionOne";
 import SectionTwoCT from "./sections/sectionTwoCT/sectionTwoCT";
+// import SectionThreeCT from "./sections/sectionThreeCT/sectionThreeCT";
 import "../Cataracts/Cataracts.css";
 import React, { useRef, useEffect, useState } from "react";
 
@@ -95,17 +96,10 @@ const Cataracts = () => {
                 </div>
             </section>
 
-            {/* Sección 3: Prevención y Tratamiento */}
-            <section ref={sectionRefs[2]} className="section3-CT">
-                <h2>Cuándo consultar al médico</h2>
-                <div className="content-container">
-                    {/* Aquí va el contenido de tu tercera sección */}
-                    <p>
-                        Información importante sobre cuándo buscar atención médica para
-                        problemas de conjuntivitis.
-                    </p>
-                </div>
-            </section>
+            {/* Sección 3: Tratamiento - Modelo 3D e información */}
+            {/* <section ref={sectionRefs[2]} className="section3-CT">
+                <SectionThreeCT />
+            </section> */}
         </div>
     );
 };

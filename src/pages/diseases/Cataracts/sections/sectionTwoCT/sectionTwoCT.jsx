@@ -11,52 +11,126 @@ import Floor from "../../Model-3d/Floor";
 const Scene = () => {
     const eyeRef = useRef();
     const eyeGroupRef = useRef();
-    const { camera } = useThree();
+    const { camera, size } = useThree();
     const [message, setMessage] = useState(null);
     const [target, setTarget] = useState(null);
     const [symptomIndex, setSymptomIndex] = useState(-1);
     const [showHint, setShowHint] = useState(true);
     const [subscribeKeys] = useKeyboardControls();
 
+    // Función para obtener configuraciones responsivas
+    const getResponsiveConfig = () => {
+        const isMobile = size.width < 768;
+        const isTablet = size.width >= 768 && size.width < 1200;
+        const isSmallHeight = size.height < 600;
+        const isVerySmallScreen = size.width < 480;
 
-    // Lista de síntomas con descripciones más detalladas
-    const symptoms = [
-        {
-            title: "Visión borrosa o nublada",
-            description: "Las cataratas hacen que los objetos aparezcan difuminados, como si estuvieras mirando a través de un vidrio esmerilado o una ventana empañada.",
-            eyeDirection: [0.5, 0.3, 0],
-            position: [1.2, -0.3, 0] // posición a la derecha
-        },
-        {
-            title: "Sensibilidad a la luz",
-            description: "La luz brillante puede causar molestia o deslumbramiento, especialmente al conducir de noche con los faros de coches que vienen en dirección contraria.",
-            eyeDirection: [-0.9, 0.2, 0],
-            position: [-1.2, -0.1, 0] // posición a la izquierda
-        },
-        {
-            title: "Colores menos brillantes",
-            description: "Los colores parecen desvanecidos o amarillentos, perdiendo su intensidad original. Es como ver el mundo a través de un filtro sepia.",
-            eyeDirection: [0, 0.4, 0],
-            position: [0, -0.8, 0] // posición abajo
-        },
-        {
-            title: "Dificultad para ver de noche",
-            description: "La visión nocturna se deteriora notablemente, haciendo difícil actividades como conducir o leer en condiciones de poca luz.",
-            eyeDirection: [0, -0.4, 0],
-            position: [0, 0.5, 0] // posición arriba
-        },
-        {
-            title: "Visión doble en un solo ojo",
-            description: "Algunas personas experimentan diplopía monocular, donde ven imágenes duplicadas aunque tengan un solo ojo abierto.",
-            eyeDirection: [-0.9, 0.3, 0],
-            position: [-1.3, -0.2, 0] // posición izquierda abajo
+        return {
+            isMobile,
+            isTablet,
+            isSmallHeight,
+            isVerySmallScreen,
+            eyeScale: isMobile ? [2.2, 2.2, 2.2] : isTablet ? [2.6, 2.6, 2.6] : [3, 3, 3],
+            titleDistanceFactor: isMobile ? 2.2 : isTablet ? 2.8 : 3,
+            messageDistanceFactor: isMobile ? 1 : isTablet ? 1.1 : 1.2,
+            hintDistanceFactor: isMobile ? 1.8 : isTablet ? 2 : 2,
+            cameraDistance: isMobile ? 3.2 : isTablet ? 2.8 : 2.2
+        };
+    };
+
+    // Lista de síntomas con posiciones responsivas
+    const getSymptoms = () => {
+        const { isMobile, isTablet, isSmallHeight, isVerySmallScreen } = getResponsiveConfig();
+
+        // Posiciones para móviles muy pequeños
+        const verySmallPositions = [
+            [0, -0.8, 0],
+            [0, -0.8, 0],
+            [0, -0.8, 0],
+            [0, -0.8, 0],
+            [0, -0.8, 0]
+        ];
+
+        // Posiciones para móviles
+        const mobilePositions = [
+            [0, -0.9, 0],
+            [0, -0.9, 0],
+            [0, -0.9, 0],
+            [0, -0.9, 0],
+            [0, -0.9, 0]
+        ];
+
+        // Posiciones para tablets
+        const tabletPositions = [
+            [0.8, -0.4, 0],
+            [-0.8, -0.1, 0],
+            [0, -0.7, 0],
+            [0, 0.4, 0],
+            [-0.9, -0.3, 0]
+        ];
+
+        // Posiciones para desktop
+        const desktopPositions = [
+            [1.2, -0.3, 0],
+            [-1.2, -0.1, 0],
+            [0, -0.8, 0],
+            [0, 0.5, 0],
+            [-1.3, -0.2, 0]
+        ];
+
+        let positions = desktopPositions;
+        if (isVerySmallScreen) positions = verySmallPositions;
+        else if (isMobile) positions = mobilePositions;
+        else if (isTablet) positions = tabletPositions;
+
+        // Ajustar posiciones si la altura es pequeña
+        if (isSmallHeight) {
+            positions = positions.map(pos => [pos[0], pos[1] * 0.8, pos[2]]);
         }
-    ];
+
+        return [
+            {
+                title: "Visión borrosa o nublada",
+                description: "Las cataratas hacen que los objetos aparezcan difuminados, como si estuvieras mirando a través de un vidrio esmerilado o una ventana empañada.",
+                eyeDirection: [0.5, 0.3, 0],
+                position: positions[0]
+            },
+            {
+                title: "Sensibilidad a la luz",
+                description: "La luz brillante puede causar molestia o deslumbramiento, especialmente al conducir de noche con los faros de coches que vienen en dirección contraria.",
+                eyeDirection: [-0.9, 0.2, 0],
+                position: positions[1]
+            },
+            {
+                title: "Colores menos brillantes",
+                description: "Los colores parecen desvanecidos o amarillentos, perdiendo su intensidad original. Es como ver el mundo a través de un filtro sepia.",
+                eyeDirection: [0, 0.4, 0],
+                position: positions[2]
+            },
+            {
+                title: "Dificultad para ver de noche",
+                description: "La visión nocturna se deteriora notablemente, haciendo difícil actividades como conducir o leer en condiciones de poca luz.",
+                eyeDirection: [0, -0.4, 0],
+                position: positions[3]
+            },
+            {
+                title: "Visión doble en un solo ojo",
+                description: "Algunas personas experimentan diplopía monocular, donde ven imágenes duplicadas aunque tengan un solo ojo abierto.",
+                eyeDirection: [-0.9, 0.3, 0],
+                position: positions[4]
+            }
+        ];
+    };
 
     // Resetear vista y estado
-
     const resetView = () => {
-        camera.position.set(0, 0.3, 2.5);
+        const { isMobile, isTablet } = getResponsiveConfig();
+        let cameraZ = 2.5;
+
+        if (isMobile) cameraZ = 3.5;
+        else if (isTablet) cameraZ = 3;
+
+        camera.position.set(0, 0.3, cameraZ);
         camera.lookAt(0, 0, 0);
         setTarget(null);
         setMessage(null);
@@ -83,6 +157,8 @@ const Scene = () => {
 
     // Animación suave de la cámara y del ojo
     useFrame(() => {
+        const symptoms = getSymptoms();
+
         if (target) {
             camera.position.lerp(target, 0.05);
             camera.lookAt(0, 0, 0);
@@ -106,6 +182,9 @@ const Scene = () => {
 
     // Manejo del clic en el ojo
     const handleEyeClick = () => {
+        const symptoms = getSymptoms();
+        const { cameraDistance } = getResponsiveConfig();
+
         // Incrementar el índice para mostrar el siguiente síntoma
         const nextIndex = symptomIndex < symptoms.length - 1 ? symptomIndex + 1 : 0;
         setSymptomIndex(nextIndex);
@@ -113,12 +192,15 @@ const Scene = () => {
         // Calcular nueva posición de la cámara para acercarse al ojo
         const targetPos = eyeRef.current
             .getWorldPosition(new THREE.Vector3())
-            .add(new THREE.Vector3(0, 0, 2.2)); // Más cerca
+            .add(new THREE.Vector3(0, 0, cameraDistance));
 
         setMessage(symptoms[nextIndex]);
         setTarget(targetPos);
         setShowHint(false);
     };
+
+    const symptoms = getSymptoms();
+    const config = getResponsiveConfig();
 
     return (
         <>
@@ -126,7 +208,7 @@ const Scene = () => {
             <Html
                 position={[0, 1, -2]}
                 center
-                distanceFactor={3}
+                distanceFactor={config.titleDistanceFactor}
                 wrapperClass="title"
                 transform
             >
@@ -138,7 +220,7 @@ const Scene = () => {
                 <Html
                     position={[0, -0.7, 0]}
                     center
-                    distanceFactor={2}
+                    distanceFactor={config.hintDistanceFactor}
                     wrapperClass="instruction-hint"
                     transform
                 >
@@ -154,13 +236,11 @@ const Scene = () => {
                     ref={eyeRef}
                     position={[0, 0, 0]}
                     onClick={handleEyeClick}
-                    scale={[3, 3, 3]} // Aumenta el tamaño para que se vea más de cerca
+                    scale={config.eyeScale}
                 >
-
                     <Suspense fallback={null}>
                         <EyeBlank />
                     </Suspense>
-
                 </group>
             </group>
 
@@ -169,7 +249,7 @@ const Scene = () => {
                 <Html
                     position={symptoms[symptomIndex].position}
                     center
-                    distanceFactor={1.2}
+                    distanceFactor={config.messageDistanceFactor}
                     transform
                     wrapperClass="instruction-hint"
                 >
@@ -185,8 +265,21 @@ const Scene = () => {
 
             {/* Indicador de tecla R para resetear */}
             {!showHint && (
-                <Html position={[-1.5, -1.1, 0]} center distanceFactor={1.2} transform>
-                    <div className="tecla-hint">🔄 Presiona la tecla <strong>R</strong> para reiniciar. <br/> Da click en la parte central del ojo para ver cada síntoma</div>
+                <Html
+                    position={
+                        config.isVerySmallScreen ? [0, -1.8, 0] :
+                            config.isMobile ? [0, -1.5, 0] :
+                                config.isTablet ? [-1, -0.9, 0] :
+                                    [-1.5, -1.1, 0]
+                    }
+                    center
+                    distanceFactor={config.messageDistanceFactor}
+                    transform
+                >
+                    <div className="tecla-hint">
+                        🔄 Presiona la tecla <strong>R</strong> para reiniciar.
+                        <br /> Da click en la parte central del ojo para ver cada síntoma
+                    </div>
                 </Html>
             )}
 
