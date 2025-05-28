@@ -13,13 +13,16 @@
     flex: 1;
     padding: 1rem;
     text-align: center;
-    height: 490px;
+    min-height: 490px;
+    height: auto;
+    max-height: 80vh;
     margin: 60px 10px 0 10px;
     position: relative;
     overflow-y: auto;
     background: #f0f8ff;
     border-radius: 20px;
-
+    display: flex;
+    flex-direction: column;
 }
 
 .btn-atras {
@@ -51,7 +54,6 @@
     margin-bottom: 1rem;
 }
 
-
 /* Estilos para el contenedor de details */
 .btn-more-info {
     background-color: #0066cc;
@@ -82,7 +84,6 @@
     justify-content: center;
     align-items: center;
     padding: 2rem 10rem 5rem 10rem;
-    /* antes: 5rem arriba y 10rem abajo */
     min-width: 300px;
     min-height: 300px;
     border-radius: 20px;
@@ -132,14 +133,12 @@
     border: none;
     border-radius: 80px;
     margin-top: 1rem;
-    /* separación del canvas */
     color: white;
     cursor: pointer;
     display: flex;
     justify-content: center;
     align-items: center;
 }
-
 
 .floating-message {
     position: absolute;
@@ -160,7 +159,6 @@
         opacity: 0;
         transform: translateY(-10px);
     }
-
     to {
         opacity: 1;
         transform: translateY(0);
@@ -185,14 +183,10 @@
     position: relative;
     background: white;
     padding: 1rem;
-    /* más compacto */
     border-radius: 1rem;
     width: 80%;
-    /* antes 90% */
     max-width: 600px;
-    /* antes 800px */
     max-height: 80vh;
-    /* más compacto también */
     overflow-y: auto;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
 }
@@ -230,14 +224,12 @@
 
 .slider-content {
     height: 300px;
-    /* Altura estándar basada en el contenido más largo */
     padding: 1rem;
     background: #f0f8ff;
     border-radius: 12px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     text-align: left;
     overflow: hidden;
-    /* Evita saltos por contenido que sobresalga */
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -253,61 +245,51 @@
     font-weight: bold;
     color: #003366;
     margin-bottom: 0.4rem;
-    
 }
 
 .causa-description {
     font-size: 1rem;
     color: #333 !important;
     line-height: 1.5;
-    height: 90px;
+    min-height: 80px;
+    height: auto;
+    max-height: 120px;
     overflow-y: auto;
     padding-right: 0.5rem;
 }
 
 .hover-message {
     position: absolute;
-    /* Posición relativa al contenedor padre con position: relative */
     top: 20px;
-    /* Ajusta la distancia desde la parte superior */
     left: 20px;
-    /* Ajusta la distancia desde la parte izquierda */
     background-color: rgba(0, 0, 0, 0.7);
-    /* Fondo semitransparente */
     color: white;
-    /* Color del texto */
     padding: 10px;
-    /* Espaciado interno */
     border-radius: 5px;
-    /* Bordes redondeados */
     font-size: 14px;
-    /* Tamaño de fuente */
     z-index: 1000;
-    /* Asegura que esté por encima de otros elementos */
 }
 
 .slider-container {
     position: relative;
     overflow: hidden;
-    /* oculta lo que sobresalga */
-    height: 300px;
-    /* o la altura que definas */
+    min-height: 280px;
+    height: auto;
     background: #fff;
     padding: 1rem;
     border-radius: 12px;
     display: flex;
     flex-direction: column;
     box-sizing: border-box;
+    flex: 1;
 }
 
-/* Pista que se desliza */
 .slider-track {
     display: flex;
     width: 100%;
     height: 100%;
 }
 
-/* Cada slide ocupa el 100% del contenedor */
 .slider-box {
     flex: 0 0 100%;
     box-sizing: border-box;
@@ -315,4 +297,524 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
+}
+
+/* ========== RESPONSIVE DESIGN ========== */
+
+/* Tablets grandes (1024px - 1199px) */
+@media screen and (max-width: 1199px) {
+    .sectionOneCT {
+        margin: 20px 5px 0 5px;
+    }
+    
+    .model-container {
+        padding: 2rem 5rem 3rem 5rem;
+    }
+    
+    .model-container canvas {
+        width: 380px;
+        height: 480px;
+    }
+    
+    .floating-message {
+        max-width: 220px;
+        font-size: 0.95rem;
+        padding: 0.9rem 1.3rem;
+    }
+}
+
+/* Tablets (768px - 1023px) */
+@media screen and (max-width: 1023px) {
+    .sectionOneCT {
+        flex-direction: column;
+        margin: 15px 5px 0 5px;
+        border-radius: 20px;
+    }
+    
+    .Text-container-sectionOne {
+        height: auto;
+        min-height: 350px;
+        max-height: none;
+        margin: 20px 10px 0 10px;
+        padding: 1rem 0.8rem;
+    }
+    
+    .cataracts-title {
+        font-size: 2.5rem !important;
+        margin-bottom: 0.8rem !important;
+    }
+    
+    .slider-container {
+        min-height: 240px;
+        height: auto;
+        padding: 0.8rem;
+        flex: 1;
+    }
+    
+    .causa-title {
+        font-size: 1.2rem;
+    }
+    
+    .causa-description {
+        font-size: 0.95rem;
+        min-height: 70px;
+        max-height: 120px;
+    }
+    
+    .btn-more-info {
+        padding: 8px 16px;
+        font-size: 0.95rem;
+        margin-top: 12px;
+    }
+    
+    .model-container {
+        margin-top: 20px;
+        height: auto;
+        min-height: 400px;
+        padding: 1rem 3rem 2rem 3rem;
+    }
+    
+    .model-container canvas {
+        width: 100%;
+        max-width: 400px;
+        height: 420px;
+    }
+    
+    .floating-message {
+        top: 2rem;
+        right: 1.5rem;
+        max-width: 200px;
+        font-size: 0.9rem;
+        padding: 0.8rem 1.2rem;
+    }
+    
+    .btn-cataracts {
+        width: 70px;
+        height: 35px;
+        margin-top: 0.8rem;
+    }
+    
+    .btn-cataracts svg {
+        font-size: 1.5rem !important;
+    }
+    
+    .btn-atras {
+        width: 70px;
+        height: 35px;
+        font-size: 0.9rem;
+        padding: 5px 10px;
+    }
+}
+
+/* Móviles grandes (480px - 767px) */
+@media screen and (max-width: 767px) {
+    .sectionOneCT {
+        margin: 10px 5px 0 5px;
+        border-radius: 15px;
+    }
+    
+    .Text-container-sectionOne {
+        height: auto;
+        min-height: 300px;
+        max-height: none;
+        margin: 15px 8px 0 8px;
+        padding: 0.8rem 0.6rem;
+    }
+    
+    .cataracts-title {
+        font-size: 2rem !important;
+        margin-bottom: 0.6rem !important;
+    }
+    
+    .slider-container {
+        min-height: 200px;
+        height: auto;
+        padding: 0.6rem;
+        flex: 1;
+    }
+    
+    .causa-title {
+        font-size: 1.1rem;
+        margin-bottom: 0.3rem;
+    }
+    
+    .causa-description {
+        font-size: 0.9rem;
+        min-height: 60px;
+        max-height: 100px;
+        line-height: 1.4;
+    }
+    
+    .btn-more-info {
+        padding: 6px 14px;
+        font-size: 0.9rem;
+        margin-top: 10px;
+    }
+    
+    .model-container {
+        margin-top: 15px;
+        height: auto;
+        min-height: 350px;
+        padding: 1rem 2rem;
+    }
+    
+    .model-container canvas {
+        width: 100%;
+        max-width: 350px;
+        height: 320px;
+        border-width: 1px;
+    }
+    
+    .floating-message {
+        top: 1.5rem;
+        right: 1rem;
+        max-width: 160px;
+        font-size: 0.85rem;
+        padding: 0.7rem 1rem;
+    }
+    
+    .hover-message {
+        top: 15px;
+        left: 15px;
+        padding: 8px;
+        font-size: 12px;
+    }
+    
+    .btn-cataracts {
+        width: 60px;
+        height: 30px;
+        margin-top: 0.6rem;
+    }
+    
+    .btn-cataracts svg {
+        font-size: 1.2rem !important;
+    }
+    
+    .btn-atras {
+        width: 60px;
+        height: 30px;
+        font-size: 0.8rem;
+        padding: 5px 8px;
+        top: 8px;
+        left: 8px;
+    }
+    
+    .modal-content {
+        width: 90%;
+        max-width: 500px;
+        padding: 0.8rem;
+    }
+}
+
+/* Móviles medianos (360px - 479px) */
+@media screen and (max-width: 479px) {
+    .sectionOneCT {
+        margin: 8px 3px 0 3px;
+        border-radius: 12px;
+    }
+    
+    .Text-container-sectionOne {
+        height: auto;
+        min-height: 250px;
+        max-height: none;
+        margin: 12px 6px 0 6px;
+        padding: 0.6rem 0.5rem;
+        border-radius: 15px;
+    }
+    
+    .cataracts-title {
+        font-size: 1.8rem !important;
+        margin-bottom: 0.5rem !important;
+    }
+    
+    .slider-container {
+        min-height: 180px;
+        height: auto;
+        padding: 0.5rem;
+        flex: 1;
+    }
+    
+    .causa-title {
+        font-size: 1rem;
+        margin-bottom: 0.25rem;
+    }
+    
+    .causa-description {
+        font-size: 0.85rem;
+        min-height: 55px;
+        max-height: 90px;
+        line-height: 1.3;
+    }
+    
+    .btn-more-info {
+        padding: 5px 12px;
+        font-size: 0.85rem;
+        margin-top: 8px;
+    }
+    
+    .model-container {
+        margin-top: 12px;
+        height: auto;
+        min-height: 300px;
+        padding: 0.8rem 1.5rem;
+    }
+    
+    .model-container canvas {
+        width: 100%;
+        max-width: 300px;
+        height: 280px;
+    }
+    
+    .floating-message {
+        top: 1rem;
+        right: 0.8rem;
+        max-width: 140px;
+        font-size: 0.8rem;
+        padding: 0.6rem 0.8rem;
+    }
+    
+    .hover-message {
+        top: 12px;
+        left: 12px;
+        padding: 6px;
+        font-size: 11px;
+    }
+    
+    .btn-cataracts {
+        width: 50px;
+        height: 25px;
+        margin-top: 0.5rem;
+    }
+    
+    .btn-cataracts svg {
+        font-size: 1rem !important;
+    }
+    
+    .btn-atras {
+        width: 50px;
+        height: 25px;
+        font-size: 0.7rem;
+        padding: 3px 6px;
+        top: 6px;
+        left: 6px;
+    }
+    
+    .modal-content {
+        width: 95%;
+        max-width: 400px;
+        padding: 0.6rem;
+    }
+}
+
+/* Móviles pequeños (hasta 359px) */
+@media screen and (max-width: 359px) {
+    .sectionOneCT {
+        margin: 5px 2px 0 2px;
+        border-radius: 10px;
+    }
+    
+    .Text-container-sectionOne {
+        min-height: 220px;
+        height: auto;
+        max-height: none;
+        padding: 0.5rem 0.4rem;
+        margin: 10px 4px 0 4px;
+        border-radius: 12px;
+    }
+    
+    .cataracts-title {
+        font-size: 1.6rem !important;
+        margin-bottom: 0.4rem !important;
+    }
+    
+    .slider-container {
+        min-height: 160px;
+        height: auto;
+        padding: 0.4rem;
+        flex: 1;
+    }
+    
+    .causa-title {
+        font-size: 0.95rem;
+        margin-bottom: 0.2rem;
+    }
+    
+    .causa-description {
+        font-size: 0.8rem;
+        min-height: 50px;
+        max-height: 80px;
+        line-height: 1.2;
+    }
+    
+    .btn-more-info {
+        padding: 4px 10px;
+        font-size: 0.8rem;
+        margin-top: 6px;
+    }
+    
+    .model-container {
+        margin-top: 10px;
+        height: auto;
+        min-height: 280px;
+        padding: 0.6rem 1rem;
+    }
+    
+    .model-container canvas {
+        width: 100%;
+        max-width: 280px;
+        height: 250px;
+        border-width: 1px;
+    }
+    
+    .floating-message {
+        top: 0.8rem;
+        right: 0.6rem;
+        max-width: 120px;
+        font-size: 0.75rem;
+        padding: 0.5rem 0.6rem;
+        border-radius: 8px;
+    }
+    
+    .hover-message {
+        top: 10px;
+        left: 10px;
+        padding: 5px;
+        font-size: 10px;
+        border-radius: 3px;
+    }
+    
+    .btn-cataracts {
+        width: 45px;
+        height: 22px;
+        margin-top: 0.4rem;
+        border-radius: 45px;
+    }
+    
+    .btn-cataracts svg {
+        font-size: 0.9rem !important;
+    }
+    
+    .btn-atras {
+        width: 45px;
+        height: 22px;
+        font-size: 0.65rem;
+        padding: 2px 4px;
+        top: 5px;
+        left: 5px;
+        border-radius: 3px;
+    }
+    
+    .modal-content {
+        width: 98%;
+        max-width: 350px;
+        padding: 0.5rem;
+        border-radius: 0.8rem;
+    }
+    
+    .close-modal-cataratas {
+        margin: 15px;
+        font-size: 1rem;
+    }
+    
+    .vision-image {
+        border-radius: 5px;
+    }
+}
+
+/* Móviles muy pequeños (hasta 320px) */
+@media screen and (max-width: 320px) {
+    .sectionOneCT {
+        margin: 3px 1px 0 1px;
+        border-radius: 8px;
+    }
+    
+    .Text-container-sectionOne {
+        min-height: 200px;
+        height: auto;
+        max-height: none;
+        padding: 0.4rem 0.3rem;
+        margin: 8px 3px 0 3px;
+        border-radius: 10px;
+    }
+    
+    .cataracts-title {
+        font-size: 1.4rem !important;
+        margin-bottom: 0.3rem !important;
+    }
+    
+    .slider-container {
+        min-height: 140px;
+        height: auto;
+        padding: 0.3rem;
+        flex: 1;
+    }
+    
+    .causa-title {
+        font-size: 0.9rem;
+        margin-bottom: 0.15rem;
+    }
+    
+    .causa-description {
+        font-size: 0.75rem;
+        min-height: 45px;
+        max-height: 70px;
+        line-height: 1.1;
+    }
+    
+    .btn-more-info {
+        padding: 3px 8px;
+        font-size: 0.75rem;
+        margin-top: 5px;
+    }
+    
+    .model-container {
+        margin-top: 8px;
+        height: auto;
+        min-height: 260px;
+        padding: 0.5rem 0.8rem;
+    }
+    
+    .model-container canvas {
+        width: 100%;
+        max-width: 260px;
+        height: 230px;
+    }
+    
+    .floating-message {
+        top: 0.6rem;
+        right: 0.4rem;
+        max-width: 100px;
+        font-size: 0.7rem;
+        padding: 0.4rem 0.5rem;
+    }
+    
+    .btn-cataracts {
+        width: 40px;
+        height: 20px;
+        margin-top: 0.3rem;
+    }
+    
+    .btn-cataracts svg {
+        font-size: 0.8rem !important;
+    }
+    
+    .btn-atras {
+        width: 40px;
+        height: 20px;
+        font-size: 0.6rem;
+        padding: 1px 3px;
+        top: 4px;
+        left: 4px;
+    }
+    
+    .modal-content {
+        width: 99%;
+        max-width: 320px;
+        padding: 0.4rem;
+    }
+    
+    .close-modal-cataratas {
+        margin: 10px;
+        font-size: 0.9rem;
+    }
 }

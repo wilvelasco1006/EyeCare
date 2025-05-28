@@ -14,14 +14,35 @@ import Staging from "../../../staging/Staging";
 
 // Componente controlador de cámara y modelo
 const CameraAndModelController = ({ animationSpeed, setHoverMessage }) => {
-    const { camera } = useThree();
+    const { camera, size } = useThree();
     const controlsRef = useRef();
     const modelRef = useRef();
 
+    // Función para obtener configuraciones responsivas
+    const getResponsiveConfig = () => {
+        const isMobile = size.width < 768;
+        const isTablet = size.width >= 768 && size.width < 1200;
+        const isSmallHeight = size.height < 600;
+        const isVerySmallScreen = size.width < 480;
+
+        return {
+            isMobile,
+            isTablet,
+            isSmallHeight,
+            isVerySmallScreen,
+            cameraDistance: isMobile ? 2.5 : isTablet ? 2.2 : 2,
+            modelScale: isMobile ? 8 : isTablet ? 9 : 10,
+            minDistance: isMobile ? 0.8 : isTablet ? 0.6 : 0.5,
+            maxDistance: isMobile ? 1.5 : isTablet ? 1.2 : 1
+        };
+    };
+
     // Función para resetear la vista
     const resetView = () => {
-        // Resetear cámara
-        camera.position.set(0, 0, 2);
+        const config = getResponsiveConfig();
+
+        // Resetear cámara con posición responsiva
+        camera.position.set(0, 0, config.cameraDistance);
         camera.lookAt(0, 0, 0);
 
         // Resetear controles
@@ -48,12 +69,21 @@ const CameraAndModelController = ({ animationSpeed, setHoverMessage }) => {
         return () => window.removeEventListener("keydown", handleKeyDown);
     }, [camera]);
 
+    // Configurar cámara inicial responsiva
+    useEffect(() => {
+        const config = getResponsiveConfig();
+        camera.position.set(0, 0, config.cameraDistance);
+        camera.lookAt(0, 0, 0);
+    }, [size.width, size.height, camera]);
+
+    const config = getResponsiveConfig();
+
     return (
         <>
             <OrbitControls
                 ref={controlsRef}
-                minDistance={0.5}
-                maxDistance={1}
+                minDistance={config.minDistance}
+                maxDistance={config.maxDistance}
                 enablePan={true}
                 enableRotate={true}
                 enableZoom={true}
@@ -61,14 +91,12 @@ const CameraAndModelController = ({ animationSpeed, setHoverMessage }) => {
             <Suspense fallback={null}>
                 <EyeCataractModel
                     ref={modelRef}
-                    scale={10}
+                    scale={config.modelScale}
                     position={[0, 0, 0]}
                     setHoverMessage={setHoverMessage}
                     animationSpeed={animationSpeed}
                 />
-
             </Suspense>
-            
         </>
     );
 };
@@ -186,7 +214,6 @@ const SectionOne = () => {
             <div className="sectionOneCT">
                 <div className="Text-container-sectionOne">
                     <button className="btn-atras" onClick={() => navigate('/diseases/content-diseases?from=cataratas')}>
-                        {" "}
                         Atrás
                     </button>
                     <h2 className="cataracts-title">Cataratas</h2>
@@ -221,15 +248,6 @@ const SectionOne = () => {
                     <button className="btn-more-info" onClick={() => setShowModal(true)}>
                         Ver más
                     </button>
-                    {/* {showInstruction && (
-                        <div className="box-message show">
-                            <div>
-                                <h3>¡Es hora de navegar!</h3>
-                                <p>Dale a la flecha para saber un poco más...</p>
-                                <p>Presiona R para restablecer la vista</p>
-                            </div>
-                        </div>
-                    )} */}
                 </div>
                 <div className="model-container">
                     <div className="floating-message">{messages[viewIndex]}</div>
@@ -245,7 +263,7 @@ const SectionOne = () => {
                         <Suspense fallback={null}>
                             <Staging />
                         </Suspense>
-                        
+
                         <CameraAndModelController
                             animationSpeed={animationSpeed}
                             setHoverMessage={setHoverMessage}
