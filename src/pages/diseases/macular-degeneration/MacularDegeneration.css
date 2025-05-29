@@ -1,15 +1,19 @@
 /* Estilos generales para el contenedor de desplazamiento */
-.scroll-container {
+.scroll-container-m {
   width: 100%;
   height: 100vh;
-  overflow: hidden;
+  overflow-y: auto;
+  overflow-x: hidden;
   position: relative;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 /* Estilos para cada sección */
-.section1,
-.section2,
-.section3 {
+.section1M,
+.section2M,
+.section3M {
   height: 100vh;
   width: 100%; /* Cambiado de 90% a 100% para evitar scroll horizontal */
   position: relative;
@@ -20,7 +24,15 @@
   justify-content: center;
   padding: 2rem;
   box-sizing: border-box; /* Asegura que el padding no afecte el ancho total */
-  margin: 0 auto; /* Centrado horizontal */
+  margin: center; /* Centrado horizontal */
+}
+
+.section2M {
+  background-color: rgba(240, 244, 251);
+}
+
+.section3M {
+  background-color: rgba(231, 243, 253);
 }
 
 /* Navegación lateral con puntos */
@@ -88,6 +100,43 @@
   }
 }
 
+/* Contenedor de prevención */
+.prevention-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 20px;
+  width: 100%;
+  max-width: 1200px;
+  margin-bottom: 2rem;
+}
+
+/* Tarjetas de prevención */
+.prevention-card {
+  background-color: white;
+  border-radius: 10px;
+  padding: 1.5rem;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  border-left: 4px solid #66caf8;
+}
+
+.prevention-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+}
+
+.prevention-card h3 {
+  color: #2c7da0;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 0;
+}
+
+.prevention-card .icon {
+  color: #66caf8;
+}
+
 /* Estilos para la sección de contenido */
 .content-container {
   width: 100%;
@@ -97,6 +146,7 @@
   border-radius: 10px;
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
   box-sizing: border-box; /* Asegura que el padding no afecte el ancho total */
+  margin: 0 auto; /* Centrado horizontal */
 }
 
 h2 {
@@ -104,26 +154,6 @@ h2 {
   font-size: 2.5rem;
   margin-bottom: 1.5rem;
   text-align: center;
-}
-
-/* Estilos específicos para la sección dos */
-.section2{
-  background-color: #f5f9ff;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  padding: 2rem;
-}
-
-/* Estilos específicos para la sección tres */
-.section3 {
-  background-color: #e9f5ff;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  padding: 2rem;
 }
 
 /* Media queries para responsividad */

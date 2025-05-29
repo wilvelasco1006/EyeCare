@@ -1,9 +1,7 @@
 import SectionOneM from "./sections/sectionOne/SectionOneM";
 import SectionTwoM from "./sections/section-two/SectionTwoM";
 import './MacularDegeneration.css';
-// eslint-disable-next-line no-unused-vars
 import React, { useRef, useEffect, useState } from "react";
-import { ChevronDown, ChevronUp } from 'lucide-react';
 
 const MacularDegeneration = () => {
     const containerRef = useRef(null);
@@ -16,7 +14,7 @@ const MacularDegeneration = () => {
         setActiveSection(index);
     };
     
-    // Para detectar la sección actual visible (opcional)
+    // Para detectar la sección actual visible
     useEffect(() => {
         const handleScroll = () => {
             // Implementación de detección de sección si lo necesitas
@@ -57,7 +55,7 @@ const MacularDegeneration = () => {
     }, []);
 
     return (
-        <div ref={containerRef} className="scroll-container">
+        <div ref={containerRef} className="scroll-container-m">
             {/* Navegación lateral fija */}
             <div className="side-navigation">
                 <div
@@ -84,15 +82,15 @@ const MacularDegeneration = () => {
             </div>
 
             {/* Secciones */}
-            <section ref={sectionRefs[0]} className="section1">
+            <section ref={sectionRefs[0]} className="section1M">
                 <SectionOneM />
             </section>
             
-            <section ref={sectionRefs[1]} className="section2">
+            <section ref={sectionRefs[1]} className="section2M">
                 <SectionTwoM />
             </section>
             
-            <section ref={sectionRefs[2]} className="section3">     
+            <section ref={sectionRefs[2]} className="section3M">     
                 <h2>Cuándo consultar al médico</h2>
                 <div className="content-container">
                     {/* Aquí va el contenido de tu tercera sección */}
