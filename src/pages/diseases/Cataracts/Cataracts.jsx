@@ -1,6 +1,6 @@
 import SectionOne from "./sections/sectionOne/SectionOne";
 import SectionTwoCT from "./sections/sectionTwoCT/sectionTwoCT";
-// import SectionThreeCT from "./sections/sectionThreeCT/sectionThreeCT";
+//  
 import "../Cataracts/Cataracts.css";
 import React, { useRef, useEffect, useState } from "react";
 

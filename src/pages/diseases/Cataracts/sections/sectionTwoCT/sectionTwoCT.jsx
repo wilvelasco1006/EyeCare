@@ -22,25 +22,42 @@ const Scene = () => {
     const getResponsiveConfig = () => {
         const isMobile = size.width < 768;
         const isTablet = size.width >= 768 && size.width < 1200;
-        const isSmallHeight = size.height < 600;
+        const isSmallLaptop = size.width >= 1200 && size.width < 1440;
+        const isSmallHeight = size.height < 700;
         const isVerySmallScreen = size.width < 480;
 
         return {
             isMobile,
             isTablet,
+            isSmallLaptop, // Nueva propiedad
             isSmallHeight,
             isVerySmallScreen,
-            eyeScale: isMobile ? [2.2, 2.2, 2.2] : isTablet ? [2.6, 2.6, 2.6] : [3, 3, 3],
-            titleDistanceFactor: isMobile ? 2.2 : isTablet ? 2.8 : 3,
-            messageDistanceFactor: isMobile ? 1 : isTablet ? 1.1 : 1.2,
-            hintDistanceFactor: isMobile ? 1.8 : isTablet ? 2 : 2,
-            cameraDistance: isMobile ? 3.2 : isTablet ? 2.8 : 2.2
+            eyeScale: isMobile ? [2.2, 2.2, 2.2] :
+                isTablet ? [2.6, 2.6, 2.6] :
+                    isSmallLaptop ? [2.8, 2.8, 2.8] : // Escala para laptops pequeñas
+                        [3, 3, 3],
+            titleDistanceFactor: isMobile ? 2.2 :
+                isTablet ? 2.8 :
+                    isSmallLaptop ? 3.2 : // Mayor distancia para laptops pequeñas
+                        3,
+            messageDistanceFactor: isMobile ? 1 :
+                isTablet ? 1.1 :
+                    isSmallLaptop ? 1.3 : // Más grande en laptops pequeñas
+                        1.2,
+            hintDistanceFactor: isMobile ? 1.8 :
+                isTablet ? 2 :
+                    isSmallLaptop ? 2.2 : // Ajuste para laptops pequeñas
+                        2,
+            cameraDistance: isMobile ? 3.2 :
+                isTablet ? 2.8 :
+                    isSmallLaptop ? 2.5 : // Distancia intermedia
+                        2.2
         };
     };
 
     // Lista de síntomas con posiciones responsivas
     const getSymptoms = () => {
-        const { isMobile, isTablet, isSmallHeight, isVerySmallScreen } = getResponsiveConfig();
+        const { isMobile, isTablet, isSmallLaptop, isSmallHeight, isVerySmallScreen } = getResponsiveConfig();
 
         // Posiciones para móviles muy pequeños
         const verySmallPositions = [
@@ -63,25 +80,34 @@ const Scene = () => {
         // Posiciones para tablets
         const tabletPositions = [
             [0.8, -0.4, 0],
-            [-0.8, -0.1, 0],
+            [-1.1, -0.1, 0],
             [0, -0.7, 0],
-            [0, 0.4, 0],
+            [0, 1.1, 0],
             [-0.9, -0.3, 0]
         ];
 
         // Posiciones para desktop
         const desktopPositions = [
-            [1.2, -0.3, 0],
-            [-1.2, -0.1, 0],
-            [0, -0.8, 0],
-            [0, 0.5, 0],
-            [-1.3, -0.2, 0]
+            [1.2, -0.3, 0],   // Posición para "Visión borrosa o nublada"
+            [-1.2, -0.1, 0],  // Posición para "Sensibilidad a la luz"
+            [0, -0.8, 0],     // Posición para "Colores menos brillantes"
+            [0, 1.6, 0],      // Posición para "Dificultad para ver de noche"
+            [-1.3, -0.2, 0]   // Posición para "Visión doble en un solo ojo"
+        ];
+        // Posiciones para laptops pequeñas (1366x768)
+        const smallLaptopPositions = [
+            [1.0, -0.35, 0],  // Más centrado verticalmente
+            [-1.0, -0.1, 0],
+            [0, -0.65, 0],
+            [0, 1.2, 0],
+            [-1.1, -0.25, 0]
         ];
 
         let positions = desktopPositions;
         if (isVerySmallScreen) positions = verySmallPositions;
         else if (isMobile) positions = mobilePositions;
         else if (isTablet) positions = tabletPositions;
+        else if (isSmallLaptop) positions = smallLaptopPositions; // Usar posiciones para laptops pequeñas
 
         // Ajustar posiciones si la altura es pequeña
         if (isSmallHeight) {
@@ -270,7 +296,7 @@ const Scene = () => {
                         config.isVerySmallScreen ? [0, -1.8, 0] :
                             config.isMobile ? [0, -1.5, 0] :
                                 config.isTablet ? [-1, -0.9, 0] :
-                                    [-1.5, -1.1, 0]
+                                    [-1.5, -0.8, 0]
                     }
                     center
                     distanceFactor={config.messageDistanceFactor}
@@ -302,7 +328,7 @@ const SectionTwoCT = () => {
                         { name: 'reset', keys: ['r', 'R'] },
                     ]}
                 >
-                    <Canvas camera={{ position: [0, 0.3, 2.5], fov: 50 }} shadows={true}>
+                    <Canvas camera={{ position: [0, 0.3, 2.5], fov: window.innerWidth < 1440 ? 45 : 50 }} shadows={true}>
                         <ambientLight intensity={0.7} />
                         <directionalLight
                             position={[2, 2, 2]}
