@@ -101,7 +101,7 @@ const Scene = () => {
 const SectionTwoM = () => {
   return (
     <>
-      <div className="presentation-container-2">
+      <div className="presentation-container-2-macular">
         <h2>Conoce los síntomas de la Degeneración Macular</h2>
         <p>Dale click a cada ojo para conocer la información, y sumérgete en el aprendizaje</p>
       </div>

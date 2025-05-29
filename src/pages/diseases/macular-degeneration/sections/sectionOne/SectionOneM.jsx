@@ -99,12 +99,12 @@ const SectionOneM = () => {
 
     return (
         <>
-        <div className="sectionOne">
-            <div className="Text-container-sectionOne">
+        <div className="sectionOneM">
+            <div className="Text-container-sectionOneM">
                     <button className="btn-atras" onClick={() => navigate('/diseases/content-diseases?from=macular-degeneration')}> Atrás</button>
                 <h2 className="macular-title">Degeneracion Macular</h2>
                 {/* Slider informativo de causas */}
-                <div className="slider-content">
+                <div className="slider-contentM">
                     {/* 1) Track: todos los slides en fila */}
                     <div
                         className="slider-track"
@@ -171,7 +171,7 @@ const SectionOneM = () => {
                 <div className="modal-overlay" onClick={() => setShowModal(false)}>
                     <div className="modal-content" onClick={e => e.stopPropagation()}>
                         <h2>Factores y Efectos</h2>
-                        <button className="close-modal" onClick={() => setShowModal(false)}>
+                        <button className="close-modal-macular" onClick={() => setShowModal(false)}>
                             <FaTimes style={{ fontSize: "1.5rem" }} />
                         </button>
                         <table className="info-table">
