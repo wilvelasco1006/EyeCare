@@ -125,7 +125,7 @@ const Scene = ({ setShowKeyHint }) => {
 
             {/* Mensaje para ojo sano */}
             {healthyMessage && (
-                <Html position={[-1.5, -1, 0]} center distanceFactor={6}>
+                <Html transform scale={0.5} position={[-2.3, 0.2, 0]} center distanceFactor={6}>
                     <div className="mensaje-inf">
                         Ojo sano: sin enrojecimiento ni inflamación.
                     </div>
@@ -134,7 +134,7 @@ const Scene = ({ setShowKeyHint }) => {
 
             {/* Mensaje para ojo infectado */}
             {infectedMessage && (
-                <Html position={[1.5, -1, 0]} center distanceFactor={6}>
+                <Html transform scale={0.5} position={[2.4, 0.2, 0.2]} center distanceFactor={5}>
                     <div className="mensaje-inf">
                         Síntomas de conjuntivitis: enrojecimiento, inflamación, secreción purulenta.
                     </div>

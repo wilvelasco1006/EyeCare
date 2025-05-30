@@ -1,5 +1,6 @@
 import SectionOneC from "./sections/sectionOne/SectionOneC";
 import SectionTwoC from "./sections/sectionTwo/SectionTwoC";
+import SectionThree from "./sections/sectionThree/SectionThree";
 import './Conjuntivitis.css';
 import React, { useRef, useEffect, useState } from "react";
 
@@ -95,13 +96,8 @@ const Conjuntivitis = () => {
             
             {/* Sección 3: Prevención y Tratamiento */}
             <section ref={sectionRefs[2]} className="section3">
-                <h2>Cuándo consultar al médico</h2>
                 <div className="content-container">
-                    {/* Aquí va el contenido de tu tercera sección */}
-                    <p>
-                        Información importante sobre cuándo buscar atención médica para
-                        problemas de conjuntivitis.
-                    </p>
+                    <SectionThree />
                 </div>
             </section>
         </div>

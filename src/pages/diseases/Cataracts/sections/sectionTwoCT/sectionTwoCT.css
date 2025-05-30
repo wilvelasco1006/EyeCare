@@ -1,4 +1,3 @@
-
 /** Título **/
 .title h1 {
     color: white;
@@ -31,11 +30,9 @@
     z-index: 100;
 }
 
-
 /** Mensaje flotante animado **/
 .mensaje-info-container {
     position: fixed;
-    /* Cambiado a fixed para mejor posicionamiento */
     bottom: 10%;
     left: 50%;
     transform: translateX(-50%);
@@ -49,38 +46,12 @@
         opacity: 0;
         transform: translateX(-50%) translateY(20px);
     }
-
     to {
         opacity: 1;
         transform: translateX(-50%) translateY(0);
     }
 }
 
-/** Responsive design **/
-@media (max-width: 768px) {
-    .title h1 {
-        font-size: 1.6rem;
-        padding: 0.5rem 1rem;
-    }
-
-    .mensaje-info {
-        padding: 0.8rem 1.2rem;
-        font-size: 0.9rem;
-        max-width: 300px;
-    }
-}
-
-/* Para alturas muy pequeñas (móviles en horizontal) */
-@media (max-height: 500px) {
-    .title h1 {
-        font-size: 1.4rem;
-        padding: 0.4rem 1rem;
-    }
-
-    .mensaje-info-container {
-        bottom: 5%;
-    }
-}
 /** Animación para que el texto suba lentamente **/
 .animated-symptoms {
     animation: moveUp 5s infinite alternate ease-in-out;
@@ -94,6 +65,7 @@
         transform: translateY(-20px) translateZ(0);
     }
 }
+
 .section2CT-container{
     margin: 64px 0 1.5rem 0;
     display: flex;
@@ -103,28 +75,24 @@
     width: 100%;
     height: auto;
     padding: 1rem 0;
-
 }
+
 .CT-intro {
-    
     width: 90%;
     max-width: 1200px;
     text-align: center;
-    
 }
-
 
 /* Ajustes generales del modelo y texto */
 .model-container-CT {
     margin: 0 auto;
     width: 1200px;
-    height: 500px; /* Altura completa de la ventana */
+    height: 500px;
     overflow: hidden;
     position: relative;
     display: flex;
     justify-content: center;
     align-items: center;
-    
 }
 
 .model-container-CT canvas {
@@ -148,6 +116,7 @@
     transform: translateZ(0);
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
 }
+
 /** Mensaje instructivo **/
 .instruction {
     background-color: rgba(0, 0, 0, 0.7);
@@ -162,14 +131,18 @@
     animation: pulse 2s infinite;
     transform: translateZ(0);
 }
+
 /* Estilos específicos para tarjetas de síntomas */
 .symptom-card {
-    max-width: 250px; /* Reducido de 300px */
-    font-size: 1.1rem; /* Reducido de 1.1rem */
-    padding: 0.7rem 1rem; /* Reducido de 0.8rem 1.2rem */
-    border-left: 4px solid #66caf8; /* Cambiado de dorado a azul */
-    animation: fadeIn 0.4s ease, pulse 3s infinite; /* Combinado fadeIn y pulse */
+    max-width: 250px;
+    font-size: 1.1rem;
+    padding: 0.7rem 1rem;
+    border-left: 4px solid #66caf8;
+    animation: fadeIn 0.4s ease, pulse 3s infinite;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
 }
+
 /* Ajusta la clase instruction para manejar los síntomas */
 .instruction h3 {
     color: #66caf8;
@@ -190,11 +163,13 @@
     font-style: italic;
     margin-top: 0.2rem;
 }
+
 @keyframes pulse {
     0% { transform: scale(1); }
     50% { transform: scale(1.05); }
     100% { transform: scale(1); }
 }
+
 .sintomas-info {
     background: rgba(0, 0, 0, 0.75);
     color: white;
@@ -209,6 +184,7 @@
     position: relative;
     z-index: 100;
 }
+
 .sintoma-info h3 {
     color: #66caf8;
     margin-bottom: 0.5rem;
@@ -257,37 +233,415 @@
     }
 }
 
-/** Responsive design **/
-@media (max-width: 768px) {
-    .title h1 {
-        font-size: 1.6rem;
-        padding: 0.5rem 1rem;
-    }
+/* ========== RESPONSIVE DESIGN ========== */
 
-    .sintoma-info, .instruction {
-        padding: 0.8rem 1.2rem;
-        font-size: 0.9rem;
-        max-width: 300px;
+/* Tablets grandes (1024px - 1199px) */
+@media screen and (max-width: 1199px) {
+    .model-container-CT {
+        width: 95%;
+        max-width: 1000px;
     }
     
-    .model-container-CT {
-        height: 400px;
+    .CT-intro {
+        width: 95%;
     }
 }
 
-/* Para alturas muy pequeñas (móviles en horizontal) */
-@media (max-height: 500px) {
-    .title h1 {
-        font-size: 1.4rem;
-        padding: 0.4rem 0.8rem;
+/* Tablets (768px - 1023px) */
+@media screen and (max-width: 1023px) {
+    .section2CT-container {
+        margin: 32px 0 1rem 0;
+        padding: 0.5rem;
     }
+    
+    .model-container-CT {
+        width: 100%;
+        height: 450px;
+        max-width: 900px;
+    }
+    
+    .model-container-CT canvas {
+        height: 450px;
+    }
+    
+    .title h1 {
+        font-size: 1.8rem;
+        padding: 0.6rem 1.3rem;
+    }
+    
+    .instruction {
+        max-width: 220px;
+        font-size: 1rem;
+        padding: 0.7rem 1rem;
+    }
+    
+    .symptom-card {
+        max-width: 220px;
+        font-size: 1rem;
+        padding: 0.6rem 0.9rem;
+    }
+    
+    .instruction h3 {
+        font-size: 1.2rem;
+    }
+    
+    .instruction p {
+        font-size: 1rem;
+    }
+    
+    .tecla-hint {
+        font-size: 0.85rem;
+        padding: 0.45rem 0.9rem;
+        max-width: 280px;
+    }
+}
 
+/* Móviles grandes (480px - 767px) */
+@media screen and (max-width: 767px) {
+    .section2CT-container {
+        margin: 16px 0 0.5rem 0;
+        padding: 0.5rem 0.25rem;
+    }
+    
+    .model-container-CT {
+        width: 100%;
+        height: 400px;
+        margin: 0;
+    }
+    
+    .model-container-CT canvas {
+        height: 400px;
+    }
+    
+    .CT-intro {
+        width: 95%;
+        padding: 0 10px;
+    }
+    
+    .CT-intro h2 {
+        font-size: 1.4rem;
+        margin-bottom: 0.5rem;
+    }
+    
+    .CT-intro p {
+        font-size: 0.9rem;
+        margin-bottom: 1rem;
+    }
+    
+    .title h1 {
+        font-size: 1.5rem;
+        padding: 0.5rem 1rem;
+        letter-spacing: 0.3px;
+    }
+    
+    .instruction {
+        max-width: 200px;
+        font-size: 0.95rem;
+        padding: 0.6rem 0.8rem;
+    }
+    
+    .symptom-card {
+        max-width: 320px !important;
+        font-size: 0.9rem;
+        padding: 0.6rem 0.8rem;
+        border-left-width: 3px;
+        margin: 0 auto;
+        position: relative;
+    }
+    
+    .instruction h3 {
+        font-size: 1.1rem;
+        margin-bottom: 0.3rem;
+    }
+    
+    .instruction p {
+        font-size: 0.95rem;
+        line-height: 1.4;
+        margin-bottom: 0.5rem;
+    }
+    
+    .instruction .counter {
+        font-size: 0.7rem;
+        margin-top: 0.3rem;
+    }
+    
     .tecla-hint {
         font-size: 0.8rem;
+        padding: 0.4rem 0.7rem;
+        max-width: 280px;
+        text-align: center;
+    }
+}
+
+/* Móviles medianos (360px - 479px) */
+@media screen and (max-width: 479px) {
+    .section2CT-container {
+        margin: 8px 0 0.25rem 0;
+        padding: 0.25rem;
+    }
+    
+    .model-container-CT {
+        height: 350px;
+    }
+    
+    .model-container-CT canvas {
+        height: 350px;
+    }
+    
+    .CT-intro h2 {
+        font-size: 1.2rem;
+    }
+    
+    .CT-intro p {
+        font-size: 0.85rem;
+    }
+    
+    .title h1 {
+        font-size: 1.3rem;
         padding: 0.4rem 0.8rem;
     }
     
-    .sintoma-info h3 {
+    .instruction {
+        max-width: 180px;
+        font-size: 0.9rem;
+        padding: 0.5rem 0.7rem;
+    }
+    
+    .symptom-card {
+        max-width: 300px !important;
+        font-size: 0.85rem;
+        padding: 0.5rem 0.7rem;
+        margin: 0 auto;
+        position: relative;
+    }
+    
+    .instruction h3 {
         font-size: 1rem;
+    }
+    
+    .instruction p {
+        font-size: 0.9rem;
+    }
+    
+    .tecla-hint {
+        font-size: 0.75rem;
+        padding: 0.35rem 0.6rem;
+        max-width: 260px;
+    }
+}
+
+/* Móviles pequeños (hasta 359px) */
+@media screen and (max-width: 359px) {
+    .model-container-CT {
+        height: 300px;
+    }
+    
+    .model-container-CT canvas {
+        height: 300px;
+    }
+    
+    .title h1 {
+        font-size: 1.1rem;
+        padding: 0.35rem 0.7rem;
+    }
+    
+    .instruction {
+        max-width: 160px;
+        font-size: 0.85rem;
+        padding: 0.45rem 0.6rem;
+    }
+    
+    .symptom-card {
+        max-width: 280px !important;
+        font-size: 0.8rem;
+        padding: 0.45rem 0.6rem;
+        margin: 0 auto;
+        position: relative;
+    }
+    
+    .instruction h3 {
+        font-size: 0.95rem;
+    }
+    
+    .instruction p {
+        font-size: 0.85rem;
+    }
+    
+    .tecla-hint {
+        font-size: 0.7rem;
+        padding: 0.3rem 0.5rem;
+        max-width: 240px;
+    }
+}
+
+/* Alturas muy pequeñas (paisaje en móviles) */
+@media screen and (max-height: 500px) {
+    .section2CT-container {
+        margin: 8px 0 0.25rem 0;
+    }
+    
+    .model-container-CT {
+        height: 280px;
+    }
+    
+    .model-container-CT canvas {
+        height: 280px;
+    }
+    
+    .title h1 {
+        font-size: 1.2rem;
+        padding: 0.3rem 0.8rem;
+    }
+    
+    .CT-intro h2 {
+        font-size: 1.1rem;
+        margin-bottom: 0.3rem;
+    }
+    
+    .CT-intro p {
+        font-size: 0.8rem;
+        margin-bottom: 0.5rem;
+    }
+    
+    .instruction {
+        padding: 0.4rem 0.7rem;
+        font-size: 0.85rem;
+    }
+    
+    .symptom-card {
+        padding: 0.4rem 0.7rem;
+        font-size: 0.8rem;
+    }
+    
+    .tecla-hint {
+        font-size: 0.7rem;
+        padding: 0.3rem 0.6rem;
+    }
+    
+    .sintoma-info h3 {
+        font-size: 0.9rem;
+    }
+}
+
+/* Alturas muy pequeñas en móviles */
+@media screen and (max-height: 400px) and (max-width: 767px) {
+    .model-container-CT {
+        height: 250px;
+    }
+    
+    .model-container-CT canvas {
+        height: 250px;
+    }
+    
+    .section2CT-container {
+        margin: 4px 0;
+    }
+}
+
+/* Orientación landscape específica para móviles */
+@media screen and (orientation: landscape) and (max-height: 500px) {
+    .section2CT-container {
+        margin: 4px 0;
+        padding: 0.25rem;
+    }
+    
+    .CT-intro {
+        margin-bottom: 0.5rem;
+    }
+    
+    .CT-intro h2 {
+        font-size: 1.1rem;
+        margin-bottom: 0.25rem;
+    }
+    
+    .CT-intro p {
+        font-size: 0.8rem;
+        margin-bottom: 0.5rem;
+    }
+}
+/* Laptops pequeñas (1200px - 1439px) */
+@media screen and (min-width: 1200px) and (max-width: 1439px) {
+    .section2CT-container {
+        margin: 48px 0 1rem 0;
+    }
+    
+    .model-container-CT {
+        width: 95%;
+        max-width: 1100px;
+        height: 480px;
+    }
+    
+    .model-container-CT canvas {
+        height: 480px;
+    }
+    
+    .title h1 {
+        font-size: 1.9rem;
+        padding: 0.65rem 1.4rem;
+    }
+    
+    .instruction {
+        max-width: 240px;
+        font-size: 1.05rem;
+        padding: 0.75rem 1.1rem;
+    }
+    
+    .symptom-card {
+        max-width: 240px;
+        font-size: 1.05rem;
+        padding: 0.7rem 1rem;
+    }
+    
+    .instruction h3 {
+        font-size: 1.25rem;
+    }
+    
+    .instruction p {
+        font-size: 1.05rem;
+    }
+    
+    .tecla-hint {
+        font-size: 0.88rem;
+        padding: 0.5rem 0.9rem;
+        max-width: 300px;
+    }
+}
+
+/* Ajustes específicos para 1366x768 */
+@media screen and (width: 1366px) and (height: 768px) {
+    .model-container-CT {
+        height: 420px;
+    }
+    
+    .model-container-CT canvas {
+        height: 420px;
+    }
+    
+    .title h1 {
+        font-size: 1.8rem;
+    }
+    
+    .instruction {
+        max-width: 230px;
+    }
+    
+    .tecla-hint {
+        bottom: 10px;
+        right: 10px;
+    }
+}
+
+/* Ajustes para alturas específicas en laptops */
+@media screen and (min-width: 1200px) and (max-height: 800px) {
+    .model-container-CT {
+        height: 500px;
+    }
+    
+    .model-container-CT canvas {
+        height: 500px;
+    }
+
+    .section2CT-container {
+        margin: 32px 0 0.8rem 0;
     }
 }
