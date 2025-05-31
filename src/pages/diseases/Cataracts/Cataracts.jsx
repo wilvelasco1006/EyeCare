@@ -1,6 +1,7 @@
 import SectionOne from "./sections/sectionOne/SectionOne";
 import SectionTwoCT from "./sections/sectionTwoCT/sectionTwoCT";
-//  
+import SectionThreeCT from "./sections/sectionThreeCT/sectionThreeCT";
+
 import "../Cataracts/Cataracts.css";
 import React, { useRef, useEffect, useState } from "react";
 
@@ -97,9 +98,9 @@ const Cataracts = () => {
             </section>
 
             {/* Sección 3: Tratamiento - Modelo 3D e información */}
-            {/* <section ref={sectionRefs[2]} className="section3-CT">
+            <section ref={sectionRefs[2]} className="section3-CT">
                 <SectionThreeCT />
-            </section> */}
+            </section>
         </div>
     );
 };
