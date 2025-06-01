@@ -6,7 +6,7 @@ const VideoConjuntivitis = ({ videoRef }) => {
     const texture = useVideoTexture(
         "https://res.cloudinary.com/dbxvkqv6w/video/upload/v1748538579/3_CONSEJOS_para_quitar_la_CONJUNTIVITIS_Short_YoutubeShort_y3zmm2.mp4",
         {
-            muted: false,
+            muted: true,
             loop: true,
             autoplay: true,
             crossOrigin: "anonymous",

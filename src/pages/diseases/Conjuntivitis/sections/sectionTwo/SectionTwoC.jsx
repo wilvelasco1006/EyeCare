@@ -90,6 +90,7 @@ const Scene = ({ setShowKeyHint }) => {
         setCameraLocked(true);
         setShowKeyHint(true); // Mostramos el mensaje flotante al hacer clic en el ojo sano
     };
+    
 
     const handleInfectedClick = () => {
         const targetPos = infectedEyeRef.current.getWorldPosition(new THREE.Vector3()).add(new THREE.Vector3(0, 0, 2));
@@ -105,11 +106,7 @@ const Scene = ({ setShowKeyHint }) => {
     return (
         <>
             {/* Ojo sano */}
-            <group
-                ref={healthyEyeRef}
-                position={[-0.9, 0, 1.2]}
-                rotation={[0, Math.PI, 0]}
-                onClick={handleHealthyClick}
+            <group ref={healthyEyeRef} position={[-0.9, 0, 1.2]} rotation={[0, Math.PI, 0]} onClick={handleHealthyClick}
             >
                 <EyeHealthModel ref={healthyModelRef} scale={[0.5, 0.5, 0.5]} />
             </group>
