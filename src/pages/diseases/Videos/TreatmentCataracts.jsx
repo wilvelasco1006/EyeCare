@@ -5,7 +5,7 @@ const VideoCataracts = ({ videoRef }) => {
     const texture = useVideoTexture(
         "https://res.cloudinary.com/dijh9two4/video/upload/v1748662729/tratamiento-cataratas_oedvx7.mp4",
         {
-            muted: false,
+            muted:  true,
             loop: true,
             autoplay: true,
             crossOrigin: "anonymous",
@@ -21,7 +21,7 @@ const VideoCataracts = ({ videoRef }) => {
     return (
         <mesh position={[0, 1, 0]}>
             {/* Proporción vertical */}
-            <planeGeometry args={[2, 3.5]} />
+            <planeGeometry args={[2.4, 3.5]} />
             <meshBasicMaterial map={texture} toneMapped={false} />
         </mesh>
     );

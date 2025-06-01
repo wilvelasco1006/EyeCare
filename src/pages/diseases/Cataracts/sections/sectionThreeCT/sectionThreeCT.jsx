@@ -1,7 +1,7 @@
 import { Canvas } from "@react-three/fiber";
 import "./SectionThreeCT.css";
 import VideoCataracts from "../../../Videos/TreatmentCataracts";
-import { OrbitControls, Text, Html, Sky } from "@react-three/drei";
+import { OrbitControls, Text, Html, Sky, Text3D, useFont } from "@react-three/drei";
 import { CiPause1 } from "react-icons/ci"
 import { FaPlay } from "react-icons/fa";
 import { AiFillMuted } from "react-icons/ai";
@@ -9,11 +9,13 @@ import { useState, useRef } from "react";
 
 import Floor from "./../../Model-3d/Floor";
 import {SurgicalToolSet} from "../../Model-3d/SurgicalToolSet";
-const SectionThreeCT = () => {
 
+const SectionThreeCT = () => {
+    // Carga la fuente para Text3D
+    const font = useFont(undefined);
     const videoRef = useRef(null);// Referencia al video
     const [showAnimation, setShowAnimation] = useState(false); // Estado para mostrar/ocultar la animación
-
+    
     const handlePlay = () => videoRef.current?.play(); // Función para reproducir el video
     const handlePause = () => videoRef.current?.pause();// Función para pausar el video
     // Función para alternar el estado de silencio del video
@@ -32,13 +34,14 @@ const SectionThreeCT = () => {
                     <OrbitControls
                         enableZoom={true}
                         enablePan={true}
-                        maxDistance={15}
+                        maxDistance={10}
                         minDistance={3}
                     />
 
                     {/* Herramientas quirúrgicas */}
                     <SurgicalToolSet scale={3.5} />
-
+                    {/* Modelo 3D de Sketchfab */}
+                    
                     {/* Sección de video (lado izquierdo) */}
                     <group position={[-4, 0.4, -2]} scale={0.6} rotation={[0, 0.3, 0]}>
                         <Text position={[0, 3, 0]} fontSize={0.4} color="#2c3e50">
@@ -63,7 +66,7 @@ const SectionThreeCT = () => {
                     </group>
 
                     {/* Sección de animación Sketchfab (lado derecho) */}
-                    <group position={[4, 0.4, -2]} scale={0.8} rotation={[0, -0.3, 0]}>
+                    <group position={[4, 0.2, -2]} scale={0.6} rotation={[0, -0.3, 0]}>
                         <Text position={[0, 3, 0]} fontSize={0.4} color="#e74c3c">
                             ANIMACIÓN 3D INTERACTIVA
                         </Text>
@@ -89,7 +92,7 @@ const SectionThreeCT = () => {
                             <Html
                                 transform
                                 scale={0.6}
-                                position={[0, -0.5, 0]}
+                                position={[1.5, -0.5,  0]}
                                 center
                                 style={{ width: '600px', height: '400px' }}
                             >
@@ -127,15 +130,28 @@ const SectionThreeCT = () => {
 
                     {/* Título principal */}
                     <group position={[0, 4, -1]}>
-                        <Text
-                            position={[0, 0, 0]}
-                            fontSize={0.6}
-                            color="#2c3e50"
-                            anchorX="center"
-                            anchorY="middle"
-                        >
-                            TRATAMIENTO DE CATARATAS
-                        </Text>
+                        {font ? (
+                            <Text
+                                //font={font}
+                                position={[0, -0.9, 0]}
+                                fontSize={0.6}
+                                color="#2c3e50"
+                                anchorX="center"
+                                anchorY="middle"
+                            >
+                                TRATAMIENTO DE CATARATAS
+                            </Text>
+                        ) : (
+                            <Text
+                                position={[0, 0, 0]}
+                                fontSize={0.6}
+                                color="#2c3e50"
+                                anchorX="center"
+                                anchorY="middle"
+                            >
+                                TRATAMIENTO DE CATARATAS
+                            </Text>
+                        )}
                     </group>
 
                     {/* Información adicional flotante */}

@@ -394,7 +394,7 @@ export function SurgicalToolSet(props) {
 
             {/* Información de la herramienta seleccionada */}
             {toolInfo && (
-                <Html position={[0, 2, 0]} center>
+                <Html position={[-0.8, 0.6, 0]} center>
                     <div style={{
                         background: toolInfo.color,
                         color: 'white',
@@ -417,18 +417,19 @@ export function SurgicalToolSet(props) {
             )}
 
             {/* Controles de teclado */}
-            <Html position={[0, -2, 2]} center>
+            <Html position={[-2, 0.2, 0]} center>
                 <div style={{
                     background: 'rgba(0,0,0,0.8)',
                     color: 'white',
-                    padding: '15px',
+                    padding: '2px',
                     borderRadius: '10px',
-                    fontSize: '12px',
+                    fontSize: '10px',
                     textAlign: 'center',
+                    minWidth: '280px',
                     backdropFilter: 'blur(10px)'
                 }}>
-                    <strong>Controles:</strong><br />
-                    1-5: Seleccionar herramientas | S: Modo showcase | A: Animación cirugía | R: Reset | ESC: Salir
+                    <strong>Controles de la bandeja:</strong><br />
+                    1-5: Seleccionar herramientas | S: Modo showcase | R: Reset | ESC: Salir
                 </div>
             </Html>
         </group>

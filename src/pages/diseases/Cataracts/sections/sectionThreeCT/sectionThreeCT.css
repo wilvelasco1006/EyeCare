@@ -5,7 +5,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  
 }
 
 .treatment-CT {
@@ -105,13 +105,13 @@
 .show-animation-btn:hover {
   transform: translateY(-3px);
   box-shadow: 0 12px 35px rgba(231, 76, 60, 0.4);
-  background: linear-gradient(45deg, #c0392b, #e74c3c);
+  background: linear-gradient(45deg, #2b67c0, #3c7be7);
 }
 
 /* Contenedor de Sketchfab en 3D */
 .sketchfab-container-3d {
-  width: 600px;
-  height: 400px;
+  width: 400px;
+  height: 300px;
   background: rgba(0, 0, 0, 0.9);
   border-radius: 15px;
   overflow: hidden;
@@ -128,7 +128,7 @@
 }
 
 .close-animation-btn {
-  background: rgba(231, 76, 60, 0.9);
+  background: rgba(60, 151, 231, 0.9);
   color: white;
   border: none;
   width: 35px;
@@ -145,7 +145,7 @@
 }
 
 .close-animation-btn:hover {
-  background: rgba(192, 57, 43, 0.9);
+  background: rgba(43, 177, 192, 0.9);
   transform: scale(1.1);
 }
 
