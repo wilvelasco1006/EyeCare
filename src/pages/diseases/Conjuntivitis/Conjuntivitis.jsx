@@ -96,9 +96,7 @@ const Conjuntivitis = () => {
             
             {/* Sección 3: Prevención y Tratamiento */}
             <section ref={sectionRefs[2]} className="section3">
-                <div className="content-container">
                     <SectionThree />
-                </div>
             </section>
         </div>
     );

@@ -25,7 +25,7 @@ const ProtectedRoute = ({ children }) => {
     const closeModal = () => {
         setShowModal(false);
         // Redirigir a la página de enfermedades
-        navigate('/diseases/content-diseases');
+        // navigate('/diseases/content-diseases');
     };
    
     useEffect(() => {

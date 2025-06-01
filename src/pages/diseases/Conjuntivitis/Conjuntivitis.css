@@ -11,7 +11,7 @@
 }
 
 /* Estilos para cada sección */
-:is(.section1C,.section2C,.section3C) {
+:is(.section1,.section2,.section3) {
   height: 100vh;
   width: 100%; /* Cambiado de 90% a 100% para evitar scroll horizontal */
   position: relative;
