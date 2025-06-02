@@ -91,15 +91,15 @@ const Scene = () => {
             [1.2, -0.3, 0],   // Posición para "Visión borrosa o nublada"
             [-1.2, -0.1, 0],  // Posición para "Sensibilidad a la luz"
             [0, -0.8, 0],     // Posición para "Colores menos brillantes"
-            [0, 1.6, 0],      // Posición para "Dificultad para ver de noche"
+            [0, 1.2, 0],      // Posición para "Dificultad para ver de noche"
             [-1.3, -0.2, 0]   // Posición para "Visión doble en un solo ojo"
         ];
         // Posiciones para laptops pequeñas (1366x768)
         const smallLaptopPositions = [
             [1.0, -0.35, 0],  // Más centrado verticalmente
             [-1.0, -0.1, 0],
-            [0, -0.65, 0],
-            [0, 1.2, 0],
+            [0, -0.99, 0],
+            [0, 0.8, 0],
             [-1.1, -0.25, 0]
         ];
 
@@ -329,7 +329,7 @@ const SectionTwoCT = () => {
                     ]}
                 >
                     <Canvas camera={{ position: [0, 0.3, 2.5], fov: window.innerWidth < 1440 ? 45 : 50 }} shadows={true}>
-                        <ambientLight intensity={0.7} />
+                        <ambientLight intensity={0.9} />
                         <directionalLight
                             position={[2, 2, 2]}
                             intensity={2}

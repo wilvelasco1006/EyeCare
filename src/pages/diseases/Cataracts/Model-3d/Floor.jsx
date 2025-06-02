@@ -18,9 +18,9 @@ const Floor = () => {
       <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, -0.5, 0]} position-y ={-1} receiveShadow = {true}>
         <planeGeometry args={[10, 10]} />
         <meshStandardMaterial
-          color={"white"}
-          transparent={true}
-          opacity={0.40}
+          color={"lightblue"}
+          // transparent={true}
+          // opacity={0.40}
         />
       </mesh>
     );
