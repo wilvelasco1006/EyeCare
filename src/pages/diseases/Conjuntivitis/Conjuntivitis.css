@@ -13,16 +13,16 @@
 /* Estilos para cada sección */
 :is(.section1,.section2,.section3) {
   height: 100vh;
-  width: 100%; /* Cambiado de 90% a 100% para evitar scroll horizontal */
+  width: 100%; 
   position: relative;
   overflow: hidden;
-  scroll-snap-align: start; /* Punto de snap */
+  scroll-snap-align: start; 
   display: flex;
   flex-direction: column;
   justify-content: center;
   padding: 2rem;
-  box-sizing: border-box; /* Asegura que el padding no afecte el ancho total */
-  margin: 0 auto; /* Centrado horizontal */
+  box-sizing: border-box;
+  margin: 0 auto; 
 }
 
 /* Navegación lateral con puntos */
