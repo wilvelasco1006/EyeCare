@@ -13,7 +13,8 @@
     margin: 30px 10px 0 10px;
     border-radius: 30px;
     position: relative;
-
+    min-height: 100vh; /* <-- Esto hace que ocupe toda la altura de la ventana */
+    width: 100%;
 }
 
 .Text-container-sectionOneG{
@@ -63,7 +64,7 @@
     margin-bottom: 15px;
 }
 
-/* Palabra "conjuntivitis" resaltada */
+
 .glaucoma-description span {
     color: #0066cc;
     font-weight: bold;
@@ -99,8 +100,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    padding: 2rem 10rem 5rem 10rem;
-    /* antes: 5rem arriba y 10rem abajo */
+    padding: 2rem 2rem 2rem 2rem; /* Cambia los 10rem por 2rem */
     min-width: 300px;
     min-height: 300px;
     border-radius: 20px;
@@ -160,7 +160,7 @@
     align-items: center;
 }
 
-.btn-conjuntivitis:hover {
+.btn-glaucoma:hover {
     background-color: #3b8bbf;
     box-shadow: 0 0 20px #52a1c0;
 }
@@ -281,4 +281,10 @@
     height: 90px;
     overflow-y: auto;
     padding-right: 0.5rem;
+}
+
+@media (max-width: 900px) {
+    .model-container {
+        padding: 1rem;
+    }
 }
