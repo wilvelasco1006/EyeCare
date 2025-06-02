@@ -1,5 +1,5 @@
 import { Canvas } from "@react-three/fiber";
-import "./SectionThreeCT.css";
+import "./sectionThreeCT.css";
 import VideoCataracts from "../../../Videos/TreatmentCataracts";
 import { OrbitControls, Text, Html, Sky, Text3D, Stars } from "@react-three/drei";
 import { CiPause1 } from "react-icons/ci"
