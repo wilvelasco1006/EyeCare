@@ -329,7 +329,7 @@ const SectionTwoCT = () => {
                     ]}
                 >
                     <Canvas camera={{ position: [0, 0.3, 2.5], fov: window.innerWidth < 1440 ? 45 : 50 }} shadows={true}>
-                        <ambientLight intensity={0.7} />
+                        <ambientLight intensity={0.9} />
                         <directionalLight
                             position={[2, 2, 2]}
                             intensity={2}

@@ -80,7 +80,7 @@ const Cataracts = () => {
                     onClick={() => scrollToSection(2)}
                     aria-label="Ir a sección 3"
                 >
-                    <span className="dot-tooltip">Prevención</span>
+                    <span className="dot-tooltip">Tratamiento</span>
                 </div>
             </div>
 

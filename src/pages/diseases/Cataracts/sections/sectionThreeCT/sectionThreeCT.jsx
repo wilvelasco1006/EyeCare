@@ -5,17 +5,16 @@ import { OrbitControls, Text, Html, Sky, Text3D, useFont } from "@react-three/dr
 import { CiPause1 } from "react-icons/ci"
 import { FaPlay } from "react-icons/fa";
 import { AiFillMuted } from "react-icons/ai";
-import { useState, useRef } from "react";
+import { useState, useRef, Suspense } from "react";
 
 import Floor from "./../../Model-3d/Floor";
-import {SurgicalToolSet} from "../../Model-3d/SurgicalToolSet";
+import { SurgicalToolSet } from "../../Model-3d/SurgicalToolSet";
 
 const SectionThreeCT = () => {
-    // Carga la fuente para Text3D
-    const font = useFont(undefined);
+
     const videoRef = useRef(null);// Referencia al video
     const [showAnimation, setShowAnimation] = useState(false); // Estado para mostrar/ocultar la animación
-    
+
     const handlePlay = () => videoRef.current?.play(); // Función para reproducir el video
     const handlePause = () => videoRef.current?.pause();// Función para pausar el video
     // Función para alternar el estado de silencio del video
@@ -41,7 +40,7 @@ const SectionThreeCT = () => {
                     {/* Herramientas quirúrgicas */}
                     <SurgicalToolSet scale={3.5} />
                     {/* Modelo 3D de Sketchfab */}
-                    
+
                     {/* Sección de video (lado izquierdo) */}
                     <group position={[-4, 0.4, -2]} scale={0.6} rotation={[0, 0.3, 0]}>
                         <Text position={[0, 3, 0]} fontSize={0.4} color="#2c3e50">
@@ -92,7 +91,7 @@ const SectionThreeCT = () => {
                             <Html
                                 transform
                                 scale={0.6}
-                                position={[1.5, -0.5,  0]}
+                                position={[1.5, -0.5, 0]}
                                 center
                                 style={{ width: '600px', height: '400px' }}
                             >
@@ -130,28 +129,27 @@ const SectionThreeCT = () => {
 
                     {/* Título principal */}
                     <group position={[0, 4, -1]}>
-                        {font ? (
-                            <Text
-                                //font={font}
-                                position={[0, -0.9, 0]}
-                                fontSize={0.6}
-                                color="#2c3e50"
-                                anchorX="center"
-                                anchorY="middle"
-                            >
-                                TRATAMIENTO DE CATARATAS
-                            </Text>
-                        ) : (
-                            <Text
-                                position={[0, 0, 0]}
-                                fontSize={0.6}
-                                color="#2c3e50"
-                                anchorX="center"
-                                anchorY="middle"
-                            >
-                                TRATAMIENTO DE CATARATAS
-                            </Text>
-                        )}
+                        <Text3D
+                            font="/fonts/B20_Sans.json"
+                            position={[-4.5, -0.9, 0]}
+                            size={0.6}
+                            height={0.1}
+                            curveSegments={12}
+                            bevelEnabled={true}
+                            bevelThickness={0.02}
+                            bevelSize={0.02}
+                            bevelOffset={0}
+                            bevelSegments={5}
+                            castShadow
+                            receiveShadow
+                        >
+                            TRATAMIENTO DE LAS CATARATAS
+                            <meshStandardMaterial
+                                color="#52a1c0"
+                                metalness={0.1}
+                                roughness={0.8}
+                            />
+                        </Text3D>
                     </group>
 
                     {/* Información adicional flotante */}
@@ -176,7 +174,7 @@ const SectionThreeCT = () => {
                 </Canvas>
 
             </div>
-            
+
         </div>
     );
 };
