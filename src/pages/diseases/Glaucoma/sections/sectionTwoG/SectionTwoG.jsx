@@ -30,7 +30,10 @@ const Scene = ({ setShowKeyHint }) => {
     const [healthyMessage, setHealthyMessage] = useState(false);
     const [target, setTarget] = useState(null);
     const [cameraLocked, setCameraLocked] = useState(false);
-    const [currentSymptomIndex, setCurrentSymptomIndex] = useState(0);
+    const [currentSymptomIndex, setCurrentSymptomIndex] = useState(null);
+
+    // Para animación suave
+    const [eyeTargetRotation, setEyeTargetRotation] = useState(0);
 
     const symptoms = [
         "Pérdida de visión periférica.",
@@ -49,7 +52,22 @@ const Scene = ({ setShowKeyHint }) => {
             camera.position.lerp(target, 0.05); // Mueve la cámara hacia el objetivo
             camera.lookAt(0, 0, 0); // Asegura que la cámara mire al centro
         }
+        // Animación suave del ojo infectado
+        if (EyeGlaucomaRef.current) {
+            EyeGlaucomaRef.current.rotation.y += (eyeTargetRotation - EyeGlaucomaRef.current.rotation.y) * 0.1;
+        }
     });
+
+    // Cuando cambia el síntoma, anima el ojo
+    useEffect(() => {
+        if (currentSymptomIndex !== null) {
+            setEyeTargetRotation(0.5); // Gira suavemente a la derecha
+            const timeout = setTimeout(() => {
+                setEyeTargetRotation(0); // Regresa suavemente al centro
+            }, 600); // Duración de la animación (ms)
+            return () => clearTimeout(timeout);
+        }
+    }, [currentSymptomIndex]);
 
     // Reiniciar la vista cuando se presione la tecla R
     useEffect(() => {
