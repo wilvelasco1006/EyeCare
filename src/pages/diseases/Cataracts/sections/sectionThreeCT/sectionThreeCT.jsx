@@ -1,7 +1,7 @@
 import { Canvas } from "@react-three/fiber";
 import "./SectionThreeCT.css";
 import VideoCataracts from "../../../Videos/TreatmentCataracts";
-import { OrbitControls, Text, Html, Sky, Text3D, useFont } from "@react-three/drei";
+import { OrbitControls, Text, Html, Sky, Text3D, Stars } from "@react-three/drei";
 import { CiPause1 } from "react-icons/ci"
 import { FaPlay } from "react-icons/fa";
 import { AiFillMuted } from "react-icons/ai";
@@ -25,10 +25,28 @@ const SectionThreeCT = () => {
     return (
         <div className="container-section3-CT">
             <div className="treatment-CT">
-                <Canvas camera={{ position: [0, 2, 8], fov: 50 }}>
-                    <ambientLight intensity={0.6} />
-                    <directionalLight position={[10, 10, 5]} intensity={0.8} />
+                <Canvas camera={{ position: [0, 2, 8], fov: 50 }} shadows>
+                    <ambientLight castShadow intensity={0.6} />
+                    <directionalLight
+                        position={[1, 1, 1]}
+                        intensity={1.2}
+                        castShadow={true}
+                        shadow-mapSize={[2048, 2048]}
+                    />
+                    <hemisphereLight
+                        skyColor="#87CEEB" // Azul cielo
+                        groundColor="blue" // Azul para el suelo
+                        intensity={0.3}
+                    />
                     <Sky />
+                    <Stars
+                        radius={100} // Radio de la esfera de estrellas
+                        depth={50} // Profundidad del campo de estrellas
+                        count={5000} // Número de estrellas
+                        factor={6} // Tamaño de las estrellas
+                        saturation={0} // Saturación del color (0 = blanco)
+                        fade={true} // Las estrellas se desvanecen al acercarse
+                    />
                     <Floor />
                     <OrbitControls
                         enableZoom={true}
@@ -66,7 +84,7 @@ const SectionThreeCT = () => {
 
                     {/* Sección de animación Sketchfab (lado derecho) */}
                     <group position={[4, 0.2, -2]} scale={0.6} rotation={[0, -0.3, 0]}>
-                        <Text position={[0, 3, 0]} fontSize={0.4} color="#e74c3c">
+                        <Text position={[0, 3, 0]} fontSize={0.4} color="#2b67c0">
                             ANIMACIÓN 3D INTERACTIVA
                         </Text>
 
@@ -154,7 +172,7 @@ const SectionThreeCT = () => {
 
                     {/* Información adicional flotante */}
                     <group position={[0, -2, 0]}>
-                        <Html transform scale={0.4} position={[0, 0, 0]} center>
+                        <Html transform scale={0.3} position={[0, 1, 0]} center>
                             <div className="info-panel-3d">
                                 <div className="info-item">
                                     <h4>Técnica Principal</h4>

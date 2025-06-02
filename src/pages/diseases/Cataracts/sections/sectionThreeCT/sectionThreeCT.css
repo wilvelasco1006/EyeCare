@@ -88,7 +88,7 @@
 }
 
 .show-animation-btn {
-  background: linear-gradient(45deg, #e74c3c, #c0392b);
+  background: linear-gradient(45deg, #3c86e7, #2b71c0);
   color: white;
   border: none;
   padding: 15px 30px;
@@ -97,14 +97,14 @@
   font-weight: 600;
   cursor: pointer;
   transition: all 0.3s ease;
-  box-shadow: 0 8px 25px rgba(231, 76, 60, 0.3);
+  box-shadow: 0 8px 25px rgba(60, 194, 231, 0.3);
   text-transform: uppercase;
   letter-spacing: 1px;
 }
 
 .show-animation-btn:hover {
   transform: translateY(-3px);
-  box-shadow: 0 12px 35px rgba(231, 76, 60, 0.4);
+  box-shadow: 0 12px 35px rgba(60, 197, 231, 0.4);
   background: linear-gradient(45deg, #2b67c0, #3c7be7);
 }
 

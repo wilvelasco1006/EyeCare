@@ -11,6 +11,7 @@ import Floor from "../../Model-3d/Floor";
 import SliderControls from "../../../utils/SliderControls/SliderControls";
 import { EyeCataractModel } from "../../Model-3d/EyeCataractModel";
 import Staging from "../../../staging/Staging";
+import ScrollIndicator from "./ScrollIndicator";
 
 // Componente controlador de cámara y modelo
 const CameraAndModelController = ({ animationSpeed, setHoverMessage }) => {
@@ -294,6 +295,8 @@ const SectionOne = () => {
                     </button>
                 </div>
             </div>
+            {/* Indicador de Scroll */}
+            {/* <ScrollIndicator /> */}
             {showModal && (
                 <div className="modal-overlay" onClick={() => setShowModal(false)}>
                     <div className="modal-content" onClick={(e) => e.stopPropagation()}>
