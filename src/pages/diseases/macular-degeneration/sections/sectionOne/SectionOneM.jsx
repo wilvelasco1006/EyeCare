@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { useNavigate } from "react-router";
 import "./sectionOneM.css";
 import { Canvas } from "@react-three/fiber";
@@ -102,7 +103,7 @@ const SectionOneM = () => {
         <div className="sectionOneM">
             <div className="Text-container-sectionOneM">
                     <button className="btn-atras" onClick={() => navigate('/diseases/content-diseases?from=macular-degeneration')}> Atrás</button>
-                <h2 className="macular-title">Degeneracion Macular</h2>
+                <h2 className="macular-title">Degeneración Macular</h2>
                 {/* Slider informativo de causas */}
                 <div className="slider-contentM">
                     {/* 1) Track: todos los slides en fila */}

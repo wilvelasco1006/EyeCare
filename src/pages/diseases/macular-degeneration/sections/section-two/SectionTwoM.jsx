@@ -1,3 +1,5 @@
+/* eslint-disable react/no-unknown-property */
+/* eslint-disable react-hooks/exhaustive-deps */
 import { Canvas, useFrame, useThree } from "@react-three/fiber"
 import Lights from "../../lights/Lights";
 import { Html, OrbitControls, KeyboardControls, useKeyboardControls } from "@react-three/drei";
@@ -46,14 +48,14 @@ const Scene = () => {
 
   const handleEyeClick = () => {
     const targetPos = eyeRef.current.getWorldPosition(new THREE.Vector3()).add(new THREE.Vector3(0, 0, 3));
-    setMessage("Este es el Ojo sano.");
+    setMessage("Este es el ojo sano.");
     setTarget(targetPos);
     setShowHint(true);
   };
 
   const handleMaculaClick = () => {
     const targetPos = maculaRef.current.getWorldPosition(new THREE.Vector3()).add(new THREE.Vector3(0, 0, 3));
-    setMessage("Así se ve la Mácula Afectada y estos son algunos síntomas: \n" +
+    setMessage("Así se ve la mácula afectada y estos son algunos síntomas: \n" +
       "Visión borrosa o distorsionada.\n" +
       "Dificultad para ver colores.\n" +
       "Puntos ciegos en la visión central. Entre otros");
@@ -65,7 +67,7 @@ const Scene = () => {
     <>
       {/* Floating title */}
       <Html position={[0, 1, -2]} center distanceFactor={3} wrapperClass="title" transform>
-        <h1>Comparación entre el Exterior del Ojo Sano y la Mácula Afectada en el Interior</h1>
+        <h1>Comparación entre el exterior del ojo sano y la mácula afectada en el interior</h1>
       </Html>
 
       {/* Eye model */}
