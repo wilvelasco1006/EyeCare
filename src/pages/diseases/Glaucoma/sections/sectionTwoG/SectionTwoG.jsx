@@ -41,7 +41,7 @@ const Scene = ({ setShowKeyHint }) => {
     ];
 
     // Detectar teclas presionadas
-    const [subscribeKeys, getKeys] = useKeyboardControls();
+    const [subscribeKeys] = useKeyboardControls();
 
     // Movimiento de cámara y rotación de modelos
     useFrame(() => {
@@ -60,6 +60,7 @@ const Scene = ({ setShowKeyHint }) => {
         });
 
         return () => unsubscribe();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [subscribeKeys]);
 
     const resetView = () => {
@@ -140,7 +141,7 @@ const Scene = ({ setShowKeyHint }) => {
     );
 };
 
-const SectionTwoC = () => {
+const SectionTwoG = () => {
     const [showKeyHint, setShowKeyHint] = useState(false);
 
     // Configurar temporizador para ocultar el mensaje después de 8 segundos cuando cambie a true
@@ -191,4 +192,4 @@ const SectionTwoC = () => {
     );
 };
 
-export default SectionTwoC;
+export default SectionTwoG;
