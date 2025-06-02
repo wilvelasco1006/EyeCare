@@ -1,0 +1,121 @@
+.scroll-indicator {
+    position: fixed;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1000;
+    cursor: pointer;
+    animation: fadeInUp 1s ease-out;
+}
+
+.scroll-indicator-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    padding: 15px 20px;
+    background: rgba(17, 106, 239, 0.649);
+    color: white;
+    border-radius: 25px;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+}
+
+.scroll-indicator:hover .scroll-indicator-content {
+    background: rgba(17, 106, 239, 1);
+    transform: translateY(-5px);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.2);
+}
+
+.scroll-text {
+    font-size: 0.9rem;
+    font-weight: 500;
+    text-align: center;
+    white-space: nowrap;
+}
+
+.scroll-arrow {
+    font-size: 1.2rem;
+    animation: bounce 2s infinite;
+}
+
+/* Animaciones */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateX(-50%) translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(-50%) translateY(0);
+    }
+}
+
+@keyframes bounce {
+    0%, 20%, 50%, 80%, 100% {
+        transform: translateY(0);
+    }
+    40% {
+        transform: translateY(-8px);
+    }
+    60% {
+        transform: translateY(-4px);
+    }
+}
+
+/* Versión alternativa más sutil */
+.scroll-indicator.minimal {
+    bottom: 20px;
+    right: 30px;
+    left: auto;
+    transform: none;
+}
+
+.scroll-indicator.minimal .scroll-indicator-content {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.scroll-indicator.minimal .scroll-text {
+    display: none;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .scroll-indicator {
+        bottom: 20px;
+    }
+    
+    .scroll-indicator-content {
+        padding: 12px 16px;
+    }
+    
+    .scroll-text {
+        font-size: 0.8rem;
+    }
+    
+    .scroll-arrow {
+        font-size: 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .scroll-text {
+        display: none;
+    }
+    
+    .scroll-indicator-content {
+        width: 45px;
+        height: 45px;
+        border-radius: 50%;
+        padding: 0;
+        justify-content: center;
+    }
+}

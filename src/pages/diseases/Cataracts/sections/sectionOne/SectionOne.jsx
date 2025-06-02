@@ -11,6 +11,7 @@ import Floor from "../../Model-3d/Floor";
 import SliderControls from "../../../utils/SliderControls/SliderControls";
 import { EyeCataractModel } from "../../Model-3d/EyeCataractModel";
 import Staging from "../../../staging/Staging";
+import ScrollIndicator from "./ScrollIndicator";
 
 // Componente controlador de cámara y modelo
 const CameraAndModelController = ({ animationSpeed, setHoverMessage }) => {
@@ -211,9 +212,9 @@ const SectionOne = () => {
 
     return (
         <>
-            <div className="sectionOneCT">
+            <div className="sectionOneCT"> 
                 <div className="Text-container-sectionOne">
-                    <button className="btn-atras" onClick={() => navigate('/diseases/content-diseases?from=cataratas')}>
+                    <button className="btn-atras" onClick={() => navigate('/diseases/content-diseases?from=cataratas')}> 
                         Atrás
                     </button>
                     <h2 className="cataracts-title">Cataratas</h2>
@@ -248,6 +249,14 @@ const SectionOne = () => {
                     <button className="btn-more-info" onClick={() => setShowModal(true)}>
                         Ver más
                     </button>
+                    {showInstruction && (
+                        <div className="box-message show">
+                            <div>
+                                <h3>¡Es hora de navegar!</h3>
+                                <p>Dale a la flecha para saber un poco más...</p>
+                            </div>
+                        </div>
+                    )}
                 </div>
                 <div className="model-container">
                     <div className="floating-message">{messages[viewIndex]}</div>
@@ -268,7 +277,7 @@ const SectionOne = () => {
                             animationSpeed={animationSpeed}
                             setHoverMessage={setHoverMessage}
                         />
-                        {/* <Floor /> */}
+                        <Floor />
                     </Canvas>
 
                     <button
@@ -286,6 +295,8 @@ const SectionOne = () => {
                     </button>
                 </div>
             </div>
+            {/* Indicador de Scroll */}
+            {/* <ScrollIndicator /> */}
             {showModal && (
                 <div className="modal-overlay" onClick={() => setShowModal(false)}>
                     <div className="modal-content" onClick={(e) => e.stopPropagation()}>
