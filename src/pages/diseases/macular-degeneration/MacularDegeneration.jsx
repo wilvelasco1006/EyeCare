@@ -1,5 +1,8 @@
+/* eslint-disable no-unused-vars */
 import SectionOneM from "./sections/sectionOne/SectionOneM";
 import SectionTwoM from "./sections/section-two/SectionTwoM";
+import SectionThreeM from "./sections/section-three/SectionThreeM";
+
 import './MacularDegeneration.css';
 import React, { useRef, useEffect, useState } from "react";
 
@@ -91,11 +94,7 @@ const MacularDegeneration = () => {
             </section>
             
             <section ref={sectionRefs[2]} className="section3M">     
-                <h2>Cuándo consultar al médico</h2>
-                <div className="content-container">
-                    {/* Aquí va el contenido de tu tercera sección */}
-                    <p>Información importante sobre cuándo buscar atención médica para problemas de Degeneración Macular.</p>
-                </div>
+                <SectionThreeM />   
             </section>
         </div>
     );

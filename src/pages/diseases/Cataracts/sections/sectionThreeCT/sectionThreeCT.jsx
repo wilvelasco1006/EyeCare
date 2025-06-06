@@ -1,3 +1,5 @@
+/* eslint-disable react/no-unknown-property */
+/* eslint-disable no-unused-vars */
 import { Canvas } from "@react-three/fiber";
 import "./sectionThreeCT.css";
 import VideoCataracts from "../../../Videos/TreatmentCataracts";
