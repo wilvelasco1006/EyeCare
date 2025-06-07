@@ -329,16 +329,6 @@
   max-width: 800px;
 }
 
-.treatment-prompt-message {
-  background-color: rgba(0, 0, 0, 0.8);
-  color: white;
-  padding: 10px 20px;
-  border-radius: 10px;
-  font-size: 14px;
-  text-align: center;
-  max-width: 300px;
-}
-
 .info-panel-extra-M {
   background: #ffffffde;
   padding: 15px;

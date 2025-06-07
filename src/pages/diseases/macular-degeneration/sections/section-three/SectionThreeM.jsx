@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
 /* eslint-disable react/no-unknown-property */
 
@@ -75,7 +76,7 @@ const SectionThreeM = () => {
   useEffect(() => {
     const timer = setTimeout(() => {
       setShowInitialMessage(false);
-    }, 8000);
+    }, 10000);
 
     return () => clearTimeout(timer);
   }, []);
@@ -96,7 +97,7 @@ const SectionThreeM = () => {
 
             {/* Mensaje inicial mejorado */}
             {showInitialMessage && (
-              <Html position={[0, 4, 0]} center transform scale={0.4}>
+              <Html position={[5, 1.5, -3]} center transform scale={0.4}>
                 <div className="keyboard-instruction-message">
                   <div className="instruction-icon">⌨️</div>
                   <div className="instruction-content">
@@ -108,14 +109,6 @@ const SectionThreeM = () => {
               </Html>
             )}
 
-            {/* Mensaje cuando el modelo está girando */}
-            <Html position={[2.5, 1.5, -2]} center transform scale={0.5}>
-              {showPrompt && (
-                <div className="treatment-prompt-message">
-                  Presiona la tecla <strong>T</strong> para ver más información sobre el tratamiento
-                </div>
-              )}
-            </Html>
 
             {/* Info adicional cuando gira */}
             {rotate && (
