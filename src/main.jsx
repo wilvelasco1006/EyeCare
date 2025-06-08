@@ -24,28 +24,17 @@ createRoot(document.getElementById("root")).render(
           <Route path="content-diseases" element={<Diseases />} />
           
           {/* Rutas protegidas de enfermedades */}
-          <Route path="cataracts" element={
-            <ProtectedRoute>
-              <Cataracts />
-            </ProtectedRoute>
-          } />
-          <Route path="Conjuntivitis" element={
-            <ProtectedRoute>
-              <Conjuntivis />
-            </ProtectedRoute>
-          } />
+          <Route path="cataracts" element={<Cataracts />} />
+          <Route path="Conjuntivitis" element={<Conjuntivis />} />
           <Route path="Glaucoma" element={
-            <ProtectedRoute>
-              <Glaucoma />
-            </ProtectedRoute>
-          } />
-          <Route path="macular-degeneration" element={
-            <ProtectedRoute>
-              <MacularDegeneration />
-            </ProtectedRoute>
-          } />
+              <Glaucoma />} />
+          <Route path="macular-degeneration" element={<MacularDegeneration />} />
         </Route>
-        <Route path="quiz" element={<Quiz />} />
+        <Route path="quiz" element={
+          <ProtectedRoute>
+            <Quiz />
+          </ProtectedRoute>
+          } />
         <Route path="*" element={<NotFound />} />
         <Route path="about-us" element={<AboutUs />} />
         <Route path="sign-in" element={<Sign />} />

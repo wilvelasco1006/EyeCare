@@ -15,8 +15,7 @@ import BurbujaIndicadora from "./recursos/burbujaIndicadora";
 import AnimatedFaceEye from "./recursos/AnimatedFaceEye";
 import AnimatedDropper from "./recursos/AnimatedDropper";
 
-
-const CameraController = ({ showMedicineInfo, orbitControlsRef }) => {
+const CameraController = ({ showMedicineInfo, focusOnVideo, orbitControlsRef, resetCamera }) => {
     const { camera } = useThree();
     const [isAnimating, setIsAnimating] = useState(false);
     const startPosition = useRef(new THREE.Vector3());
@@ -28,30 +27,43 @@ const CameraController = ({ showMedicineInfo, orbitControlsRef }) => {
 
     useEffect(() => {
         if (showMedicineInfo) {
-            // Posición inicial
+            
             startPosition.current.copy(camera.position);
             startTarget.current.copy(orbitControlsRef.current?.target || new THREE.Vector3(0, 0, 0));
 
-            // Posición objetivo: más cerca, más alto, mirando hacia la caja
-            targetPosition.current.set(-1.5, 1.5, 2); // Frente y arriba
-            targetTarget.current.set(-2.5, 0, 0.5); // Mirar hacia la caja
+            
+            targetPosition.current.set(-1.5, 1.5, 2); 
+            targetTarget.current.set(-2.5, 0, 0.5); 
 
             // Deshabilitar controles
             if (orbitControlsRef.current) {
                 orbitControlsRef.current.enabled = false;
             }
-        } else {
+        } else if (focusOnVideo) {
+            // Enfocar en el video
+            startPosition.current.copy(camera.position);
+            startTarget.current.copy(orbitControlsRef.current?.target || new THREE.Vector3(0, 0, 0));
+
+            targetPosition.current.set(2.9,0,2.5); // Posición cerca del video
+            targetTarget.current.set(2.5, 0.4, -2); // Mirar hacia el video
+
+            if (orbitControlsRef.current) {
+                orbitControlsRef.current.enabled = false;
+            }
+        } else if (resetCamera) {
             // Volver a posición original
             startPosition.current.copy(camera.position);
-            startTarget.current.copy(orbitControlsRef.current?.target || new THREE.Vector3(-2.5, 0, 0.5));
+            startTarget.current.copy(orbitControlsRef.current?.target || new THREE.Vector3(0, 0, 0));
 
-            targetPosition.current.set(0, 0, 5); // Posición original
-            targetTarget.current.set(0, 0, 0); // Target original
+            targetPosition.current.set(0, 0, 5); 
+            targetTarget.current.set(0, 0, 0); 
+        } else {
+            return; 
         }
 
         setIsAnimating(true);
         startTime.current = Date.now();
-    }, [showMedicineInfo, camera, orbitControlsRef]);
+    }, [showMedicineInfo, focusOnVideo, resetCamera, camera, orbitControlsRef]);
 
     useFrame(() => {
         if (isAnimating) {
@@ -105,12 +117,25 @@ const RotatingMedicine = ({ showMedicineInfo, ...props }) => {
     );
 };
 
+const FloatingKeyHint = ({ show }) => {
+    if (!show) return null;
+
+    return (
+        <div className="floating-key-hint">
+            Presiona la tecla <span className="key-highlight">R</span> para volver atrás
+        </div>
+    );
+};
+
 const SectionThree = () => {
     const videoRef = useRef(null);
     const orbitControlsRef = useRef(null);
     const [showMedicineInfo, setShowMedicineInfo] = useState(false);
     const [showInfoTratamiento, setShowInfoTratamiento] = useState(false);
     const [showBurbuja, setShowBurbuja] = useState(true);
+    const [focusOnVideo, setFocusOnVideo] = useState(false);
+    const [resetCamera, setResetCamera] = useState(false);
+    const [showHelpInfo, setShowHelpInfo] = useState(false);
 
     const handlePlay = () => videoRef.current?.play();
     const handlePause = () => videoRef.current?.pause();
@@ -122,19 +147,78 @@ const SectionThree = () => {
     const handleLookUp = () => {
         setLookUp(!lookUp);
         setShowBurbuja(!showBurbuja);
-        setShowInfoTratamiento(!showInfoTratamiento); // Alterna entre mirar hacia arriba o estar normal
+        setShowInfoTratamiento(!showInfoTratamiento);
     };
+
     const handleInfoMedicine = () => {
         setShowMedicineInfo(!showMedicineInfo);
         setShowBurbuja(!showBurbuja);
     };
+
+    // Función para reiniciar todo a la posición inicial
+    const resetToInitial = () => {
+        setShowMedicineInfo(false);
+        setShowInfoTratamiento(false);
+        setShowBurbuja(true);
+        setFocusOnVideo(false);
+        setShowHelpInfo(false);
+        setLookUp(false);
+        setResetCamera(true);
+        
+        // Reset del estado de resetCamera después de un breve delay
+        setTimeout(() => setResetCamera(false), 100);
+    };
+
+    // Función para enfocar en el video
+    const focusVideo = () => {
+        setShowMedicineInfo(false);
+        setShowInfoTratamiento(false);
+        setShowBurbuja(false);
+        setShowHelpInfo(false);
+        setFocusOnVideo(true);
+        
+        // Reset del estado de focusOnVideo después de la animación
+        setTimeout(() => setFocusOnVideo(false), 2100);
+    };
+
+    // Función para mostrar/ocultar información de ayuda
+    const toggleHelpInfo = () => {
+        setShowHelpInfo(!showHelpInfo);
+    };
+
+    // Event listeners para teclado
+    useEffect(() => {
+        const handleKeyPress = (event) => {
+            const key = event.key.toLowerCase();
+            
+            switch (key) {
+                case 'r':
+                    resetToInitial();
+                    break;
+                case 'v':
+                    focusVideo();
+                    break;
+                case 'h':
+                    toggleHelpInfo();
+                    break;
+                default:
+                    break;
+            }
+        };
+
+        window.addEventListener('keydown', handleKeyPress);
+
+        // Cleanup
+        return () => {
+            window.removeEventListener('keydown', handleKeyPress);
+        };
+    }, [showHelpInfo]);
+
     const InfoTratamiento = () => {
         if (!showInfoTratamiento) return null;
 
         return (
-            <Html
-                position={[0.8, 2, 0]}
-            >
+            <Html position={[0.8, 2, 0]}>
                 <div className="container_box tratamiento">
                     <h2 className="title_box">
                         Dosis de Ciprofloxacina Gotas Oftálmicas
@@ -147,27 +231,19 @@ const SectionThree = () => {
                         </ul>
                     </p>
                 </div>
-
             </Html>
         )
-
-    }
+    };
 
     const MedicineInfoBox = () => {
         if (!showMedicineInfo) return null;
 
         return (
-            <Html
-                position={[-2.5, 0.8, 1.5]} // Posición al lado de la caja
-                center
-            >
-                <div
-                    className="container_box"
-                >
+            <Html position={[-2.5, 0.8, 1.5]} center>
+                <div className="container_box">
                     <h2 className="title_box">
                         Ciprofloxacina en contra de la conjuntivitis
                     </h2>
-
                     <p className="info_box">
                         La solución de ciprofloxacina oftálmica se usa para tratar infecciones bacterianas del ojo, que incluyen conjuntivitis (infección de la membrana que cubre el exterior del globo ocular y el interior del párpado) y úlceras en la córnea (infección y pérdida de tejido en la parte delantera transparente del ojo).
                     </p>
@@ -176,8 +252,35 @@ const SectionThree = () => {
         );
     };
 
+    const HelpInfoBox = () => {
+        if (!showHelpInfo) return null;
+
+        return (
+            <Html position={[0, 1, 0]} center>
+                <div className="container_box" >
+                    
+                    <h2 className="title_box" style={{ color: 'white', marginBottom: '15px' }}>
+                        Controles de Teclado
+                    </h2>
+                    <div className="info_box">
+                        <p><strong>R:</strong> Reiniciar todo a la posición inicial</p>
+                        <p><strong>V:</strong> Enfocar cámara hacia el video</p>
+                        <p><strong>H:</strong> Mostrar/ocultar esta ayuda</p>
+                        <br />
+                        <p style={{ fontSize: '12px', opacity: '0.8' }}>
+                            También puedes hacer clic en los elementos de la escena marcados con el inidicador purpura para interactuar con ellos.
+                        </p>
+                    </div>
+                </div>
+            </Html>
+        );
+    };
+
     return (
         <div className="content-container">
+            {/* Hint flotante que aparece cuando hay alguna interacción activa */}
+            <FloatingKeyHint show={showMedicineInfo || showInfoTratamiento || focusOnVideo || showHelpInfo} />
+            
             <div className="Container-tratamiento">
                 <Canvas camera={{ position: [0, 0, 5], fov: 50 }} shadows={true}>
                     <ambientLight intensity={1} />
@@ -202,37 +305,35 @@ const SectionThree = () => {
 
                     <Sky
                         distance={450000}
-                        sunPosition={[0, 1, -15]}      // Sol más bajo para un atardecer más dramático
-                        inclination={0.49}             // Justo en el horizonte para colores intensos
-                        azimuth={0.15}                 // Posición del sol ligeramente hacia el este
-                        mieCoefficient={0.005}         // Menos partículas para cielo más claro
-                        mieDirectionalG={0.8}          // Luz más direccional para rayos de sol
-                        rayleigh={6}                   // Intensidad alta para colores vibrantes (naranjas, rosas)
-                        turbidity={10}                 // Atmósfera más densa para colores cálidos
+                        sunPosition={[0, 1, -15]}
+                        inclination={0.49}
+                        azimuth={0.15}
+                        mieCoefficient={0.005}
+                        mieDirectionalG={0.8}
+                        rayleigh={6}
+                        turbidity={10}
                     />
 
-                    {/* Múltiples nubes para más realismo */}
                     <Cloud
                         position={[-15, 8, -25]}
                         speed={0.1}
                         opacity={0.4}
                         segments={40}
-                        bounds={[8, 3, 8]}             // Nubes más grandes y extendidas
+                        bounds={[8, 3, 8]}
                         volume={6}
-                        color="#ffeecc"                // Tinte dorado suave
+                        color="#ffeecc"
                     />
                     <Floor />
 
-                    {/* OrbitControls con referencia */}
                     <OrbitControls ref={orbitControlsRef} enableZoom={false} />
 
-                    {/* Controlador de cámara */}
                     <CameraController
                         showMedicineInfo={showMedicineInfo}
+                        focusOnVideo={focusOnVideo}
+                        resetCamera={resetCamera}
                         orbitControlsRef={orbitControlsRef}
                     />
 
-                    {/* Caja de medicina con rotación */}
                     <RotatingMedicine
                         onClick={handleInfoMedicine}
                         position={[-2.5, -0.1, 0.5]}
@@ -250,11 +351,10 @@ const SectionThree = () => {
                         <meshStandardMaterial color="#1034A6" />
                     </Text3D>
 
-
                     <AnimatedFaceEye lookUp={lookUp} onClick={handleLookUp} />
                     <AnimatedDropper lookUp={lookUp} />
 
-                    <group position={[2.5, 0.4, -2]} scale={0.7} rotation={[0, -0.5, 0]}>
+                    <group position={[2.5, 0.4, -2]} scale={0.7} rotation={[0, 0, 0]}>
                         <Text position={[0, 3, 0]} fontSize={0.4} color="black" font="/fonts/Mofulina.ttf">
                             Dale Play y Enterate
                         </Text>
@@ -269,19 +369,22 @@ const SectionThree = () => {
                             </div>
                         </Html>
                     </group>
+
                     {showBurbuja && (
                         <>
                             <BurbujaIndicadora position={[-1.9, 0, 0.6]} />
                             <BurbujaIndicadora position={[-0.3, 0, -0.9]} />
                         </>
-                    )};
+                    )}
 
-
-                    {/* Recuadro de información */}
                     <MedicineInfoBox />
                     <InfoTratamiento />
+                    <HelpInfoBox />
 
                 </Canvas>
+            </div>
+            <div className="mensaje-controls">
+                <p>Presiona la tecla H para Ayudarte</p>
             </div>
         </div>
     );
