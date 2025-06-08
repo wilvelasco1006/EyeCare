@@ -3,7 +3,7 @@
 /* eslint-disable react/no-unknown-property */
 
 import { Canvas, useFrame } from "@react-three/fiber";
-import "./sectionThreeM.css";
+import "./SectionThreeM.css";
 import VideoMacular from "../../../Videos/TreatmentMacular";
 import { OrbitControls, Text, Html, Sky, Text3D, Stars, KeyboardControls } from "@react-three/drei";
 import { CiPause1 } from "react-icons/ci";
