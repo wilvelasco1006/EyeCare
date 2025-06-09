@@ -27,11 +27,11 @@ export function SurgicalToolSet(props) {
 
     // Información de cada herramienta
     const toolsData = {
-        scissors1: { name: "Tijeras Tipo 1", description: "Tijeras de iris curvas para incisiones precisas", color: "#3498db" },
-        scissors2: { name: "Tijeras Tipo 2", description: "Tijeras capsulares para capsulotomía", color: "#e74c3c" },
-        scissors3: { name: "Tijeras Tipo 3", description: "Tijeras de Vannas para cortes delicados", color: "#f39c12" },
+        scissors1: { name: "Pinza Foerster", description: "Pinza con aros para comprimir, sujetar o dirigir cualquier punto en cuestión dentro de una operación quirúrgica", color: "#3498db" },
+        scissors2: { name: "Pinza Rochester Pean Curvas", description: "Es utilizada en procedimientos quirúrgicos para sujetar vasos sanguíneos y principalmente en la hemostasia primaria", color: "#e74c3c" },
+        scissors3: { name: "Pinza Rochester Pean Recta", description: "También conocida como pinza hemostática, se utiliza en cirugía para sujetar y manipular tejidos, especialmente vasos sanguíneos, con el objetivo de controlar el sangrado (hemostasia)", color: "#f39c12" },
         syringe: { name: "Jeringa", description: "Jeringa para irrigación y aspiración", color: "#2ecc71" },
-        forcep: { name: "Fórceps", description: "Fórceps para manipulación de tejidos", color: "#9b59b6" },
+        forcep: { name: "Pinza de diseccion curva", description: "Se utiliza para agarrar y manipular tejidos o estructuras anatómicas durante el procedimiento", color: "#9b59b6" },
         tray: { name: "Bandeja", description: "Bandeja quirúrgica estéril", color: "#95a5a6" },
         towel: { name: "Toalla", description: "Toalla quirúrgica estéril", color: "#34495e" }
     };
@@ -63,16 +63,16 @@ export function SurgicalToolSet(props) {
 
             switch (key) {
                 case '1':
-                    selectTool('scissors1');
+                    selectTool('syringe');
                     break;
                 case '2':
-                    selectTool('scissors2');
+                    selectTool('scissors1');
                     break;
                 case '3':
-                    selectTool('scissors3');
+                    selectTool('scissors2');
                     break;
                 case '4':
-                    selectTool('syringe');
+                    selectTool('scissors3');
                     break;
                 case '5':
                     selectTool('forcep');
@@ -423,13 +423,16 @@ export function SurgicalToolSet(props) {
                     color: 'white',
                     padding: '2px',
                     borderRadius: '10px',
-                    fontSize: '10px',
-                    textAlign: 'center',
+                    fontSize: '12px',
+                    textAlign: 'left',
                     minWidth: '280px',
                     backdropFilter: 'blur(10px)'
                 }}>
-                    <strong>Controles de la bandeja:</strong><br />
-                    1-5: Seleccionar herramientas | S: Modo showcase | R: Reset | ESC: Salir
+                    <strong>Controles de la bandeja:</strong> <br /><br />
+                    Seleccionar herramientas: pulsa 2 veces cualquier tecla del 1 al 5 <br /> <br />
+                    Modo showcase: Pulsa S para ver informacion de manera automática <br /> <br />
+                    Reset: Presiona R para restablecer la vista <br /> <br />
+                    Salir: Presion Esc para cerrar la herramienta que está abierta en ese momento <br />
                 </div>
             </Html>
         </group>

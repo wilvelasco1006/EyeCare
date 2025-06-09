@@ -248,9 +248,9 @@ const Scene = () => {
                     center
                     distanceFactor={config.hintDistanceFactor}
                     wrapperClass="instruction-hint"
-                    transform
+                    
                 >
-                    <div className="instruction">
+                    <div className="instruction-eye">
                         Da click en el ojo para ver los síntomas
                     </div>
                 </Html>
@@ -276,7 +276,7 @@ const Scene = () => {
                     position={symptoms[symptomIndex].position}
                     center
                     distanceFactor={config.messageDistanceFactor}
-                    transform
+                    
                     wrapperClass="instruction-hint"
                 >
                     <div className="instruction symptom-card">
