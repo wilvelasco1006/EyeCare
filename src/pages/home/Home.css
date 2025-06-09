@@ -82,14 +82,7 @@
 .welcome-header {
     margin-bottom: 1.5rem;
     position: relative;
-}
-
-.accent-line {
-    height: 3px;
-    width: 80px;
-    background: linear-gradient(90deg, #4a9dd3, #61b3e9);
-    margin-top: 0.5rem;
-    border-radius: 2px;
+    right: 70px;
 }
 
 .Presentation-text h2 {
