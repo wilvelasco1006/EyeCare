@@ -14,7 +14,7 @@ import { useKeyboardControls } from "@react-three/drei";
 import Floor from "./../../model-3d/Floor";
 import  MedicineEye   from "../../model-3d/medicineEye";
 import tooltips from "/src/microcopy/Tooltips.js";
-import Lights from "./../../lights/Lights";
+import Lights from "../../Lights/Lights";
 import VideoGlaucoma from "../../../Videos/TreatmentGlaucoma";
 
 // Configuración de controles de teclado
