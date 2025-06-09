@@ -1,7 +1,7 @@
 /* eslint-disable react/no-unknown-property */
 import SectionOneG from "./sections/sectionOneG/SectionOneG";
 import SectionTwoG from "./sections/sectionTwoG/SectionTwoG";
-import SectionThreeG from "./sections/sectionThreeG/SectionThreeG";
+import SectionThreeG from "./sections/sectionThreeG/sectionThreeG";
 import "./Glaucoma.css";
 import React, { useRef, useEffect, useState } from 'react';
 
