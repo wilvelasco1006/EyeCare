@@ -50,9 +50,9 @@
     color: white;
     padding: 1rem 1.5rem;
     border-radius: 10px;
-    max-width: 250px;
+    min-width: 300px;
     font-size: 1rem;
-    text-align: center;
+    text-align: left;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
     border-left: 4px solid #66caf8;
     line-height: 1.5;

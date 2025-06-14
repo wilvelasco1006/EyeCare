@@ -56,9 +56,9 @@
   align-items: center;
   background-color: #2c2c2c;
   color: white;
-  padding: 20px;
+  padding: 10px;
   border-radius: 15px;
-  max-width: 500px;
+  min-width: 420px;
   box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
   font-family: Arial, sans-serif;
   border: 3px solid #4a90e2;
@@ -92,4 +92,29 @@
 }
 .tratamiento p{
   margin-right: 20px;
+}
+.mensaje-controls {
+  position: absolute;
+  bottom: 50px;
+  right: 450px;
+  background-color: #fff4;
+  width: 250px;
+  padding: 5px;
+  border-radius: 20px;
+  /* Efecto de resplandor animado */
+  box-shadow: 0 0 0 0 rgba(82, 161, 192, 0.7), 0 0 0 0 #66caf8;
+  animation: glowAttention 1.5s 1s infinite alternate;
+  transition: box-shadow 0.3s;
+}
+
+@keyframes glowAttention {
+  0% {
+    box-shadow: 0 0 0 0 rgba(82, 161, 192, 0), 0 0 0 0 #66caf8;
+  }
+  60% {
+    box-shadow: 0 0 18px 4px rgba(82, 161, 192, 0.7), 0 0 8px 2px #66caf8;
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(82, 161, 192, 0), 0 0 0 0 #66caf8;
+  }
 }

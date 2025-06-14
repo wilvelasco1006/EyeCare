@@ -26,7 +26,7 @@ const Home = () => {
               <h2>¡Bienvenido a EyeCare!</h2>
               <div className="accent-line"></div>
             </div>
-            <p className="tagline">Aprende con EyeCare</p>
+            <p className="tagline">Descubre con EyeCare</p>
             <p className="description">Tu guía completa sobre enfermedades oculares</p>
             <p className="call-to-action">¡Haz click en el botón para empezar!</p>
             <div className="button-group">
@@ -43,7 +43,7 @@ const Home = () => {
               </p>
             ):(
               <p className="login-message">
-                <span className="highlight">Bienvenido!</span> Ahora disfruta de todo el contenido, aprende y divirtete
+                Disfruta de todo el contenido, aprende y diviértete
               </p>
             )}
           </div>

@@ -73,7 +73,7 @@ const SectionOneM = () => {
             titulo: "Datos",
             descripcion: (
                 <>
-                    La degeneración macular puede ser seca o húmeda. La forma seca es más común y se produce por el adelgazamiento de la mácula.
+                    La degeneración macular puede ser seca o húmeda.
                     La forma seca es más común y se produce por el adelgazamiento de la mácula.
                     Las personas con DMAE pueden conservar la visión periférica.
                 </>

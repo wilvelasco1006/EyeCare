@@ -1,6 +1,7 @@
 /* eslint-disable react/no-unknown-property */
 import SectionOneG from "./sections/sectionOneG/SectionOneG";
 import SectionTwoG from "./sections/sectionTwoG/SectionTwoG";
+import SectionThreeG from "./sections/sectionThreeG/sectionThreeG";
 import "./Glaucoma.css";
 import React, { useRef, useEffect, useState } from 'react';
 
@@ -77,10 +78,7 @@ const Glaucoma = () => {
       </section>
 
       <section ref={sectionsRefs[2]} className="section3">
-        <h2>Cuándo consultar al médico</h2>
-        <div className="content-container">
-          <p>Información importante sobre cuándo buscar atención médica para problemas de glaucoma.</p>
-        </div>
+        <SectionThreeG />      
       </section>
     </div>
   );

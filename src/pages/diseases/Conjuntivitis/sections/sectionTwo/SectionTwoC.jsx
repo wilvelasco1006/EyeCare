@@ -1,6 +1,6 @@
-    /* eslint-disable react/no-unknown-property */
+/* eslint-disable react/no-unknown-property */
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
-import { Html, OrbitControls, KeyboardControls, useKeyboardControls } from "@react-three/drei";
+import { Html, OrbitControls, KeyboardControls, useKeyboardControls, Text3D } from "@react-three/drei";
 import { useRef, useState, useEffect } from "react";
 import * as THREE from "three";
 import InfectedEye from "../../model-3d/EyeInfected";
@@ -90,7 +90,7 @@ const Scene = ({ setShowKeyHint }) => {
         setCameraLocked(true);
         setShowKeyHint(true); // Mostramos el mensaje flotante al hacer clic en el ojo sano
     };
-    
+
 
     const handleInfectedClick = () => {
         const targetPos = infectedEyeRef.current.getWorldPosition(new THREE.Vector3()).add(new THREE.Vector3(0, 0, 2));
@@ -116,13 +116,23 @@ const Scene = ({ setShowKeyHint }) => {
                 <InfectedEye ref={infectedModelRef} scale={[0.5, 0.5, 0.5]} />
             </group>
 
-            <Html occlude position={[0, 2, -3]} transform center distanceFactor={5} wrapperClass="title">
-                <h1>Síntomas de la conjuntivitis</h1>
-            </Html>
+            <Text3D
+                castShadow
+                position={[-1.9, 1.4, -1.1]}
+                rotation={[0, 0, 0]}
+                font="/fonts/Mofulina_Regular.json"
+                size={0.4}
+            >
+                {`SINTOMAS DE LA\n  CONJUNTIVITIS`}
+                <meshStandardMaterial color="#1034A6" />
+            </Text3D>
+
+
+
 
             {/* Mensaje para ojo sano */}
             {healthyMessage && (
-                <Html transform scale={0.5} position={[-2.3, 0.2, 0]} center distanceFactor={6}>
+                <Html scale={0.5} position={[-2.3, 0.2, 0]} center distanceFactor={6}>
                     <div className="mensaje-inf">
                         Ojo sano: sin enrojecimiento ni inflamación.
                     </div>
@@ -131,9 +141,17 @@ const Scene = ({ setShowKeyHint }) => {
 
             {/* Mensaje para ojo infectado */}
             {infectedMessage && (
-                <Html transform scale={0.5} position={[2.4, 0.2, 0.2]} center distanceFactor={5}>
+                <Html scale={0.5} position={[2.4, 0.2, 0.2]} center distanceFactor={5}>
                     <div className="mensaje-inf">
-                        Síntomas de conjuntivitis: enrojecimiento, inflamación, secreción purulenta.
+                        <ul>
+                            <li>Enrojecimiento del ojo</li>
+                            <li>Inflamación del párpado</li>
+                            <li>Secreción purulenta o acuosa</li>
+                            <li>Picazón o ardor</li>
+                            <li>Sensación de cuerpo extraño</li>
+                            <li>Lagrimeo excesivo</li>
+                            <li>Sensibilidad a la luz</li>
+                        </ul>
                     </div>
                 </Html>
             )}

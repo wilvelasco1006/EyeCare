@@ -3,7 +3,7 @@
 /* eslint-disable react/no-unknown-property */
 
 import { Canvas, useFrame } from "@react-three/fiber";
-import "./sectionThreeM.css";
+import "./SectionThreeM.css";
 import VideoMacular from "../../../Videos/TreatmentMacular";
 import { OrbitControls, Text, Html, Sky, Text3D, Stars, KeyboardControls } from "@react-three/drei";
 import { CiPause1 } from "react-icons/ci";
@@ -55,11 +55,22 @@ const SectionThreeM = () => {
   const [showInitialMessage, setShowInitialMessage] = useState(true);
   const lastToggleTime = useRef(0);
 
-  const handlePlay = () => videoRef.current?.play();
-  const handlePause = () => videoRef.current?.pause();
-  const handleToggleMute = () => {
-    if (videoRef.current) videoRef.current.muted = !videoRef.current.muted;
-  };
+  const [showVideoMessage, setShowVideoMessage] = useState(true);
+
+  const handlePlay = () => {
+  videoRef.current?.play();
+  handleVideoInteraction();
+};
+
+const handlePause = () => {
+  videoRef.current?.pause();
+  handleVideoInteraction();
+};
+
+const handleToggleMute = () => {
+  if (videoRef.current) videoRef.current.muted = !videoRef.current.muted;
+  handleVideoInteraction();
+};
 
   const handleToggleInfo = () => {
     const now = Date.now();
@@ -72,14 +83,18 @@ const SectionThreeM = () => {
     }
   };
 
-  // Ocultar mensaje inicial después de 8 segundos
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setShowInitialMessage(false);
-    }, 10000);
+  const handleVideoInteraction = () => {
+  setShowVideoMessage(false);
+};
 
-    return () => clearTimeout(timer);
-  }, []);
+  // Ocultar mensaje inicial después de 8 segundos
+  // useEffect(() => {
+  //   const timer = setTimeout(() => {
+  //     setShowInitialMessage(false);
+  //   }, 10000);
+
+  //   return () => clearTimeout(timer);
+  // }, []);
 
   return (
     <div className="container-section3-M">
@@ -97,13 +112,12 @@ const SectionThreeM = () => {
 
             {/* Mensaje inicial mejorado */}
             {showInitialMessage && (
-              <Html position={[5, 1.5, -3]} center transform scale={0.4}>
+              <Html position={[7, 1.5, -3]} center transform scale={0.4}>
                 <div className="keyboard-instruction-message">
                   <div className="instruction-icon">⌨️</div>
                   <div className="instruction-content">
                     <h3>Información Interactiva</h3>
                     <p>Presiona la tecla <span className="key-highlight">T</span> para ver más detalles sobre el tratamiento</p>
-                    <div className="instruction-hint">Este mensaje desaparecerá automáticamente</div>
                   </div>
                 </div>
               </Html>
@@ -171,6 +185,19 @@ const SectionThreeM = () => {
                 <meshStandardMaterial color="#52a1c0" metalness={0.1} roughness={0.8} />
               </Text3D>
             </group>
+
+            {showVideoMessage && (
+              <Html position={[-6, 1.8, -3]} center transform scale={0.35}>
+                <div className="video-controls-instruction-message">
+                  <div className="video-instruction-icon">🎬</div>
+                  <div className="video-instruction-content">
+                    <h3>Controles de Video</h3>
+                    <p>Usa los botones <span className="controls-highlight">▶</span> <span className="controls-highlight">⏸</span> <span className="controls-highlight">🔇</span> para controlar la reproducción</p>
+                    <div className="video-instruction-hint">Interactúa con los controles para ocultar este mensaje</div>
+                  </div>
+                </div>
+              </Html>
+            )}
 
             {/* Información adicional flotante (siempre visible) */}
             <group position={[0, -2, 0]}>
