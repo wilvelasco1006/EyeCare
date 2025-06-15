@@ -13,7 +13,7 @@ const Sign = ({ closeModal }) => {
     
     try {
       const response = await fetch(
-        `${import.meta.env.VITE_API_BASE_URL}/users`, //
+        `${import.meta.env.VITE_API_BASE_URL}/api/v1/users/`, //ruta del index
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
