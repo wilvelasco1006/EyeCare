@@ -5,6 +5,7 @@ const useQuizStore = create((set) => ({
         correctAnswers: 0,
         incorrectAnswers: 0,
         percentageQuizCompleted: 0,
+        points : 0,
     },
     incrementQuizProgress: () => {
         set((state) => {
@@ -25,8 +26,28 @@ const useQuizStore = create((set) => ({
             correctAnswers: 0,
             incorrectAnswers: 0,
             percentageQuizCompleted: 0,
+            points: 0,
         },
-    })
+    }),
+    pointQuiz: () => set((state) => ({
+        quiz: {
+            ...state.quiz,
+            points: (state.quiz.points || 0) + 100,
+        },
+    })),
+    incrementCorrectAnswers: () => set((state) => ({
+        quiz: {
+            ...state.quiz,
+            correctAnswers: state.quiz.correctAnswers + 1,
+        }
+    })),
+    incrementIncorrectAnswers: () => set((state) => ({
+        quiz: {
+            ...state.quiz,
+            incorrectAnswers: state.quiz.incorrectAnswers + 1,
+        }
+    })),
+
 })); // Fixed closing parentheses
 
 export default useQuizStore;
