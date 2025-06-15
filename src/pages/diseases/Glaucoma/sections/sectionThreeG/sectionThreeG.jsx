@@ -137,7 +137,7 @@ const SectionThreeG = () => {
               <VideoGlaucoma videoRef={videoRef} />
 
               <Html transform scale={0.4} position={[0, -1.5, 0]} center>
-                <div className="video-controls-M">
+                <div className="video-controls-G">
                   <button onClick={handlePlay} title={tooltips.videoControls.play}>
                     <FaPlay />
                   </button>
