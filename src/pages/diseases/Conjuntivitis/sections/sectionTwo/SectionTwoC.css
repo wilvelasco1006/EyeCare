@@ -1,8 +1,8 @@
 /** Contenedor principal - Ahora con altura completa **/
 .section2-container {
-    display: grid;
-    align-content: center;
-    align-items: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
 }
 
 .presentation-container-2 {
@@ -12,9 +12,6 @@
 }
 
 .model-container-s {
-    margin-right: 30px;
-    width: 1200px;
-    height: 500px;
     /* Altura completa de la ventana */
     overflow: hidden;
     position: relative;
@@ -23,8 +20,7 @@
 
 /** Canvas de Three.js **/
 .model-container-s canvas {
-    width: 100%;
-    height: 400px;
+
     outline: none;
     background: linear-gradient(to bottom, #e6f7ff, #ffffff);
 }

@@ -1,6 +1,7 @@
 import SectionOneC from "./sections/sectionOne/SectionOneC";
 import SectionTwoC from "./sections/sectionTwo/SectionTwoC";
 import SectionThree from "./sections/sectionThree/SectionThree";
+import SectionFour from "./sections/sectionFour/sectionFour";
 import './Conjuntivitis.css';
 import React, { useRef, useEffect, useState } from "react";
 
@@ -77,26 +78,37 @@ const Conjuntivitis = () => {
                     onClick={() => scrollToSection(2)}
                     aria-label="Ir a sección 3"
                 >
+                    <span className="dot-tooltip">Tratamiento</span>
+                </div>
+                <div
+                    className={`nav-dot ${activeSection === 3 ? "active" : ""}`}
+                    onClick={() => scrollToSection(3)}
+                    aria-label="Ir a sección 4"
+                >
                     <span className="dot-tooltip">Prevención</span>
                 </div>
             </div>
             
             {/* Sección 1: Introducción - Causas y efectos */}
-            <section ref={sectionRefs[0]} className="section1">
+            <section ref={sectionRefs[0]} className="sectionConjuntivitis">
                 <SectionOneC />
             </section>
             
             {/* Sección 2: Síntomas - Solo modelo 3D interactivo */}
-            <section ref={sectionRefs[1]} className="section2">
+            <section ref={sectionRefs[1]} className="sectionConjuntivitis">
                 {/* Solo el modelo 3D con información integrada de síntomas */}
                 <div className="model-section-full">
                     <SectionTwoC />
                 </div>
             </section>
             
-            {/* Sección 3: Prevención y Tratamiento */}
-            <section ref={sectionRefs[2]} className="section3">
+            {/* Sección 3:Tratamiento */}
+            <section ref={sectionRefs[2]} className="sectionConjuntivitis">
                     <SectionThree />
+            </section>
+            {/*Sección 4: Prevención*/}
+            <section ref={sectionRefs[3]} className="sectionConjuntivitis">
+                    <SectionFour />
             </section>
         </div>
     );
