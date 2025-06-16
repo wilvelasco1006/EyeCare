@@ -1,7 +1,7 @@
 import SectionOne from "./sections/sectionOne/SectionOne";
 import SectionTwoCT from "./sections/sectionTwoCT/sectionTwoCT";
 import SectionThreeCT from "./sections/sectionThreeCT/sectionThreeCT";
-
+import SectionFourCT from "./sections/sectionFourCT/sectionFourCT";
 import "../Cataracts/Cataracts.css";
 import React, { useRef, useEffect, useState } from "react";
 
@@ -82,6 +82,13 @@ const Cataracts = () => {
                 >
                     <span className="dot-tooltip">Tratamiento</span>
                 </div>
+                <div
+                    className={`nav-dot ${activeSection === 3 ? "active" : ""}`}
+                    onClick={() => scrollToSection(3)}
+                    aria-label="Ir a sección 4"
+                >
+                    <span className="dot-tooltip">Prevención</span>
+                </div>
             </div>
 
             {/* Sección 1: Introducción - Causas y efectos */}
@@ -100,6 +107,12 @@ const Cataracts = () => {
             {/* Sección 3: Tratamiento - Modelo 3D e información */}
             <section ref={sectionRefs[2]} className="section3-CT">
                 <SectionThreeCT />
+            </section>
+
+            {/* Sección 4: Prevención - Información y consejos */}
+            <section ref={sectionRefs[3]} className="section4-CT">
+                
+                <SectionFourCT />
             </section>
         </div>
     );

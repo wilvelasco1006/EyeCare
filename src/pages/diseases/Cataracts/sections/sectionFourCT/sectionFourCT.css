@@ -1,0 +1,35 @@
+.section4CT-container{
+    margin: 64px 0 1.5rem 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: auto;
+    padding: 1rem 0;
+}
+
+.CT4-intro {
+    width: 90%;
+    max-width: 1200px;
+    text-align: center;
+}
+
+/* Ajustes generales del modelo y texto */
+.model-container-4CT {
+    margin: 0 auto;
+    width: 1200px;
+    height: 500px;
+    overflow: hidden;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.model-container-4CT canvas {
+    width: 100%;
+    height: 500px;
+    outline: none;
+    background: linear-gradient(to bottom, #e6f7ff, #ffffff);
+}
