@@ -1,0 +1,17 @@
+.sectionFourContainer{
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+}
+.sectionFourContainer h2{
+    margin: 0;
+    font-size: 40px;
+}
+
+.container__canva{
+    
+    height: 500px;
+}
+
+
+
