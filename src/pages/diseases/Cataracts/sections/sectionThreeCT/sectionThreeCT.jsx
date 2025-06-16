@@ -11,7 +11,7 @@ import { useState, useRef, Suspense, useEffect } from "react";
 import * as THREE from 'three';
 import Floor from "./../../Model-3d/Floor";
 import { SurgicalToolSet } from "../../Model-3d/SurgicalToolSet";
-
+import { useSkyConfig } from '../../Cataracts';
 // Componente BurbujaIndicadora mejorado con animación más atractiva
 const BurbujaIndicadora = ({ position = [0, 1.5, 0], scale = 0.28, onClick, isActive = false }) => {
     const ref = useRef();
@@ -170,7 +170,7 @@ const CameraController = ({ isVideoFocused, setIsVideoFocused, orbitControlsRef 
 };
 
 const SectionThreeCT = () => {
-
+    const { currentSkyConfig, activeSection } = useSkyConfig();
     const videoRef = useRef(null);// Referencia al video
     const orbitControlsRef = useRef(null); // Referencia a los controles de órbita
     const [showAnimation, setShowAnimation] = useState(false); // Estado para mostrar/ocultar la animación
@@ -217,12 +217,25 @@ const SectionThreeCT = () => {
                         shadow-radius={4} // Radio de suavizado
                         shadow-blurSamples={25} // Muestras para suavizado
                     />
+                    {/* En lugar de tus props actuales del Sky, usa: */}
+                    {currentSkyConfig && activeSection === 2 && (
+                        <Sky
+                            key={currentSkyConfig.key}
+                            sunPosition={currentSkyConfig.sunPosition}
+                            turbidity={currentSkyConfig.turbidity}
+                            rayleigh={currentSkyConfig.rayleigh}
+                            mieCoefficient={currentSkyConfig.mieCoefficient}
+                            mieDirectionalG={currentSkyConfig.mieDirectionalG}
+                            inclination={currentSkyConfig.inclination}
+                            azimuth={currentSkyConfig.azimuth}
+                        />
+                    )}
                     <hemisphereLight
                         skyColor="#87CEEB" // Azul cielo
                         groundColor="blue" // Azul para el suelo
                         intensity={0.3}
                     />
-                    <Sky />
+                    
                     <Stars
                         radius={100} // Radio de la esfera de estrellas
                         depth={50} // Profundidad del campo de estrellas
