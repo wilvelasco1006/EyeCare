@@ -13,7 +13,8 @@
 /* Estilos para cada sección */
 .section1M,
 .section2M,
-.section3M {
+.section3M,
+.section4M {
   height: 100vh;
   width: 100%; /* Cambiado de 90% a 100% para evitar scroll horizontal */
   position: relative;
@@ -33,6 +34,10 @@
 
 .section3M {
   background-color: rgba(231, 243, 253);
+}
+
+.section4M {
+  background-color: rgba(255, 255, 255, 0.9);
 }
 
 /* Navegación lateral con puntos */

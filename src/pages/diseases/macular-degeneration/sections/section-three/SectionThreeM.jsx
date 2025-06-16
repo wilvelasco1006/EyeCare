@@ -51,7 +51,6 @@ const KeyboardHandler = ({ onToggleInfo }) => {
 const SectionThreeM = () => {
   const videoRef = useRef(null);
   const [rotate, setRotate] = useState(false);
-  const [showPrompt, setShowPrompt] = useState(true);
   const [showInitialMessage, setShowInitialMessage] = useState(true);
   const lastToggleTime = useRef(0);
 
@@ -77,7 +76,6 @@ const handleToggleMute = () => {
     // Evitar múltiples activaciones rápidas
     if (now - lastToggleTime.current > 300) {
       setRotate((prev) => !prev);
-      setShowPrompt(false);
       setShowInitialMessage(false);
       lastToggleTime.current = now;
     }
@@ -87,27 +85,17 @@ const handleToggleMute = () => {
   setShowVideoMessage(false);
 };
 
-  // Ocultar mensaje inicial después de 8 segundos
-  // useEffect(() => {
-  //   const timer = setTimeout(() => {
-  //     setShowInitialMessage(false);
-  //   }, 10000);
-
-  //   return () => clearTimeout(timer);
-  // }, []);
-
   return (
     <div className="container-section3-M">
       <div className="treatment-M">
         <KeyboardControls map={keyboardMap}>
-          <Canvas camera={{ position: [0, 3, 8], fov: 50 }} shadows={true}>
+          <Canvas camera={{ position: [0, 0, 6], fov: 50 }} shadows={true}>
             <KeyboardHandler onToggleInfo={handleToggleInfo} />
             <Lights />
             <Sky />
             <Stars radius={100} depth={50} count={5000} factor={6} saturation={0} fade={true} />
             <Floor />
             <OrbitControls enableZoom={true} enablePan={true} maxDistance={10} minDistance={3} />
-
             <RotatingTreatment rotate={rotate} />
 
             {/* Mensaje inicial mejorado */}
