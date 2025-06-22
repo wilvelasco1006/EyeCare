@@ -1,68 +1,32 @@
+// src/components/quiz/Quiz.jsx
+/* eslint-disable react/no-unknown-property */
 import React, { useState, useCallback } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Canvas } from '@react-three/fiber';
+import { Physics, RigidBody } from '@react-three/rapier';
+import { OrbitControls } from '@react-three/drei';
 import useQuizStore from '../../stores/use-quiz-store';
-import useAuthStore from '../../stores/use-auth-store'; // Para asociar el quiz al usuario
+import useAuthStore from '../../stores/use-auth-store';
+import { useNavigate } from 'react-router-dom';
+import './Quiz.css';
 
-// Definición de preguntas
-const quizQuestions = [
-    {
-        id: 1,
-        text: "¿Cuál es la capital de Francia?",
-        options: [
-            { id: 'a', text: "Berlín" },
-            { id: 'b', text: "Madrid" },
-            { id: 'c', text: "París" },
-            { id: 'd', text: "Roma" }
-        ],
-        correctOptionId: 'c'
-    },
-    {
-        id: 2,
-        text: "¿Qué gas es esencial para la respiración humana?",
-        options: [
-            { id: 'a', text: "Nitrógeno" },
-            { id: 'b', text: "Oxígeno" },
-            { id: 'c', text: "Dióxido de Carbono" },
-            { id: 'd', text: "Hidrógeno" }
-        ],
-        correctOptionId: 'b'
-    },
-    {
-        id: 3,
-        text: "¿Cuántos continentes hay en la Tierra (modelo tradicional de 7)?",
-        options: [
-            { id: 'a', text: "5" },
-            { id: 'b', text: "6" },
-            { id: 'c', text: "7" },
-            { id: 'd', text: "8" }
-        ],
-        correctOptionId: 'c'
-    },
-    {
-        id: 4,
-        text: "¿Cuál es el río más largo del mundo?",
-        options: [
-            { id: 'a', text: "Nilo" },
-            { id: 'b', text: "Amazonas" },
-            { id: 'c', text: "Yangtsé" },
-            { id: 'd', text: "Misisipi" }
-        ],
-        correctOptionId: 'b'
-    },
-    // Añade más preguntas para un quiz más completo
-];
+// Import refactored components
+import { quizQuestions } from './utils/quizQuestion';
+import { QuizOptionBlock } from './utils/QuizOptionBlock';
+import { Eye } from './model-3d/Eye';
+import { Heart } from './model-3d/Heart.jsx';
+import { QuestionText3D } from './utils/QuestionText3D';
+import { QuizStats } from './utils/QuizStats';
+import { QuizActions } from './utils/QuizActions';
+import { QuizResultsOverlay } from './utils/QuizResultsOverlay';
 
-// Función para enviar los datos del quiz al backend
+// API function for quiz results (can be moved to a separate service file if it grows)
 const createQuizData = async (quizResultsData) => {
     try {
-        const response = await fetch(
-            `${import.meta.env.VITE_API_BASE_URL}/api/quizzes`, // Asegúrate que esta URL sea correcta
-            {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify(quizResultsData),
-            }
-        );
+        const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/api/quizzes`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(quizResultsData),
+        });
         if (!response.ok) {
             const errorBody = await response.text();
             throw new Error(`Error ${response.status}: ${response.statusText}. Body: ${errorBody}`);
@@ -74,8 +38,7 @@ const createQuizData = async (quizResultsData) => {
     }
 };
 
-
-const Quiz = () => {
+export default function Quiz() {
     const {
         quiz,
         incrementQuizProgress,
@@ -90,46 +53,62 @@ const Quiz = () => {
     const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
     const [selectedOptionId, setSelectedOptionId] = useState(null);
     const [quizFinished, setQuizFinished] = useState(false);
-    const [isSubmitting, setIsSubmitting] = useState(false); // Para deshabilitar botón mientras se guarda
+    const [isSubmitting, setIsSubmitting] = useState(false);
+    const [eyesCount, setEyesCount] = useState(0);
+    const [showResult, setShowResult] = useState(false);
+    const [brokenHearts, setBrokenHearts] = useState([]);
+    const [lives, setLives] = useState(3);
 
     const currentQuestion = quizQuestions[currentQuestionIndex];
 
-    const handleOptionChange = (event) => {
-        setSelectedOptionId(event.target.value);
-    };
+    const handleOptionClick = useCallback((optionId) => {
+        if (showResult) return;
+        setSelectedOptionId(optionId);
+    }, [showResult]);
+
+    const breakNextHeart = useCallback(() => {
+        setBrokenHearts(prev => {
+            const nextHeartIndex = prev.length;
+            if (nextHeartIndex < 3) {
+                return [...prev, nextHeartIndex];
+            }
+            return prev;
+        });
+        setLives(prev => Math.max(0, prev - 1));
+    }, []);
 
     const handleNextQuestion = useCallback(() => {
-        if (!currentQuestion) return; // No hacer nada si no hay pregunta actual
+        if (!currentQuestion) return;
 
         if (selectedOptionId === null) {
-            alert("Por favor, selecciona una respuesta.");
+            alert("Por favor, selecciona una respuesta haciendo click en uno de los bloques.");
             return;
         }
 
-        if (selectedOptionId === currentQuestion.correctOptionId) {
-            pointQuiz();
-            incrementCorrectAnswers();
-        } else {
-            incrementIncorrectAnswers();
-        }
-        incrementQuizProgress();
+        setShowResult(true);
 
-        setSelectedOptionId(null);
+        setTimeout(() => {
+            setEyesCount((prev) => prev + 1);
 
-        if (currentQuestionIndex < quizQuestions.length - 1) {
-            setCurrentQuestionIndex(prevIndex => prevIndex + 1);
-        } else {
-            setQuizFinished(true);
-        }
-    }, [
-        selectedOptionId,
-        currentQuestionIndex,
-        pointQuiz,
-        incrementCorrectAnswers,
-        incrementIncorrectAnswers,
-        incrementQuizProgress,
-        currentQuestion
-    ]);
+            if (selectedOptionId === currentQuestion.correctOptionId) {
+                pointQuiz();
+                incrementCorrectAnswers();
+            } else {
+                incrementIncorrectAnswers();
+                breakNextHeart();
+            }
+            incrementQuizProgress();
+            setSelectedOptionId(null);
+            setShowResult(false);
+
+            if (currentQuestionIndex < quizQuestions.length - 1) {
+                setCurrentQuestionIndex((prev) => prev + 1);
+            } else {
+                setQuizFinished(true);
+            }
+        }, 2000);
+
+    }, [selectedOptionId, currentQuestionIndex, pointQuiz, incrementCorrectAnswers, incrementIncorrectAnswers, incrementQuizProgress, currentQuestion, breakNextHeart]);
 
     const handleSaveQuizResults = useCallback(async () => {
         setIsSubmitting(true);
@@ -139,27 +118,16 @@ const Quiz = () => {
             incorrectAnswers: quiz.incorrectAnswers,
             percentageQuizCompleted: quiz.percentageQuizCompleted,
             userID: userLooged ? userLooged.uid : null,
-            
-            // completedAt: new Date().toISOString(), // Opcional, si el backend no lo genera
         };
-
-        console.log("Preparando para guardar resultados del quiz:", quizResultsData);
-        console.log("Usuario logueado:", userLooged);
         try {
             const savedQuiz = await createQuizData(quizResultsData);
-            console.log("Resultados del quiz guardados exitosamente:", savedQuiz);
             alert("¡Resultados del quiz guardados!");
-            // No se limpia el quiz aquí para que el usuario vea los resultados.
-            // Se limpiará al reiniciar o al navegar a otra parte.
-            // clearQuiz(); 
-            // navigate('/quiz-summary'); // Opcional: redirigir
         } catch (error) {
-            console.error("Fallo al guardar los resultados del quiz en el componente:", error.message);
             alert(`Error al guardar los resultados: ${error.message}`);
         } finally {
             setIsSubmitting(false);
         }
-    }, [quiz, userLooged /*, navigate, clearQuiz */]); // Dependencias ajustadas
+    }, [quiz, userLooged]);
 
     const handleRestartQuiz = useCallback(() => {
         clearQuiz();
@@ -167,75 +135,113 @@ const Quiz = () => {
         setSelectedOptionId(null);
         setQuizFinished(false);
         setIsSubmitting(false);
+        setEyesCount(0);
+        setShowResult(false);
+        setBrokenHearts([]);
+        setLives(3);
     }, [clearQuiz]);
 
-    if (quizFinished) {
-        return (
-            <div className="Quiz">
-                <h1>Quiz Finalizado</h1>
-                <h3>Resultados:</h3>
-                <p>Puntos Totales: <span>{quiz.points}</span></p>
-                <p>Respuestas Correctas: <span>{quiz.correctAnswers}</span></p>
-                <p>Respuestas Incorrectas: <span>{quiz.incorrectAnswers}</span></p>
-                <p>Progreso Completado: <span>{quiz.percentageQuizCompleted}%</span></p>
-                <button onClick={handleSaveQuizResults} disabled={isSubmitting}>
-                    {isSubmitting ? "Guardando..." : "Guardar Resultados"}
-                </button>
-                <button onClick={handleRestartQuiz} style={{ marginLeft: '10px' }}>Reiniciar Quiz</button>
-            </div>
-        );
-    }
-
-    if (!currentQuestion) {
-        return (
-            <div className="Quiz">
-                <p>No hay más preguntas o el quiz ha terminado.</p>
-                <button onClick={handleRestartQuiz}>Reiniciar Quiz</button>
-            </div>
-        );
-    }
-
     return (
-        <div className="Quiz">
-            <h1>Quiz Interactivo</h1>
-            <div>
-                <h2>Pregunta {currentQuestionIndex + 1} de {quizQuestions.length}:</h2>
-                <p>{currentQuestion.text}</p>
+        <div style={{ width: '100%', height: '100vh', position: 'relative' }}>
+            <Canvas
+                camera={{ position: [0, 5, 12], fov: 60 }}
+                shadows
+                style={{ width: '100%', height: '100%' }}
+            >
+                <ambientLight intensity={0.4} />
+                <directionalLight position={[5, 10, 5]} intensity={1} castShadow />
+                <OrbitControls enablePan={false} maxPolarAngle={Math.PI / 2} />
 
-                <form>
-                    {currentQuestion.options.map(option => (
-                        <div key={option.id}>
-                            <input
-                                type="radio"
-                                id={`${currentQuestion.id}-${option.id}`}
-                                name={`question-${currentQuestion.id}`}
-                                value={option.id}
-                                checked={selectedOptionId === option.id}
-                                onChange={handleOptionChange}
+                {!quizFinished && currentQuestion && (
+                    <QuestionText3D
+                        question={currentQuestion.text}
+                        questionNumber={currentQuestionIndex + 1}
+                        totalQuestions={quizQuestions.length}
+                    />
+                )}
+
+                <Physics gravity={[0, -9.81, 0]}>
+                    <RigidBody type="fixed" colliders="cuboid">
+                        <mesh position={[0, -5, 0]} visible={false}>
+                            <boxGeometry args={[20, 0.1, 20]} />
+                            <meshStandardMaterial transparent opacity={0} />
+                        </mesh>
+                    </RigidBody>
+
+                    {!quizFinished && currentQuestion && (
+                        <>
+                            <QuizOptionBlock
+                                position={[-4, 0, 0]}
+                                label="A"
+                                optionText={currentQuestion.options[0].text}
+                                isSelected={selectedOptionId === 'a'}
+                                onClick={() => handleOptionClick('a')}
+                                isCorrect={currentQuestion.correctOptionId === 'a'}
+                                showResult={showResult}
                             />
-                            <label htmlFor={`${currentQuestion.id}-${option.id}`}> {option.text}</label>
-                        </div>
+                            <QuizOptionBlock
+                                position={[-1.3, 0, 0]}
+                                label="B"
+                                optionText={currentQuestion.options[1].text}
+                                isSelected={selectedOptionId === 'b'}
+                                onClick={() => handleOptionClick('b')}
+                                isCorrect={currentQuestion.correctOptionId === 'b'}
+                                showResult={showResult}
+                            />
+                            <QuizOptionBlock
+                                position={[1.3, 0, 0]}
+                                label="C"
+                                optionText={currentQuestion.options[2].text}
+                                isSelected={selectedOptionId === 'c'}
+                                onClick={() => handleOptionClick('c')}
+                                isCorrect={currentQuestion.correctOptionId === 'c'}
+                                showResult={showResult}
+                            />
+                            <QuizOptionBlock
+                                position={[4, 0, 0]}
+                                label="D"
+                                optionText={currentQuestion.options[3].text}
+                                isSelected={selectedOptionId === 'd'}
+                                onClick={() => handleOptionClick('d')}
+                                isCorrect={currentQuestion.correctOptionId === 'd'}
+                                showResult={showResult}
+                            />
+                        </>
+                    )}
+
+                    {[...Array(eyesCount)].map((_, i) => (
+                        <Eye key={i} position={[-8, 5 + i * 1.5, 0]} />
                     ))}
-                </form>
-            </div>
+                    <Heart position={[-2, 4, -2]} isBroken={brokenHearts.includes(0)} heartIndex={0} />
+                    <Heart position={[0, 4.5, -2]} isBroken={brokenHearts.includes(1)} heartIndex={1} />
+                    <Heart position={[2, 4, -2]} isBroken={brokenHearts.includes(2)} heartIndex={2} />
+                </Physics>
 
-            <button onClick={handleNextQuestion} style={{ marginTop: '10px' }} disabled={!selectedOptionId}>
-                Siguiente Pregunta
-            </button>
+                {!quizFinished && (
+                    <QuizStats quiz={quiz} lives={lives} />
+                )}
 
-            <div style={{ marginTop: '20px' }}>
-                <h3>Estado Actual:</h3>
-                <p>Puntos: <span>{quiz.points}</span></p>
-                <p>Progreso: <span>{quiz.percentageQuizCompleted}%</span></p>
-                <p>Correctas: <span>{quiz.correctAnswers}</span></p>
-                <p>Incorrectas: <span>{quiz.incorrectAnswers}</span></p>
-            </div>
+                {!quizFinished && (
+                    <QuizActions
+                        selectedOptionId={selectedOptionId}
+                        showResult={showResult}
+                        currentQuestionIndex={currentQuestionIndex}
+                        totalQuestions={quizQuestions.length}
+                        handleNextQuestion={handleNextQuestion}
+                        handleRestartQuiz={handleRestartQuiz}
+                    />
+                )}
+            </Canvas>
 
-            <button onClick={handleRestartQuiz} style={{ marginTop: '20px' }}>
-                Reiniciar Quiz (en cualquier momento)
-            </button>
+            {quizFinished && (
+                <QuizResultsOverlay
+                    quiz={quiz}
+                    lives={lives}
+                    handleSaveQuizResults={handleSaveQuizResults}
+                    handleRestartQuiz={handleRestartQuiz}
+                    isSubmitting={isSubmitting}
+                />
+            )}
         </div>
     );
-};
-
-export default  Quiz;
+}
