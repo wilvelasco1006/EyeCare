@@ -144,6 +144,7 @@ export default function Quiz() {
     const [showResult, setShowResult] = useState(false);
     const [brokenHearts, setBrokenHearts] = useState([]);
     const [lives, setLives] = useState(3);
+    const [showGameOver, setShowGameOver] = useState(false);
 
     const currentQuestion = quizQuestions[currentQuestionIndex];
 
@@ -160,7 +161,13 @@ export default function Quiz() {
             }
             return prev;
         });
-        setLives(prev => Math.max(0, prev - 1));
+        setLives(prev => {
+            const newLives = Math.max(0, prev - 1);
+            if (newLives === 0) {
+                setShowGameOver(true);
+            }
+            return newLives;
+        });
     }, []);
 
     const handleNextQuestion = useCallback(() => {
@@ -178,10 +185,9 @@ export default function Quiz() {
         setIsSubmitting(true);
 
         setTimeout(() => {
-            setEyesCount((prev) => prev + 1);
-
             if (selectedOptionId === currentQuestion.correctOptionId) {
                 incrementCorrectAnswers();
+                setEyesCount((prev) => prev + 1); // Solo suma ojo si es correcta
             } else {
                 incrementIncorrectAnswers();
                 breakNextHeart();
@@ -231,7 +237,8 @@ export default function Quiz() {
         setEyesCount(0);
         setShowResult(false);
         setBrokenHearts([]);
-        setLives(3);
+        setLives(3); // <-- Esto reinicia las vidas
+        setShowGameOver(false);
     }, [clearQuiz]);
 
     // Define los controles
@@ -393,44 +400,31 @@ export default function Quiz() {
                     isSubmitting={isSubmitting}
                 />
             )}
-
-            {/* Instrucciones para el usuario */}
-            <div className="controls-info" style={{
-                position: 'absolute',
-                bottom: '20px',
-                left: '20px',
-                backgroundColor: 'rgba(0,0,0,0.7)',
-                color: 'white',
-                padding: '10px',
-                borderRadius: '5px',
-                zIndex: 100
-            }}>
-                Usa las teclas WASD o las flechas del teclado para mover el ojo azul
-            </div>
-
-            {/* Indicador para el ojo controlable */}
-            <div className="player-indicator" style={{
-                position: 'absolute',
-                top: '20px',
-                right: '20px',
-                backgroundColor: 'rgba(75, 112, 255, 0.7)',
-                color: 'white',
-                padding: '10px',
-                borderRadius: '5px',
-                zIndex: 100,
-                display: 'flex',
-                alignItems: 'center',
-                gap: '10px'
-            }}>
-                <div style={{
-                    width: '20px',
-                    height: '20px',
-                    borderRadius: '50%',
-                    backgroundColor: '#4b70ff',
-                    boxShadow: '0 0 10px #4b70ff'
-                }}></div>
-                Tu ojo controlable
-            </div>
+            {showGameOver && (
+                <div className="game-over-modal" style={{
+                    position: 'fixed',
+                    top: 0, left: 0, right: 0, bottom: 0,
+                    background: 'rgba(0,0,0,0.7)',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    zIndex: 9999
+                }}>
+                    <div style={{
+                        background: '#fff',
+                        padding: '2rem 3rem',
+                        borderRadius: '16px',
+                        textAlign: 'center',
+                        boxShadow: '0 4px 32px rgba(0,0,0,0.2)'
+                    }}>
+                        <h2 style={{ color: '#d33' }}>Game Over</h2>
+                        <p>Intenta de nuevo</p>
+                        <button className="btn btn-primary" onClick={handleRestartQuiz}>
+                            Reiniciar Quiz
+                        </button>
+                    </div>
+                </div>
+            )}
         </div>
     );
 }
