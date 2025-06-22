@@ -1,10 +1,31 @@
-import React, { useRef } from 'react'
-import { useGLTF } from '@react-three/drei'
+import React, { useRef } from 'react';
+import { useGLTF } from '@react-three/drei';
+import { useFrame } from '@react-three/fiber';
 
 export function Hospital(props) {
-    const { nodes, materials } = useGLTF('/models-3d/cataracts/low_poly_hospital.glb')
+    const { nodes, materials } = useGLTF('/models-3d/cataracts/low_poly_hospital.glb');
+    const groupRef = useRef();
+
+    // Opcionalmente, permitir deshabilitar la animación a través de props
+    const { animate = true, animationSpeed = 0.5, animationIntensity = 0.0005, ...otherProps } = props;
+
+    // Animación de flotación
+    useFrame((state) => {
+        if (groupRef.current && animate) {
+            // Movimiento vertical suave de flotación
+            const originalY = groupRef.current.position.y || 0;
+            const baseY = originalY - (Math.sin(state.clock.getElapsedTime() * 0) * 0); // Para obtener la posición base sin el seno
+
+            // Aplicar el efecto de flotación
+            groupRef.current.position.y = baseY + Math.sin(state.clock.getElapsedTime() * animationSpeed) * animationIntensity;
+
+            // Opcional: añadir una ligera rotación para un efecto más natural
+            // groupRef.current.rotation.y = Math.sin(state.clock.getElapsedTime() * 0.2) * 0.03;
+        }
+    });
+
     return (
-        <group {...props} dispose={null}>
+        <group ref={groupRef} {...otherProps} dispose={null}>
             <group name="Sketchfab_Scene">
                 <group name="Sketchfab_model" rotation={[-Math.PI / 2, 0, 0]}>
                     <group
@@ -331,7 +352,7 @@ export function Hospital(props) {
                 </group>
             </group>
         </group>
-    )
+    );
 }
 
-useGLTF.preload('/models-3d/cataracts/low_poly_hospital.glb')
+useGLTF.preload('/models-3d/cataracts/low_poly_hospital.glb');
