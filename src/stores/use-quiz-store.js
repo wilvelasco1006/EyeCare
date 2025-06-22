@@ -10,7 +10,7 @@ const useQuizStore = create((set) => ({
     incrementQuizProgress: () => {
         set((state) => {
             const newPercentage = Math.min(
-                state.quiz.percentageQuizCompleted + 10,
+                state.quiz.percentageQuizCompleted + 6.25,
                 100
             );
             return {
@@ -29,11 +29,11 @@ const useQuizStore = create((set) => ({
             points: 0,
         },
     }),
-    pointQuiz: () => set((state) => ({
+    pointQuiz: (points = 100) => set((state) => ({
         quiz: {
             ...state.quiz,
-            points: (state.quiz.points || 0) + 100,
-        },
+            points: state.quiz.points + points
+        }
     })),
     incrementCorrectAnswers: () => set((state) => ({
         quiz: {

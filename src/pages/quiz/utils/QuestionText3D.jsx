@@ -28,7 +28,7 @@ export const QuestionText3D = ({ question, questionNumber, totalQuestions }) => 
         </Text>
 
         <Text
-            position={[0, 0.2, 0]}
+            position={[-8, 2, 0]}
             fontSize={0.25}
             color="#3b82f6"
             textAlign="center"

@@ -1,4 +1,4 @@
-//* Quiz.css - Estilos para el componente Quiz */
+/* Quiz.css - Estilos para el componente Quiz */
 
 /* Overlay para resultados finales */
 .quiz-results-overlay {
@@ -218,7 +218,7 @@
         font-size: 1.5rem;
     }
 };
-}
+
 
 .results-grid {
     display: grid;

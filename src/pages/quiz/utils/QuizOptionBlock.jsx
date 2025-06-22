@@ -34,7 +34,7 @@ export const QuizOptionBlock = ({ position, label, optionText, isSelected, onCli
 
 
                 <Text
-                    position={[0, 0.5, 0]}
+                    position={[0, 1, 0]}
                     fontSize={0.25}
                     color="black"
                     maxWidth={2}

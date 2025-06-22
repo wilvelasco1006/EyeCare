@@ -18,6 +18,8 @@ import { QuestionText3D } from './utils/QuestionText3D';
 import { QuizStats } from './utils/QuizStats';
 import { QuizActions } from './utils/QuizActions';
 import { QuizResultsOverlay } from './utils/QuizResultsOverlay';
+import Floor from './model-3d/Floor.jsx';
+
 
 // API function for quiz results (can be moved to a separate service file if it grows)
 const createQuizData = async (quizResultsData) => {
@@ -77,10 +79,6 @@ export default function Quiz() {
         setLives(prev => Math.max(0, prev - 1));
     }, []);
 
-    const handleBowlCollision = useCallback(() => {
-        pointQuiz();
-    }, [pointQuiz]);
-
     const handleNextQuestion = useCallback(() => {
         if (!currentQuestion) return;
 
@@ -90,11 +88,10 @@ export default function Quiz() {
         }
 
         // IMPIDE CLICS MÚLTIPLES O RE-EJECUCIONES MIENTRAS SE PROCESA
-        if (isSubmitting) return; // Podrías usar un estado similar para la "transición de respuesta"
-        // O: if (showResult) return; // Esto ya está al inicio, pero es clave.
+        if (isSubmitting || showResult) return;
 
-        setShowResult(true); // Muestra el resultado de la respuesta (bloques se colorean)
-        setIsSubmitting(true); // <-- Podríamos usar este estado para bloquear clics en el botón Siguiente
+        setShowResult(true);
+        setIsSubmitting(true);
 
         setTimeout(() => {
             setEyesCount((prev) => prev + 1);
@@ -106,10 +103,13 @@ export default function Quiz() {
                 breakNextHeart();
             }
             incrementQuizProgress();
-            setSelectedOptionId(null);
-            setShowResult(false); // Oculta el resultado, vuelve a bloques normales
-            setIsSubmitting(false); // Libera el botón para el siguiente clic
 
+            // Reset states first
+            setSelectedOptionId(null);
+            setShowResult(false);
+            setIsSubmitting(false);
+
+            // Then update question index or finish quiz
             if (currentQuestionIndex < quizQuestions.length - 1) {
                 setCurrentQuestionIndex((prev) => prev + 1);
             } else {
@@ -117,7 +117,8 @@ export default function Quiz() {
             }
         }, 2000);
 
-    }, [selectedOptionId, currentQuestionIndex, incrementCorrectAnswers, incrementIncorrectAnswers, incrementQuizProgress, currentQuestion, breakNextHeart, isSubmitting, setShowResult, setIsSubmitting]);
+    }, [selectedOptionId, currentQuestionIndex, currentQuestion, isSubmitting, showResult, incrementCorrectAnswers, incrementIncorrectAnswers, incrementQuizProgress, breakNextHeart]);
+
     const handleSaveQuizResults = useCallback(async () => {
         setIsSubmitting(true);
         const quizResultsData = {
@@ -179,7 +180,7 @@ export default function Quiz() {
                     {!quizFinished && currentQuestion && (
                         <>
                             <QuizOptionBlock
-                                position={[-4, 0, 0]}
+                                position={[-4, -0.39, 0]}
                                 optionText={currentQuestion.options[0].text}
                                 isSelected={selectedOptionId === 'a'}
                                 onClick={() => handleOptionClick('a')}
@@ -187,7 +188,7 @@ export default function Quiz() {
                                 showResult={showResult}
                             />
                             <QuizOptionBlock
-                                position={[-1.3, 0, 0]}
+                                position={[-1.3, -0.39, 0]}
                                 optionText={currentQuestion.options[1].text}
                                 isSelected={selectedOptionId === 'b'}
                                 onClick={() => handleOptionClick('b')}
@@ -195,7 +196,7 @@ export default function Quiz() {
                                 showResult={showResult}
                             />
                             <QuizOptionBlock
-                                position={[1.3, 0, 0]}
+                                position={[1.3, -0.39, 0]}
                                 optionText={currentQuestion.options[2].text}
                                 isSelected={selectedOptionId === 'c'}
                                 onClick={() => handleOptionClick('c')}
@@ -203,7 +204,7 @@ export default function Quiz() {
                                 showResult={showResult}
                             />
                             <QuizOptionBlock
-                                position={[4, 0, 0]}
+                                position={[4, -0.39, 0]}
                                 optionText={currentQuestion.options[3].text}
                                 isSelected={selectedOptionId === 'd'}
                                 onClick={() => handleOptionClick('d')}
@@ -216,9 +217,9 @@ export default function Quiz() {
                     {[...Array(eyesCount)].map((_, i) => (
                         <Eye key={i} onScore={pointQuiz} position={[-8, 5 + i * 1.5, 0]} />
                     ))}
-                    <Heart position={[-2, 4, -2]} isBroken={brokenHearts.includes(0)} heartIndex={0} />
-                    <Heart position={[0, 4.5, -2]} isBroken={brokenHearts.includes(1)} heartIndex={1} />
-                    <Heart position={[2, 4, -2]} isBroken={brokenHearts.includes(2)} heartIndex={2} />
+                    <Heart position={[-1, 5, 0]} isBroken={brokenHearts.includes(0)} heartIndex={0} />
+                    <Heart position={[0, 5, 0]} isBroken={brokenHearts.includes(1)} heartIndex={1} />
+                    <Heart position={[1, 5, 0]} isBroken={brokenHearts.includes(2)} heartIndex={2} />
                     <group scale={0.3} position={[-8, 1, 0]}>
                         {/* Paredes del bowl con colisionador */}
                         <RigidBody type="fixed" colliders="trimesh">
@@ -255,7 +256,7 @@ export default function Quiz() {
                         handleRestartQuiz={handleRestartQuiz}
                     />
                 )}
-
+            <Floor />
             </Canvas>
             {quizFinished && (
                 <QuizResultsOverlay
