@@ -118,7 +118,7 @@ const Scene = ({ setShowKeyHint }) => {
 
             <Text3D
                 castShadow
-                position={[-1.9, 1.4, -1.1]}
+                position={[-2.2, 1.4, -1]}
                 rotation={[0, 0, 0]}
                 font="/fonts/Mofulina_Regular.json"
                 size={0.4}

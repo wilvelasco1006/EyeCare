@@ -169,28 +169,7 @@ const SectionOne = () => {
             descripcion:
                 "Los niveles altos de azúcar en sangre alteran la estructura del cristalino, favoreciendo su opacidad.",
         },
-        {
-            titulo: "Uso prolongado de corticosteroides",
-            descripcion:
-                "Medicamentos antiinflamatorios como la prednisona pueden afectar negativamente el cristalino.",
-        },
-        {
-            titulo: "Visión borrosa o nublada",
-            descripcion:
-                "La opacidad del cristalino dispersa la luz y dificulta el enfoque claro.",
-        },
-        {
-            titulo: "Sensibilidad a la luz",
-            descripcion: "La luz intensa puede causar molestias o deslumbramiento.",
-        },
-        {
-            titulo: "Colores menos brillantes",
-            descripcion: "Los colores pueden percibirse más apagados o amarillentos.",
-        },
-        {
-            titulo: "Dificultad para ver de noche",
-            descripcion: "Se reduce la capacidad de adaptarse a entornos oscuros.",
-        },
+
     ];
     const [causaIndex, setCausaIndex] = useState(0);
     const handleCausaPrev = () =>
