@@ -9,6 +9,7 @@ export function Heart({ position, isBroken, heartIndex }) {
     const [fragments, setFragments] = useState([]);
     const [isVisible, setIsVisible] = useState(true);
 
+    // Maneja la rotura
     useEffect(() => {
         if (isBroken && isVisible) {
             const newFragments = [];
@@ -32,9 +33,16 @@ export function Heart({ position, isBroken, heartIndex }) {
         }
     }, [isBroken, isVisible, position, heartIndex]);
 
+    // Reinicia el corazón cuando isBroken vuelve a false
+    useEffect(() => {
+        if (!isBroken) {
+            setIsVisible(true);
+            setFragments([]);
+        }
+    }, [isBroken]);
+
     return (
         <>
-            {/** Full Heart (GLB Model) **/}
             {isVisible && (
                 <group position={position} dispose={null}>
                     {/* Intentar con ambos nodos Cube y Cube__0 */}
@@ -45,7 +53,7 @@ export function Heart({ position, isBroken, heartIndex }) {
                             geometry={nodes.Cube.geometry}
                             material={materials['Scene_-_Root']}
                             rotation={[-Math.PI / 2, 0, 0]}
-                            scale={1}
+                            scale={0.2}
                         />
                     )}
                     
@@ -56,7 +64,7 @@ export function Heart({ position, isBroken, heartIndex }) {
                             geometry={nodes.Cube__0.geometry}
                             material={materials['Scene_-_Root']}
                             rotation={[-Math.PI / 2, 0, 0]}
-                            scale={0.1} // Aumenté el scale significativamente
+                            scale={0.2} // Aumenté el scale significativamente
                         />
                     )}
                     
@@ -68,7 +76,7 @@ export function Heart({ position, isBroken, heartIndex }) {
                             geometry={nodes.Heartfbx.geometry}
                             material={materials['Scene_-_Root']}
                             rotation={[-Math.PI / 2, 0, 0]}
-                            scale={0.1}
+                            scale={0.2}
                         />
                     )}
                 </group>

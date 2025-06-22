@@ -60,6 +60,7 @@ export default function Quiz() {
     const [showResult, setShowResult] = useState(false);
     const [brokenHearts, setBrokenHearts] = useState([]);
     const [lives, setLives] = useState(3);
+    const [showGameOver, setShowGameOver] = useState(false);
 
     const currentQuestion = quizQuestions[currentQuestionIndex];
 
@@ -76,7 +77,13 @@ export default function Quiz() {
             }
             return prev;
         });
-        setLives(prev => Math.max(0, prev - 1));
+        setLives(prev => {
+            const newLives = Math.max(0, prev - 1);
+            if (newLives === 0) {
+                setShowGameOver(true);
+            }
+            return newLives;
+        });
     }, []);
 
     const handleNextQuestion = useCallback(() => {
@@ -94,10 +101,9 @@ export default function Quiz() {
         setIsSubmitting(true);
 
         setTimeout(() => {
-            setEyesCount((prev) => prev + 1);
-
             if (selectedOptionId === currentQuestion.correctOptionId) {
                 incrementCorrectAnswers();
+                setEyesCount((prev) => prev + 1); // Solo suma ojo si es correcta
             } else {
                 incrementIncorrectAnswers();
                 breakNextHeart();
@@ -147,7 +153,8 @@ export default function Quiz() {
         setEyesCount(0);
         setShowResult(false);
         setBrokenHearts([]);
-        setLives(3);
+        setLives(3); // <-- Esto reinicia las vidas
+        setShowGameOver(false);
     }, [clearQuiz]);
 
     return (
@@ -267,8 +274,31 @@ export default function Quiz() {
                     isSubmitting={isSubmitting}
                 />
             )}
-
-
+            {showGameOver && (
+                <div className="game-over-modal" style={{
+                    position: 'fixed',
+                    top: 0, left: 0, right: 0, bottom: 0,
+                    background: 'rgba(0,0,0,0.7)',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    zIndex: 9999
+                }}>
+                    <div style={{
+                        background: '#fff',
+                        padding: '2rem 3rem',
+                        borderRadius: '16px',
+                        textAlign: 'center',
+                        boxShadow: '0 4px 32px rgba(0,0,0,0.2)'
+                    }}>
+                        <h2 style={{ color: '#d33' }}>Game Over</h2>
+                        <p>Intenta de nuevo</p>
+                        <button className="btn btn-primary" onClick={handleRestartQuiz}>
+                            Reiniciar Quiz
+                        </button>
+                    </div>
+                </div>
+            )}
         </div>
     );
 }
