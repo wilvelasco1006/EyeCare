@@ -31,10 +31,14 @@ export const QuestionText3D = ({ question, questionNumber, totalQuestions }) => 
             position={[-8, 2, 0]}
             fontSize={0.25}
             color="#3b82f6"
-            textAlign="center"
+            textAlign="left"
             maxWidth={6}
+            lineHeight={1.3}
         >
-            💡 Haz click en los bloques para seleccionar tu respuesta
+            💡 Controles:
+            {'\n'}WASD o ↑←↓→: Mover bola
+            {'\n'}Golpea bloques para seleccionar
+            {'\n'}ENTER: Continuar | R: Reiniciar
         </Text>
     </group>
 );

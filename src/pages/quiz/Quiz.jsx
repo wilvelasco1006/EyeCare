@@ -1,6 +1,6 @@
 // src/components/quiz/Quiz.jsx
 /* eslint-disable react/no-unknown-property */
-import React, { useState, useCallback, useRef } from 'react'; // Añadir useRef
+import React, { useState, useCallback, useRef, useEffect } from 'react'; // Añadir useEffect
 import { Canvas, useFrame } from '@react-three/fiber'; // Añadir useFrame
 import { Physics, RigidBody } from '@react-three/rapier';
 import { OrbitControls, KeyboardControls, useKeyboardControls } from '@react-three/drei'; // Añadir useKeyboardControls
@@ -45,6 +45,7 @@ const PlayerBall = ({ onCollideWithOption, showResult, isSubmitting }) => {
     const ballRef = useRef();
     const [subscribeKeys, getKeys] = useKeyboardControls();
     const [emissiveIntensity, setEmissiveIntensity] = useState(0.5);
+    const [lastHitOptionId, setLastHitOptionId] = useState(null);
 
     // Estado para evitar múltiples colisiones
     const lastCollision = useRef(null);
@@ -54,11 +55,14 @@ const PlayerBall = ({ onCollideWithOption, showResult, isSubmitting }) => {
     useFrame((state) => {
         if (!ballRef.current) return;
 
+        // Despertar la física en cada frame
+        ballRef.current.wakeUp();
+
         const { forward, backward, left, right } = getKeys();
 
         // Calcular dirección basada en entradas
         const impulse = { x: 0, y: 0, z: 0 };
-        const moveSpeed = 2.0; // Ajustar según necesidad
+        const moveSpeed = 0.1;
 
         if (forward) impulse.z = -moveSpeed;
         if (backward) impulse.z = moveSpeed;
@@ -68,7 +72,6 @@ const PlayerBall = ({ onCollideWithOption, showResult, isSubmitting }) => {
         // Aplicar impulso si hay movimiento
         if (impulse.x !== 0 || impulse.z !== 0) {
             ballRef.current.applyImpulse(impulse);
-
             // Efecto visual de brillo al moverse
             setEmissiveIntensity(0.5 + Math.sin(state.clock.getElapsedTime() * 10) * 0.3);
         }
@@ -78,22 +81,47 @@ const PlayerBall = ({ onCollideWithOption, showResult, isSubmitting }) => {
     const handleCollision = (event) => {
         if (showResult || isSubmitting) return;
 
-        if (event.other.rigidBodyObject && event.other.rigidBodyObject.userData?.isOptionBlock) {
-            const optionId = event.other.rigidBodyObject.userData.optionId;
+        // Verificar la posición del objeto con el que colisionamos
+        const otherPosition = event.other.rigidBody?.translation();
 
-            // Evitar múltiples colisiones seguidas
-            if (lastCollision.current !== optionId) {
-                lastCollision.current = optionId;
+        if (otherPosition) {
+            // Aproximación por posición con coordenadas más precisas
+            const optionPositions = {
+                '-4': 'a',
+                '-1.3': 'b',
+                '1.3': 'c',
+                '4': 'd'
+            };
 
-                // Informar al componente padre
-                onCollideWithOption(optionId);
+            // Imprimir posición de colisión para debugging
+            //console.log("Posición de colisión:", otherPosition);
 
-                // Limpiar timeout previo
-                if (collisionTimeout.current) clearTimeout(collisionTimeout.current);
+            // Encontrar la opción más cercana con umbral más estricto
+            let closestOption = null;
+            let minDistance = Infinity;
 
-                // Permitir nueva colisión después de un tiempo
-                collisionTimeout.current = setTimeout(() => {
-                    lastCollision.current = null;
+            Object.entries(optionPositions).forEach(([posX, optionId]) => {
+                const distance = Math.abs(parseFloat(posX) - otherPosition.x);
+
+                // Usar un umbral más pequeño para mayor precisión
+                if (distance < minDistance && distance < 0.8) {
+                    minDistance = distance;
+                    closestOption = optionId;
+                }
+            });
+
+            if (closestOption && lastHitOptionId !== closestOption) {
+                console.log(`Colisión detectada con bloque: ${closestOption} (distancia: ${minDistance})`);
+                setLastHitOptionId(closestOption);
+
+                // Notificar al componente padre con un pequeño retraso para evitar selecciones erróneas
+                setTimeout(() => {
+                    onCollideWithOption(closestOption);
+                }, 10);
+
+                // Prevenir colisiones repetidas
+                setTimeout(() => {
+                    setLastHitOptionId(null);
                 }, 1000);
             }
         }
@@ -102,18 +130,20 @@ const PlayerBall = ({ onCollideWithOption, showResult, isSubmitting }) => {
     return (
         <RigidBody
             ref={ballRef}
-            position={[0, 1, 5]} // Posición inicial más cercana a la cámara
+            position={[0, 1, 5]}
             colliders="ball"
-            restitution={0.6}
-            friction={0.7}
-            linearDamping={1.0} // Amortiguación para mejor control
-            angularDamping={0.5}
+            restitution={0.4} // Reducir de 0.6 a 0.4 para menos rebote
+            friction={0.8} // Aumentar de 0.7 a 0.8 para más agarre
+            linearDamping={2.0} // Aumentar de 1.0 a 2.0 para que frene más rápido
+            angularDamping={0.1} // Aumentar de 0.5 a 0.8 para menos rotación
             onCollisionEnter={handleCollision}
+            canSleep={false}
         >
             <mesh castShadow>
-                <sphereGeometry args={[1, 32, 32]} />
+                {/* BOLA MÁS PEQUEÑA: Cambiar de 1 a 0.5 */}
+                <sphereGeometry args={[0.5, 32, 32]} />
                 <meshStandardMaterial
-                    color="#4b70ff" // Azul como se menciona en las instrucciones
+                    color="#4b70ff"
                     emissive="#4b70ff"
                     emissiveIntensity={emissiveIntensity}
                     metalness={0.8}
@@ -246,7 +276,9 @@ export default function Quiz() {
         { name: 'forward', keys: ['KeyW', 'ArrowUp'] },
         { name: 'backward', keys: ['KeyS', 'ArrowDown'] },
         { name: 'left', keys: ['KeyA', 'ArrowLeft'] },
-        { name: 'right', keys: ['KeyD', 'ArrowRight'] }
+        { name: 'right', keys: ['KeyD', 'ArrowRight'] },
+        { name: 'next', keys: ['Enter'] },
+        { name: 'reset', keys: ['KeyR'] } // Añadir esta línea
     ];
 
     // Callback para manejar colisiones con opciones
@@ -262,6 +294,40 @@ export default function Quiz() {
             handleOptionClick(optionId);
         }
     }, [handleOptionClick, showResult, isSubmitting]);
+
+    
+    const KeyboardHandler = ({ onEnterPress, onResetPress, isSubmitting, selectedOptionId }) => {
+        const [subscribeKeys] = useKeyboardControls();
+
+        useEffect(() => {
+            // Manejar tecla Enter
+            const unsubscribeNext = subscribeKeys(
+                (state) => state.next,
+                (pressed) => {
+                    if (pressed && !isSubmitting && selectedOptionId !== null) {
+                        onEnterPress();
+                    }
+                }
+            );
+
+            // Manejar tecla R para reiniciar
+            const unsubscribeReset = subscribeKeys(
+                (state) => state.reset,
+                (pressed) => {
+                    if (pressed) {
+                        onResetPress();
+                    }
+                }
+            );
+
+            return () => {
+                unsubscribeNext();
+                unsubscribeReset();
+            };
+        }, [subscribeKeys, onEnterPress, onResetPress, isSubmitting, selectedOptionId]);
+
+        return null; 
+    };
 
     return (
         <div style={{ width: '100%', height: '100vh', position: 'relative' }}>
@@ -371,7 +437,7 @@ export default function Quiz() {
                             </mesh>
                         </group>
 
-                        {/* Mover Floor AQUÍ, dentro de Physics */}
+
                         <Floor />
                     </Physics>
 
@@ -389,6 +455,14 @@ export default function Quiz() {
                             handleRestartQuiz={handleRestartQuiz}
                         />
                     )}
+
+                    {/* Añadir esto dentro del Canvas pero fuera de Physics */}
+                    <KeyboardHandler
+                        onEnterPress={handleNextQuestion}
+                        onResetPress={handleRestartQuiz}
+                        isSubmitting={isSubmitting}
+                        selectedOptionId={selectedOptionId}
+                    />
                 </Canvas>
             </KeyboardControls>
             {quizFinished && (

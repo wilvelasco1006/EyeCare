@@ -19,10 +19,21 @@ export const QuizOptionBlock = ({ position, label, optionText, isSelected, onCli
     // Asignar userData para identificación en colisiones
     useEffect(() => {
         if (rigidBodyRef.current) {
+            // Asignar userData directamente al RigidBody
             rigidBodyRef.current.userData = {
                 isOptionBlock: true,
-                optionId
+                optionId: optionId
             };
+
+            // Asegurar que también se asigna al meshRef para mayor compatibilidad
+            if (meshRef.current) {
+                meshRef.current.userData = {
+                    isOptionBlock: true,
+                    optionId: optionId
+                };
+            }
+
+            console.log(`Bloque ${optionId} configurado con userData:`, rigidBodyRef.current.userData);
         }
     }, [optionId]);
 
@@ -37,7 +48,6 @@ export const QuizOptionBlock = ({ position, label, optionText, isSelected, onCli
                 ref={meshRef}
                 onPointerEnter={() => !showResult && setHovered(true)}
                 onPointerLeave={() => !showResult && setHovered(false)}
-                onClick={!showResult ? onClick : undefined}
                 scale={isSelected ? [1.1, 1.1, 1.1] : [1, 1, 1]}
             >
                 <boxGeometry args={[2.5, 0.8, 2.5]} />
