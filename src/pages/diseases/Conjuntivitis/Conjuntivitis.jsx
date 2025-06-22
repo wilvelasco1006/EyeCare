@@ -7,7 +7,7 @@ import React, { useRef, useEffect, useState } from "react";
 
 const Conjuntivitis = () => {
     const containerRef = useRef(null);
-    const sectionRefs = [useRef(null), useRef(null), useRef(null)];
+    const sectionRefs = [useRef(null), useRef(null), useRef(null), useRef(null)];
     const [activeSection, setActiveSection] = useState(0);
     
     // Función para manejar el scroll suave entre secciones
