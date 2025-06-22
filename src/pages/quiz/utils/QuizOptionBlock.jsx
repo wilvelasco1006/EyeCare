@@ -32,19 +32,11 @@ export const QuizOptionBlock = ({ position, label, optionText, isSelected, onCli
                     emissiveIntensity={isSelected ? 0.2 : 0}
                 />
 
-                <Text
-                    position={[0, 0.5, 0]}
-                    fontSize={0.4}
-                    color="white"
-                    fontWeight="bold"
-                >
-                    {label}
-                </Text>
 
                 <Text
-                    position={[0, 0.1, 0]}
+                    position={[0, 0.5, 0]}
                     fontSize={0.25}
-                    color="white"
+                    color="black"
                     maxWidth={2}
                     textAlign="center"
                 >

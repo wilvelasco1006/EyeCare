@@ -4,7 +4,7 @@ import React from 'react';
 import { Text } from '@react-three/drei';
 
 export const QuizActions = ({ selectedOptionId, showResult, currentQuestionIndex, totalQuestions, handleNextQuestion, handleRestartQuiz }) => (
-    <group position={[6, 1, 0]}>
+    <group position={[6.5, 1.2, 0]}>
         <mesh
             position={[0, 0.5, 0]}
             onClick={handleNextQuestion}
