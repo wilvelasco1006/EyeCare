@@ -1,11 +1,12 @@
 // src/components/quiz/QuizOptionBlock.jsx
 /* eslint-disable react/no-unknown-property */
-import React, { useRef, useState } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import { RigidBody } from '@react-three/rapier';
 import { Text } from '@react-three/drei';
 
-export const QuizOptionBlock = ({ position, label, optionText, isSelected, onClick, isCorrect, showResult }) => {
+export const QuizOptionBlock = ({ position, label, optionText, isSelected, onClick, isCorrect, showResult, optionId }) => {
     const meshRef = useRef();
+    const rigidBodyRef = useRef();
     const [hovered, setHovered] = useState(false);
 
     const getBlockColor = () => {
@@ -15,11 +16,25 @@ export const QuizOptionBlock = ({ position, label, optionText, isSelected, onCli
         return isSelected ? "#3b82f6" : hovered ? "#60a5fa" : "#4ade80";
     };
 
+    // Asignar userData para identificación en colisiones
+    useEffect(() => {
+        if (rigidBodyRef.current) {
+            rigidBodyRef.current.userData = {
+                isOptionBlock: true,
+                optionId
+            };
+        }
+    }, [optionId]);
+
     return (
-        <RigidBody type="fixed" colliders="cuboid">
+        <RigidBody
+            ref={rigidBodyRef}
+            type="fixed"
+            colliders="cuboid"
+            position={position}
+        >
             <mesh
                 ref={meshRef}
-                position={position}
                 onPointerEnter={() => !showResult && setHovered(true)}
                 onPointerLeave={() => !showResult && setHovered(false)}
                 onClick={!showResult ? onClick : undefined}
@@ -31,7 +46,6 @@ export const QuizOptionBlock = ({ position, label, optionText, isSelected, onCli
                     emissive={isSelected ? "#1e40af" : "#000000"}
                     emissiveIntensity={isSelected ? 0.2 : 0}
                 />
-
 
                 <Text
                     position={[0, 1, 0]}

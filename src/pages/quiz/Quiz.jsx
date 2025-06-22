@@ -1,9 +1,9 @@
 // src/components/quiz/Quiz.jsx
 /* eslint-disable react/no-unknown-property */
-import React, { useState, useCallback } from 'react';
-import { Canvas } from '@react-three/fiber';
+import React, { useState, useCallback, useRef } from 'react'; // Añadir useRef
+import { Canvas, useFrame } from '@react-three/fiber'; // Añadir useFrame
 import { Physics, RigidBody } from '@react-three/rapier';
-import { OrbitControls } from '@react-three/drei';
+import { OrbitControls, KeyboardControls, useKeyboardControls } from '@react-three/drei'; // Añadir useKeyboardControls
 import useQuizStore from '../../stores/use-quiz-store';
 import useAuthStore from '../../stores/use-auth-store';
 import { useNavigate } from 'react-router-dom';
@@ -38,6 +38,90 @@ const createQuizData = async (quizResultsData) => {
         console.error("Error al guardar los datos del quiz:", error);
         throw error;
     }
+};
+
+// Crear un componente para la bola controlable
+const PlayerBall = ({ onCollideWithOption, showResult, isSubmitting }) => {
+    const ballRef = useRef();
+    const [subscribeKeys, getKeys] = useKeyboardControls();
+    const [emissiveIntensity, setEmissiveIntensity] = useState(0.5);
+
+    // Estado para evitar múltiples colisiones
+    const lastCollision = useRef(null);
+    const collisionTimeout = useRef(null);
+
+    // Manejar movimiento con teclas
+    useFrame((state) => {
+        if (!ballRef.current) return;
+
+        const { forward, backward, left, right } = getKeys();
+
+        // Calcular dirección basada en entradas
+        const impulse = { x: 0, y: 0, z: 0 };
+        const moveSpeed = 2.0; // Ajustar según necesidad
+
+        if (forward) impulse.z = -moveSpeed;
+        if (backward) impulse.z = moveSpeed;
+        if (left) impulse.x = -moveSpeed;
+        if (right) impulse.x = moveSpeed;
+
+        // Aplicar impulso si hay movimiento
+        if (impulse.x !== 0 || impulse.z !== 0) {
+            ballRef.current.applyImpulse(impulse);
+
+            // Efecto visual de brillo al moverse
+            setEmissiveIntensity(0.5 + Math.sin(state.clock.getElapsedTime() * 10) * 0.3);
+        }
+    });
+
+    // Manejar colisiones con bloques de opciones
+    const handleCollision = (event) => {
+        if (showResult || isSubmitting) return;
+
+        if (event.other.rigidBodyObject && event.other.rigidBodyObject.userData?.isOptionBlock) {
+            const optionId = event.other.rigidBodyObject.userData.optionId;
+
+            // Evitar múltiples colisiones seguidas
+            if (lastCollision.current !== optionId) {
+                lastCollision.current = optionId;
+
+                // Informar al componente padre
+                onCollideWithOption(optionId);
+
+                // Limpiar timeout previo
+                if (collisionTimeout.current) clearTimeout(collisionTimeout.current);
+
+                // Permitir nueva colisión después de un tiempo
+                collisionTimeout.current = setTimeout(() => {
+                    lastCollision.current = null;
+                }, 1000);
+            }
+        }
+    };
+
+    return (
+        <RigidBody
+            ref={ballRef}
+            position={[0, 1, 5]} // Posición inicial más cercana a la cámara
+            colliders="ball"
+            restitution={0.6}
+            friction={0.7}
+            linearDamping={1.0} // Amortiguación para mejor control
+            angularDamping={0.5}
+            onCollisionEnter={handleCollision}
+        >
+            <mesh castShadow>
+                <sphereGeometry args={[1, 32, 32]} />
+                <meshStandardMaterial
+                    color="#4b70ff" // Azul como se menciona en las instrucciones
+                    emissive="#4b70ff"
+                    emissiveIntensity={emissiveIntensity}
+                    metalness={0.8}
+                    roughness={0.2}
+                />
+            </mesh>
+        </RigidBody>
+    );
 };
 
 export default function Quiz() {
@@ -150,114 +234,156 @@ export default function Quiz() {
         setLives(3);
     }, [clearQuiz]);
 
+    // Define los controles
+    const keyboardMap = [
+        { name: 'forward', keys: ['KeyW', 'ArrowUp'] },
+        { name: 'backward', keys: ['KeyS', 'ArrowDown'] },
+        { name: 'left', keys: ['KeyA', 'ArrowLeft'] },
+        { name: 'right', keys: ['KeyD', 'ArrowRight'] }
+    ];
+
+    // Callback para manejar colisiones con opciones
+    const handleEyeCollideWithOption = useCallback((optionId) => {
+        if (!showResult && !isSubmitting) {
+            handleOptionClick(optionId);
+        }
+    }, [handleOptionClick, showResult, isSubmitting]);
+
+    // Modificar la función handleEyeCollideWithOption para pasarla como prop
+    const handleBallCollideWithOption = useCallback((optionId) => {
+        if (!showResult && !isSubmitting) {
+            handleOptionClick(optionId);
+        }
+    }, [handleOptionClick, showResult, isSubmitting]);
+
     return (
         <div style={{ width: '100%', height: '100vh', position: 'relative' }}>
-            <Canvas
-                camera={{ position: [0, 5, 12], fov: 60 }}
-                shadows
-                style={{ width: '100%', height: '100%' }}
-            >
-                <ambientLight intensity={0.4} />
-                <directionalLight position={[5, 10, 5]} intensity={1} castShadow />
-                <OrbitControls enablePan={false} maxPolarAngle={Math.PI / 2} />
-
-                {!quizFinished && currentQuestion && (
-                    <QuestionText3D
-                        question={currentQuestion.text}
-                        questionNumber={currentQuestionIndex + 1}
-                        totalQuestions={quizQuestions.length}
-                    />
-                )}
-
-                <Physics gravity={[0, -9.81, 0]}>
-                    <RigidBody type="fixed" colliders="cuboid">
-                        <mesh position={[0, -5, 0]} visible={false}>
-                            <boxGeometry args={[20, 0.1, 20]} />
-                            <meshStandardMaterial transparent opacity={0} />
-                        </mesh>
-                    </RigidBody>
+            <KeyboardControls map={keyboardMap}>
+                <Canvas
+                    camera={{ position: [0, 7, 16], fov: 60 }}
+                    shadows
+                    style={{ width: '100%', height: '100%' }}
+                >
+                    <ambientLight intensity={0.4} />
+                    <directionalLight position={[5, 10, 5]} intensity={1} castShadow />
+                    <OrbitControls enablePan={false} maxPolarAngle={Math.PI / 2} />
 
                     {!quizFinished && currentQuestion && (
-                        <>
-                            <QuizOptionBlock
-                                position={[-4, -0.39, 0]}
-                                optionText={currentQuestion.options[0].text}
-                                isSelected={selectedOptionId === 'a'}
-                                onClick={() => handleOptionClick('a')}
-                                isCorrect={currentQuestion.correctOptionId === 'a'}
-                                showResult={showResult}
-                            />
-                            <QuizOptionBlock
-                                position={[-1.3, -0.39, 0]}
-                                optionText={currentQuestion.options[1].text}
-                                isSelected={selectedOptionId === 'b'}
-                                onClick={() => handleOptionClick('b')}
-                                isCorrect={currentQuestion.correctOptionId === 'b'}
-                                showResult={showResult}
-                            />
-                            <QuizOptionBlock
-                                position={[1.3, -0.39, 0]}
-                                optionText={currentQuestion.options[2].text}
-                                isSelected={selectedOptionId === 'c'}
-                                onClick={() => handleOptionClick('c')}
-                                isCorrect={currentQuestion.correctOptionId === 'c'}
-                                showResult={showResult}
-                            />
-                            <QuizOptionBlock
-                                position={[4, -0.39, 0]}
-                                optionText={currentQuestion.options[3].text}
-                                isSelected={selectedOptionId === 'd'}
-                                onClick={() => handleOptionClick('d')}
-                                isCorrect={currentQuestion.correctOptionId === 'd'}
-                                showResult={showResult}
-                            />
-                        </>
+                        <QuestionText3D
+                            question={currentQuestion.text}
+                            questionNumber={currentQuestionIndex + 1}
+                            totalQuestions={quizQuestions.length}
+                        />
                     )}
 
-                    {[...Array(eyesCount)].map((_, i) => (
-                        <Eye key={i} onScore={pointQuiz} position={[-8, 5 + i * 1.5, 0]} />
-                    ))}
-                    <Heart position={[-1, 5, 0]} isBroken={brokenHearts.includes(0)} heartIndex={0} />
-                    <Heart position={[0, 5, 0]} isBroken={brokenHearts.includes(1)} heartIndex={1} />
-                    <Heart position={[1, 5, 0]} isBroken={brokenHearts.includes(2)} heartIndex={2} />
-                    <group scale={0.3} position={[-8, 1, 0]}>
-                        {/* Paredes del bowl con colisionador */}
-                        <RigidBody type="fixed" colliders="trimesh">
-                            <mesh position={[0, -4.5, 0]} receiveShadow>
-                                {/* Paredes del bowl */}
-                                <cylinderGeometry args={[8, 8, 2, 64, 1, true]} />
-                                <meshStandardMaterial color="#d39be6" />
-                            </mesh>
-                            <mesh position={[0, -5.5, 0]} receiveShadow>
-                                {/* Fondo del bowl */}
-                                <cylinderGeometry args={[7.7, 7.7, 1, 64]} />
-                                <meshStandardMaterial color="#d39be6" />
+                    <Physics gravity={[0, -9.81, 0]}>
+                        <RigidBody type="fixed" colliders="cuboid">
+                            <mesh position={[0, -5, 0]} visible={false}>
+                                <boxGeometry args={[20, 0.1, 20]} />
+                                <meshStandardMaterial transparent opacity={0} />
                             </mesh>
                         </RigidBody>
-                        {/* Opcional: Borde superior solo visual, sin colisión */}
-                        <mesh position={[0, -3.5, 0]} rotation={[-Math.PI / 2, 0, 0]} receiveShadow>
-                            <torusGeometry args={[8, 0.15, 16, 100]} />
-                            <meshStandardMaterial color="#c084d6" />
-                        </mesh>
-                    </group>
-                </Physics>
 
-                {!quizFinished && (
-                    <QuizStats quiz={quiz} lives={lives} />
-                )}
+                        {/* Bloques de opciones - IMPORTANTE: Añadir optionId para detectar colisiones */}
+                        {!quizFinished && currentQuestion && (
+                            <>
+                                <QuizOptionBlock
+                                    position={[-4, -0.39, 0]}
+                                    optionText={currentQuestion.options[0].text}
+                                    isSelected={selectedOptionId === 'a'}
+                                    onClick={() => handleOptionClick('a')}
+                                    isCorrect={currentQuestion.correctOptionId === 'a'}
+                                    showResult={showResult}
+                                    optionId="a" // Añadir esta propiedad
+                                />
+                                <QuizOptionBlock
+                                    position={[-1.3, -0.39, 0]}
+                                    optionText={currentQuestion.options[1].text}
+                                    isSelected={selectedOptionId === 'b'}
+                                    onClick={() => handleOptionClick('b')}
+                                    isCorrect={currentQuestion.correctOptionId === 'b'}
+                                    showResult={showResult}
+                                    optionId="b" // Añadir esta propiedad
+                                />
+                                <QuizOptionBlock
+                                    position={[1.3, -0.39, 0]}
+                                    optionText={currentQuestion.options[2].text}
+                                    isSelected={selectedOptionId === 'c'}
+                                    onClick={() => handleOptionClick('c')}
+                                    isCorrect={currentQuestion.correctOptionId === 'c'}
+                                    showResult={showResult}
+                                    optionId="c" // Añadir esta propiedad
+                                />
+                                <QuizOptionBlock
+                                    position={[4, -0.39, 0]}
+                                    optionText={currentQuestion.options[3].text}
+                                    isSelected={selectedOptionId === 'd'}
+                                    onClick={() => handleOptionClick('d')}
+                                    isCorrect={currentQuestion.correctOptionId === 'd'}
+                                    showResult={showResult}
+                                    optionId="d" // Añadir esta propiedad
+                                />
+                            </>
+                        )}
 
-                {!quizFinished && (
-                    <QuizActions
-                        selectedOptionId={selectedOptionId}
-                        showResult={showResult}
-                        currentQuestionIndex={currentQuestionIndex}
-                        totalQuestions={quizQuestions.length}
-                        handleNextQuestion={handleNextQuestion}
-                        handleRestartQuiz={handleRestartQuiz}
-                    />
-                )}
-            <Floor />
-            </Canvas>
+                        {/* Ojos que caen (comportamiento original) */}
+                        {[...Array(eyesCount)].map((_, i) => (
+                            <Eye key={i} onScore={pointQuiz} position={[-8, 5 + i * 1.5, 0]} />
+                        ))}
+
+                        {/* Reemplazar la esfera de prueba con nuestro PlayerBall */}
+                        {!quizFinished && (
+                            <PlayerBall
+                                onCollideWithOption={handleBallCollideWithOption}
+                                showResult={showResult}
+                                isSubmitting={isSubmitting}
+                            />
+                        )}
+
+                        <Heart position={[-1, 5, 0]} isBroken={brokenHearts.includes(0)} heartIndex={0} />
+                        <Heart position={[0, 5, 0]} isBroken={brokenHearts.includes(1)} heartIndex={1} />
+                        <Heart position={[1, 5, 0]} isBroken={brokenHearts.includes(2)} heartIndex={2} />
+                        <group scale={0.3} position={[-8, 1, 0]}>
+                            {/* Paredes del bowl con colisionador */}
+                            <RigidBody type="fixed" colliders="trimesh">
+                                <mesh position={[0, -4.5, 0]} receiveShadow>
+                                    {/* Paredes del bowl */}
+                                    <cylinderGeometry args={[8, 8, 2, 64, 1, true]} />
+                                    <meshStandardMaterial color="#d39be6" />
+                                </mesh>
+                                <mesh position={[0, -5.5, 0]} receiveShadow>
+                                    {/* Fondo del bowl */}
+                                    <cylinderGeometry args={[7.7, 7.7, 1, 64]} />
+                                    <meshStandardMaterial color="#d39be6" />
+                                </mesh>
+                            </RigidBody>
+                            {/* Opcional: Borde superior solo visual, sin colisión */}
+                            <mesh position={[0, -3.5, 0]} rotation={[-Math.PI / 2, 0, 0]} receiveShadow>
+                                <torusGeometry args={[8, 0.15, 16, 100]} />
+                                <meshStandardMaterial color="#c084d6" />
+                            </mesh>
+                        </group>
+
+                        {/* Mover Floor AQUÍ, dentro de Physics */}
+                        <Floor />
+                    </Physics>
+
+                    {!quizFinished && (
+                        <QuizStats quiz={quiz} lives={lives} />
+                    )}
+
+                    {!quizFinished && (
+                        <QuizActions
+                            selectedOptionId={selectedOptionId}
+                            showResult={showResult}
+                            currentQuestionIndex={currentQuestionIndex}
+                            totalQuestions={quizQuestions.length}
+                            handleNextQuestion={handleNextQuestion}
+                            handleRestartQuiz={handleRestartQuiz}
+                        />
+                    )}
+                </Canvas>
+            </KeyboardControls>
             {quizFinished && (
                 <QuizResultsOverlay
                     quiz={quiz}
@@ -268,7 +394,43 @@ export default function Quiz() {
                 />
             )}
 
+            {/* Instrucciones para el usuario */}
+            <div className="controls-info" style={{
+                position: 'absolute',
+                bottom: '20px',
+                left: '20px',
+                backgroundColor: 'rgba(0,0,0,0.7)',
+                color: 'white',
+                padding: '10px',
+                borderRadius: '5px',
+                zIndex: 100
+            }}>
+                Usa las teclas WASD o las flechas del teclado para mover el ojo azul
+            </div>
 
+            {/* Indicador para el ojo controlable */}
+            <div className="player-indicator" style={{
+                position: 'absolute',
+                top: '20px',
+                right: '20px',
+                backgroundColor: 'rgba(75, 112, 255, 0.7)',
+                color: 'white',
+                padding: '10px',
+                borderRadius: '5px',
+                zIndex: 100,
+                display: 'flex',
+                alignItems: 'center',
+                gap: '10px'
+            }}>
+                <div style={{
+                    width: '20px',
+                    height: '20px',
+                    borderRadius: '50%',
+                    backgroundColor: '#4b70ff',
+                    boxShadow: '0 0 10px #4b70ff'
+                }}></div>
+                Tu ojo controlable
+            </div>
         </div>
     );
 }
