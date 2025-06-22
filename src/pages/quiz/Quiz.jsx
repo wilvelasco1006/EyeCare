@@ -3,7 +3,8 @@
 import React, { useState, useCallback, useRef, useEffect } from 'react'; // Añadir useEffect
 import { Canvas, useFrame } from '@react-three/fiber'; // Añadir useFrame
 import { Physics, RigidBody } from '@react-three/rapier';
-import { OrbitControls, KeyboardControls, useKeyboardControls } from '@react-three/drei'; // Añadir useKeyboardControls
+import { OrbitControls, KeyboardControls, useKeyboardControls, Sky, Stars, Sparkles } from '@react-three/drei'; // Añadir useKeyboardControls
+
 import useQuizStore from '../../stores/use-quiz-store';
 import useAuthStore from '../../stores/use-auth-store';
 import { useNavigate } from 'react-router-dom';
@@ -463,6 +464,18 @@ export default function Quiz() {
                         isSubmitting={isSubmitting}
                         selectedOptionId={selectedOptionId}
                     />
+                    // añadir cielo oscuro y estrellas
+                    <Sky sunPosition={[60, -10, 100]} />
+                    <Stars />
+                
+                    <Sparkles
+                        size={6} // Tamaño de las chispas
+                        scale={[10, 10, 10]} // Escala de las chispas
+                        position={[0, 1, 0]} // Posición de las chispas
+                        speed={0.5} // Velocidad de las chispas
+                        count={50} // Número de chispas
+                    />
+
                 </Canvas>
             </KeyboardControls>
             {quizFinished && (

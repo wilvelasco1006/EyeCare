@@ -8,7 +8,7 @@ export const QuestionText3D = ({ question, questionNumber, totalQuestions }) => 
         <Text
             position={[0, 1.5, 0]}
             fontSize={0.4}
-            color="#667eea"
+            color="#ffffff"
             fontWeight="bold"
             textAlign="center"
         >
@@ -18,7 +18,7 @@ export const QuestionText3D = ({ question, questionNumber, totalQuestions }) => 
         <Text
             position={[0, 0.8, 0]}
             fontSize={0.35}
-            color="#1f2937"
+            color="#ffffff"
             fontWeight="600"
             textAlign="center"
             maxWidth={8}
@@ -30,7 +30,7 @@ export const QuestionText3D = ({ question, questionNumber, totalQuestions }) => 
         <Text
             position={[-8, 2, 0]}
             fontSize={0.25}
-            color="#3b82f6"
+            color="#ffffff"
             textAlign="left"
             maxWidth={6}
             lineHeight={1.3}
