@@ -3,27 +3,51 @@ import "./Sign.css";
 import { FaTimes } from "react-icons/fa";
 import { FcGoogle } from "react-icons/fc";
 import useAuthStore from "../../stores/use-auth-store";
-import { useNavigate } from "react-router-dom"; // Asegúrate de usar react-router-dom
+import { useNavigate } from "react-router-dom"; 
 
 const Sign = ({ closeModal }) => {
-  const { loginGoogleWithPopup } = useAuthStore(); // Método para iniciar sesión con Google
-  const navigate = useNavigate(); // Para redirigir después del inicio de sesión
+  const { loginGoogleWithPopup, userLooged } = useAuthStore();
+  const navigate = useNavigate();
+
+  const createUserInDatabase = useCallback(async (userData) => {
+    
+    try {
+      const response = await fetch(
+        `${import.meta.env.VITE_API_BASE_URL}/api/users/`, //ruta del index
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(userData),
+        }
+      );
+      if (!response.ok)
+        throw new Error(`Error ${response.status}: ${response.statusText}`);
+      return await response.json();
+    } catch (error) {
+      console.error(`Error creating user:`, error);
+      throw error;
+    }
+  });
 
   const handleLogin = useCallback(() => {
-    
     loginGoogleWithPopup()
-    closeModal()
-      .then(() => {
-        // Redirige al usuario a la página principal después de iniciar sesión
+      .then(async (loggedInUser) => {
+        if (loggedInUser) {
+          console.log("Usuario logueado:", loggedInUser);
+          const { uid, displayName, email } = loggedInUser; // <-- Incluye el uid
+          const data = { uid, displayName, email };         // <-- Incluye el uid
+          await createUserInDatabase(data);
+        } else {
+          console.log("loggedInUser es null o undefined después del login");
+        }
         navigate("/");
       })
       .catch((error) => {
-        console.error("Error al iniciar sesión con Google:", error);
-        // Redirige al usuario a la página de inicio de sesión en caso de error
-        navigate("/sign-in");
+        console.error("ERROR EN CATCH de loginGoogleWithPopup:", error);
+        // ...
       });
-  }, [loginGoogleWithPopup, navigate]   
-);
+  }, [loginGoogleWithPopup, navigate, closeModal, userLooged]);
+
 
   return (
     <div className="modal-overlay" onClick={closeModal}>

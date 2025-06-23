@@ -1,14 +1,16 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable no-unused-vars */
 import SectionOneM from "./sections/sectionOne/SectionOneM";
 import SectionTwoM from "./sections/section-two/SectionTwoM";
 import SectionThreeM from "./sections/section-three/SectionThreeM";
+import SectionFourM from "./sections/section-four/SectionFourM";
 
 import './MacularDegeneration.css';
 import React, { useRef, useEffect, useState } from "react";
 
 const MacularDegeneration = () => {
     const containerRef = useRef(null);
-    const sectionRefs = [useRef(null), useRef(null), useRef(null)];
+    const sectionRefs = [useRef(null), useRef(null), useRef(null), useRef(null)]; // Agregada la cuarta referencia
     const [activeSection, setActiveSection] = useState(0);
     
     // Función para manejar el scroll suave entre secciones
@@ -82,6 +84,13 @@ const MacularDegeneration = () => {
                 >
                     <span className="dot-tooltip">Tratamiento</span>
                 </div>
+                <div
+                    className={`nav-dot ${activeSection === 3 ? "active" : ""}`}
+                    onClick={() => scrollToSection(3)}
+                    aria-label="Ir a sección 4"
+                >
+                    <span className="dot-tooltip">Prevención</span>
+                </div>
             </div>
 
             {/* Secciones */}
@@ -95,6 +104,10 @@ const MacularDegeneration = () => {
             
             <section ref={sectionRefs[2]} className="section3M">     
                 <SectionThreeM />   
+            </section>
+            
+            <section ref={sectionRefs[3]} className="section4M">     
+                <SectionFourM />   
             </section>
         </div>
     );

@@ -24,7 +24,6 @@ const Home = () => {
           <div className="Presentation-text">
             <div className="welcome-header">
               <h2>¡Bienvenido a EyeCare!</h2>
-              <div className="accent-line"></div>
             </div>
             <p className="tagline">Descubre con EyeCare</p>
             <p className="description">Tu guía completa sobre enfermedades oculares</p>
