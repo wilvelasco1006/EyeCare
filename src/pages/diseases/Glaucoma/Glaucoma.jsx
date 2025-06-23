@@ -2,6 +2,7 @@
 import SectionOneG from "./sections/sectionOneG/SectionOneG";
 import SectionTwoG from "./sections/sectionTwoG/SectionTwoG";
 import SectionThreeG from "./sections/sectionThreeG/sectionThreeG";
+import SectionFourG from "./sections/sectionFourG/sectionFourG";
 import "./Glaucoma.css";
 import React, { useRef, useEffect, useState } from 'react';
 
@@ -65,8 +66,15 @@ const Glaucoma = () => {
           className={`nav-dot ${activeSection === 2 ? "active" : ""}`}
           onClick={() => sectionsRefs[2]?.current?.scrollIntoView({ behavior: 'smooth' })}
         >
+          <span className="dot-tooltip">Tratamiento</span>
+        </div>
+        <div
+          className={`nav-dot ${activeSection === 3 ? "active" : ""}`}
+          onClick={() => sectionsRefs[3]?.current?.scrollIntoView({ behavior: 'smooth' })}
+        >
           <span className="dot-tooltip">Prevención</span>
         </div>
+        
       </div>
 
       <section ref={sectionsRefs[0]} className="section1">
@@ -79,6 +87,10 @@ const Glaucoma = () => {
 
       <section ref={sectionsRefs[2]} className="section3">
         <SectionThreeG />      
+      </section>
+
+      <section ref={sectionsRefs[3]} className="section4">
+        <SectionFourG />      
       </section>
     </div>
   );
