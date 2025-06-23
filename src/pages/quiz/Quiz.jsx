@@ -20,7 +20,7 @@ import { QuizStats } from './utils/QuizStats';
 import { QuizActions } from './utils/QuizActions';
 import { QuizResultsOverlay } from './utils/QuizResultsOverlay';
 import Floor from './model-3d/Floor.jsx';
-
+import Podio from './utils/Podio';
 
 // API function for quiz results (can be moved to a separate service file if it grows)
 const createQuizData = async (quizResultsData) => {
@@ -440,6 +440,8 @@ export default function Quiz() {
 
 
                         <Floor />
+                        {/* Añadir esto dentro del Canvas pero fuera de Physics */}
+                        <Podio />
                     </Physics>
 
                     {!quizFinished && (
@@ -457,7 +459,8 @@ export default function Quiz() {
                         />
                     )}
 
-                    {/* Añadir esto dentro del Canvas pero fuera de Physics */}
+                    
+
                     <KeyboardHandler
                         onEnterPress={handleNextQuestion}
                         onResetPress={handleRestartQuiz}

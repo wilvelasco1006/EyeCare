@@ -30,32 +30,21 @@ const Sign = ({ closeModal }) => {
   });
 
   const handleLogin = useCallback(() => {
-    
     loginGoogleWithPopup()
       .then(async (loggedInUser) => {
-        
         if (loggedInUser) {
           console.log("Usuario logueado:", loggedInUser);
-          const { displayName, email } = loggedInUser; 
-          const data = { displayName, email };
-
-          await createUserInDatabase(data); // <--- EL FOCO ESTÁ AQUÍ AHORA
+          const { uid, displayName, email } = loggedInUser; // <-- Incluye el uid
+          const data = { uid, displayName, email };         // <-- Incluye el uid
+          await createUserInDatabase(data);
         } else {
-          // Este bloque ya no debería ejecutarse
           console.log("loggedInUser es null o undefined después del login");
         }
-
-        // Redirige al usuario a la página principal después de iniciar sesión
         navigate("/");
       })
       .catch((error) => {
-        // ESTE BLOQUE DEBERÍA EJECUTARSE SI LA PROMESA FALLA DEBIDO AL COOP
         console.error("ERROR EN CATCH de loginGoogleWithPopup:", error);
-        console.error("Tipo de error:", error.name);
-        console.error("Mensaje de error:", error.message);
-        console.error("Código de error (si existe):", error.code);
-        // Redirige al usuario a la página de inicio de sesión en caso de error
-        //navigate("/sign-in");
+        // ...
       });
   }, [loginGoogleWithPopup, navigate, closeModal, userLooged]);
 
