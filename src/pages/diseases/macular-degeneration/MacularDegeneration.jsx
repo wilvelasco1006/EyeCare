@@ -10,7 +10,7 @@ import React, { useRef, useEffect, useState } from "react";
 
 const MacularDegeneration = () => {
     const containerRef = useRef(null);
-    const sectionRefs = [useRef(null), useRef(null), useRef(null)];
+    const sectionRefs = [useRef(null), useRef(null), useRef(null), useRef(null)]; // Agregada la cuarta referencia
     const [activeSection, setActiveSection] = useState(0);
     
     // Función para manejar el scroll suave entre secciones
@@ -105,7 +105,8 @@ const MacularDegeneration = () => {
             <section ref={sectionRefs[2]} className="section3M">     
                 <SectionThreeM />   
             </section>
-             <section ref={sectionRefs[3]} className="section4M">     
+            
+            <section ref={sectionRefs[3]} className="section4M">     
                 <SectionFourM />   
             </section>
         </div>
