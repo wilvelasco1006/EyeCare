@@ -1,17 +1,78 @@
-footer {
-    background: #f5f5f5;
-    padding: 0.5rem;
-    min-height: 50px;
-    height: 4.5rem;
-    display: flex; /* Usa flexbox para centrar */
-    justify-content: center; /* Centra horizontalmente */
-    align-items: center; /* Centra verticalmente */
+.footer-container {
+  background: #eaf3fa;
+  padding: 2rem 1rem;
+  font-family: 'Alberto Sans', sans-serif;
+  color: #000000;
+  border-top: 3px solid #3EC3BA;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.footer-columns {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center; /* Centra horizontalmente todas las columnas */
+  gap: 2rem;
+  max-width: 1200px;
+  width: 100%;
+  margin-bottom: 1.5rem;
+}
+
+.footer-column {
+  flex: 1 1 200px;
+  min-width: 180px;
+  max-width: 250px;
+}
+
+.footer-column h4 {
+  color: #3EC3BA;
+  font-size: 1.1rem;
+  margin-bottom: 0.7rem;
+  font-weight: bold;
+}
+
+.footer-column ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.footer-column li {
+  margin-bottom: 0.5rem;
+}
+
+.footer-column a {
+  text-decoration: none;
+  color: #000;
+  font-size: 0.9rem;
+  transition: color 0.3s ease;
+}
+
+.footer-column a:hover {
+  color: #3EC3BA;
+}
+
+.footer-copy {
+  font-size: 0.8rem;
+  color: #555;
+  border-top: 1px solid #ccc;
+  padding-top: 1rem;
+  width: 100%;
+  max-width: 1200px;
 }
 
 
-#copy{
-    color: #000000; 
-    font-size: 0.8rem; 
+/* Responsive */
+@media (max-width: 768px) {
+  .footer-columns {
+    flex-direction: column;
+    align-items: center;
     text-align: center;
-    text-shadow: 0 0 5px #00596f81;
+  }
+
+  .footer-column {
+    margin-bottom: 1.5rem;
+  }
 }
